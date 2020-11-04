@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ENT Mobile</string>
+    <string name="home">Home</string>
+    <string name="mails">Mails</string>
+    <string name="settings">Settings</string>
+    <string name="log_off">LOG OFF</string>
+    <string name="schedule">Schedule</string>
+    <string name="links">Links</string>
+    <string name="notes">Notes</string>
+    <string name="results">Results</string>
+    <string name="umtice">UMTICE</string>
+    <string name="ent">ENT</string>
+    <string name="connection">Connection</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
+    <string name="createAccount">Create an account</string>
+    <string name="group">Group</string>
+    <string name="mail">Mail</string>
+    <string name="validate">Validate</string>
+    <string name="wrong_pass_error">Incorrect password.</string>
+    <string name="wrong_username_error">Incorrect username.</string>
+    <string name="unmatch_pass_error">The passwords do not match</string>
+    <string name="empty_pass_error">The passwords cannot be left blank</string>
+</resources>
