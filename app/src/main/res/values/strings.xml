@@ -22,4 +22,7 @@
     <string name="wrong_username_error">Incorrect username.</string>
     <string name="unmatch_pass_error">The passwords do not match</string>
     <string name="empty_pass_error">The passwords cannot be left blank</string>
+    <string name="title_activity_e_d_t">EDTActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
