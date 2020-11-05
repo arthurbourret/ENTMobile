@@ -25,7 +25,7 @@ public class CourseAdaptator extends RecyclerView.Adapter<ContentViewHolder> {
     @NonNull
     @Override
     public ContentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_card_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_course_view, parent, false);
         // get the schedule_card_view.xml layout and set it for ContentViewHolder
         return new ContentViewHolder(view);
     }
