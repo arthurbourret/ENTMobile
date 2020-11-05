@@ -13,14 +13,14 @@ import com.example.entmobile.R;
 import java.util.ArrayList;
 
 public class CourseAdaptator extends RecyclerView.Adapter<ContentViewHolder> {
-    private ArrayList<Course> courses;
+    private ArrayList<Course> adaptedCourses;
 
     /**
      * Instantiate the class with the courses to be displayed
      * @param courses
      */
     public CourseAdaptator(ArrayList<Course> courses) {
-        this.courses = courses;
+        this.adaptedCourses = courses;
     }
 
     @NonNull
@@ -33,7 +33,7 @@ public class CourseAdaptator extends RecyclerView.Adapter<ContentViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ContentViewHolder holder, int position) {
-        String[] infos = courses.get(position).getInfos(); // get the infos of the course at this position
+        String[] infos = adaptedCourses.get(position).getInfos(); // get the infos of the course at this position
 
         for (int i=0; i<holder.infosView.length; i++)
             holder.infosView[i].setText(infos[i]); // set the infos in the texts
@@ -41,7 +41,7 @@ public class CourseAdaptator extends RecyclerView.Adapter<ContentViewHolder> {
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return adaptedCourses.size();
     }
 }
 
