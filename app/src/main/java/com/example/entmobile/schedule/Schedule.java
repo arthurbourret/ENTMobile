@@ -1,11 +1,16 @@
 package com.example.entmobile.schedule;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.entmobile.R;
@@ -16,15 +21,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.function.Consumer;
 
+/**
+ * The main class for the schedule module
+ */
 public class Schedule extends AppCompatActivity {
+    RecyclerView scheduleView;
+
     ArrayList<Course> courses;
 
     private Calendar calendar;
-    /**
-     * Contains the 12 months in strings
-     */
     private static String[] MONTHS;
 
     private TextView dateView;
@@ -35,11 +44,16 @@ public class Schedule extends AppCompatActivity {
         setContentView(R.layout.schedule_activity);
 
         // instantiation
-        dateView = findViewById(R.id.dateView);
-        changeDate(0); // instantiate the value of dateView
         calendar = Calendar.getInstance();
         MONTHS = getResources().getStringArray(R.array.months);
-        courses = new ArrayList<>();
+        courses = openScheduleData(); // extract the courses
+
+        scheduleView = (RecyclerView) findViewById(R.id.scheduleView); // instantiate the recycler
+        RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this);
+        scheduleView.setLayoutManager(recyclerManager); // set a manager for the recycler
+        scheduleView.setHasFixedSize(true);
+
+        dateView = findViewById(R.id.dateView); // instantiate the view of the date
 
         // Set a listener on the Previous Date button
         ImageButton button_previous = findViewById(R.id.button_previousDate);
@@ -59,14 +73,34 @@ public class Schedule extends AppCompatActivity {
             }
         });
 
-        openScheduleData();
+        changeDate(0); // instantiate the recycler and the date view
+    }
+
+    /**
+     * Change the day in the calendar to the amount of day computed in the argument.
+     * It set the dateView to the current date of the calendar and it show the courses of the day
+     *
+     * @param amountOfDay The amount of days to add to the calendar
+     * @return the string value of the date
+     */
+    private String changeDate(int amountOfDay) {
+        calendar.add(Calendar.DAY_OF_YEAR, amountOfDay); // change the day in the calendar
+        String dateText = getDateFormated(calendar.getTime()); // get a string from the date
+        dateView.setText(dateText); // set dateView to this string
+
+        //scheduleView.removeAllViews(); // reset the schedules
+        ArrayList<Course> thisDayCourses = getCoursesOfTheDay();
+        showCourses(thisDayCourses);
+
+        return dateText;
     }
 
     /**
      * Method that read the calendar from the ent
      * It should be called only once when the file is downloaded because it takes some times to read the data
      */
-    private void openScheduleData() {
+    private ArrayList<Course> openScheduleData() {
+        ArrayList<Course> coursesFromData = new ArrayList<>();
         //TODO recuperer le lien url donner sur l'ent
 
         try {
@@ -84,7 +118,7 @@ public class Schedule extends AppCompatActivity {
                     isEvent = true;
 
                 if (line.contains("END:VEVENT")) { // if the line is the end of an event
-                    courses.add(Course.readData(data)); // extract the data of the text end ad it to courses
+                    coursesFromData.add(Course.readData(data)); // extract the data of the text end ad it to courses
 
                     isEvent = false;
                     data = ""; // reset the data
@@ -92,12 +126,48 @@ public class Schedule extends AppCompatActivity {
             }
 
             br.close();
-            for (Course course : courses)
-                Log.i("prompt", course.toString()); // primpt all courses in the console
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return coursesFromData;
+    }
+
+    /**
+     * Show the givens course in the page on a view. It shows there start and end time (in hour)
+     * , there name and their location
+     *
+     * @param courseToBeShown The courses to be shown on the page
+     */
+    private void showCourses(ArrayList<Course> courseToBeShown) {
+        Collections.sort(courseToBeShown, Course.compareStartHour); // sort the course by their starting hour
+
+        // put the courses to be shown in the recycler view
+        RecyclerView.Adapter recyclerAdapter = new CourseAdaptator(courseToBeShown);
+        scheduleView.setAdapter(recyclerAdapter); // adapt the recycler view
+    }
+
+    /**
+     * Gives the courses of the day
+     *
+     * @return All the lessons happening the same day as the same day of the current day in calendar
+     */
+    private ArrayList<Course> getCoursesOfTheDay() {
+        ArrayList<Course> coursesOfDay = new ArrayList<>();
+        Date currentDate = calendar.getTime(); // get the current date
+
+        for (Course course : courses) {
+            Date cDate = course.getStartDate();
+            if (currentDate.getYear() == cDate.getYear() &&
+                    currentDate.getMonth() == cDate.getMonth() &&
+                    currentDate.getDate() == cDate.getDate()) {
+                // if same year, month, day
+                coursesOfDay.add(course); // add to the list
+            }
+        }
+
+        return coursesOfDay;
     }
 
     /**
@@ -112,20 +182,6 @@ public class Schedule extends AppCompatActivity {
      */
     private void nextDate() {
         changeDate(1);
-    }
-
-    /**
-     * Change the day in the calendar to the amount of day computed in the argument
-     * and set the dateView to the current date of the calendar
-     *
-     * @param amountOfDay The amount of days to add to the calendar
-     * @return the string value of the date
-     */
-    private String changeDate(int amountOfDay) {
-        calendar.add(Calendar.DAY_OF_YEAR, amountOfDay); // change the day in the calendar
-        String dateText = getDateFormated(calendar.getTime()); // get a string from the date
-        dateView.setText(dateText); // set dateView to this string
-        return dateText;
     }
 
     /**
@@ -145,7 +201,7 @@ public class Schedule extends AppCompatActivity {
      * @return the string value of the date
      */
     public static String getHourFormated(Date date) {
-        return date.getHours() + ":" + date.getMinutes();
+        return date.getHours() + "h" + ((date.getMinutes()>0)?date.getMinutes():"");
     }
 
 }

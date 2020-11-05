@@ -1,9 +1,15 @@
 package com.example.entmobile.schedule;
 
+import android.os.Build;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -38,6 +44,19 @@ public class Course {
         this.end = end;
         this.duration = duration;
     }
+
+    /**
+     * Compare two courses by their starting times
+     */
+    public final static Comparator<? super Course> compareStartHour = new Comparator<Course>() {
+        public int compare(Course c1, Course c2) {
+            Duration dif = getHourMinuteDiference(c2.getStartDate(), c1.getStartDate());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                return (int) dif.toMinutes();
+            return 0;
+        }
+    };
 
     /**
      * Take a string value of a course in the format of the schedule from the ent and read it.
@@ -86,21 +105,36 @@ public class Course {
 
                 // if the start and end time were extracted
                 if (start != null && end != null) {
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        // recuperation of hours and minutes of each date
-                        LocalTime startTime = LocalTime.of(start.getHours(), start.getMinutes());
-                        LocalTime endTime = LocalTime.of(end.getHours(), end.getMinutes());
-
-                        // calculate difference between these dates
-                        Duration dif = Duration.between(startTime, endTime);
-                        duration = dif.toString().replace("PT", "").toLowerCase();
-                    }
+                    Duration dif = getHourMinuteDiference(start, end);
+                    duration = dif.toString().replace("PT", "").toLowerCase();
                 }
             }
         }
 
         // creation of a new course containing the data of the string
         return new Course(courseName, room, teacher, groupAttending, start, end, duration);
+    }
+
+    /**
+     * Get the difference of hours and minutes between two dates
+     *
+     * @param firstDate  The first date to compare
+     * @param secondDate The second date to compare
+     * @return The difference between the two in Duration
+     */
+    private static Duration getHourMinuteDiference(Date firstDate, Date secondDate) {
+        Duration diference = null;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            // recuperation of hours and minutes of each dates
+            LocalTime firstTime = LocalTime.of(firstDate.getHours(), firstDate.getMinutes());
+            LocalTime secondTime = LocalTime.of(secondDate.getHours(), secondDate.getMinutes());
+
+            // calculate difference between these dates
+            diference = Duration.between(firstTime, secondTime);
+        }
+
+        return diference;
     }
 
     /**
@@ -128,6 +162,14 @@ public class Course {
         }
 
         return date;
+    }
+
+    public Date getStartDate() {
+        return start;
+    }
+
+    public String[] getInfos() {
+        return new String[]{Schedule.getHourFormated(start), Schedule.getHourFormated(end), courseName, room};
     }
 
     @Override
