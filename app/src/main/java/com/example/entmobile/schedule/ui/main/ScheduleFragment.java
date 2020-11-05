@@ -1,4 +1,4 @@
-package com.example.entmobile.edt.ui.main;
+package com.example.entmobile.schedule.ui.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,19 +14,19 @@ import android.view.ViewGroup;
 
 import com.example.entmobile.R;
 
-public class EdtFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
 
     private MainViewModel mViewModel;
 
-    public static EdtFragment newInstance() {
-        return new EdtFragment();
+    public static ScheduleFragment newInstance() {
+        return new ScheduleFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+        return inflater.inflate(R.layout.schedule_fragment, container, false);
     }
 
     @Override

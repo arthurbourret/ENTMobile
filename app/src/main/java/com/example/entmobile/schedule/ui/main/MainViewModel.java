@@ -1,7 +1,6 @@
-package com.example.entmobile.edt.ui.main;
+package com.example.entmobile.schedule.ui.main;
 
 import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
 }

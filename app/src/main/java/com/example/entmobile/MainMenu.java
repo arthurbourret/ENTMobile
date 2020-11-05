@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.entmobile.edt.EdtActivity;
+import com.example.entmobile.schedule.Schedule;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -118,7 +118,7 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Schedule page
      */
     private void openSchedule() {
-        startActivity(new Intent(this, EdtActivity.class));
+        startActivity(new Intent(this, Schedule.class));
     }
 
     /**
