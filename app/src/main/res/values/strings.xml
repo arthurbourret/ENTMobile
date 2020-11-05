@@ -44,5 +44,8 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="location">Location</string>
+    <string name="teacher">Teacher(s)</string>
+    <string name="student">Students</string>
 
 </resources>
