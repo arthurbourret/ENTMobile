@@ -11,20 +11,22 @@ import android.widget.TextView;
 import com.example.entmobile.R;
 import com.example.entmobile.schedule.ui.main.ScheduleFragment;
 
-import net.fortuna.ical4j.data.CalendarBuilder;
-import net.fortuna.ical4j.data.CalendarParser;
-import net.fortuna.ical4j.data.ParserException;
-import net.fortuna.ical4j.model.component.CalendarComponent;
-
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Schedule extends AppCompatActivity {
+    ArrayList<Course> courses;
+
     private Calendar calendar;
-    private String[] months;
+    /**
+     * Contains the 12 months in strings
+     */
+    private static String[] MONTHS;
 
     private TextView dateView;
 
@@ -33,19 +35,20 @@ public class Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_activity);
 
-        calendar = Calendar.getInstance();
-        months = getResources().getStringArray(R.array.months);
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, ScheduleFragment.newInstance())
                     .commitNow();
         }
 
+        // instantiation
         dateView = findViewById(R.id.dateView);
+        changeDate(0); // instantiate the value of dateView
+        calendar = Calendar.getInstance();
+        MONTHS = getResources().getStringArray(R.array.months);
+        courses = new ArrayList<>();
 
-        changeDate(0);
-
+        // Set a listener on the Previous Date button
         ImageButton button_previous = findViewById(R.id.button_previousDate);
         button_previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,7 @@ public class Schedule extends AppCompatActivity {
             }
         });
 
+        // Set a listener on the Next Date button
         ImageButton button_next = findViewById(R.id.button_nextDate);
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,34 +69,90 @@ public class Schedule extends AppCompatActivity {
         openScheduleData();
     }
 
+    /**
+     * Method that read the calendar from the ent
+     * It should be called only once when the file is downloaded because it takes some times to read the data
+     */
     private void openScheduleData() {
         //TODO recuperer le lien url donner sur l'ent
+
         try {
-            InputStream file = getAssets().open("ADECal.ics");
-            net.fortuna.ical4j.model.Calendar schedule = (new CalendarBuilder()).build(file);
+            InputStream file = getAssets().open("ADECal.ics"); // temporary way of getting the calendar from the ent
+            BufferedReader br = new BufferedReader(new InputStreamReader(file)); // parsing the file
+            String data = "", // initialisation of the data
+                    line;
 
-            for (CalendarComponent component : schedule.getComponents())
-                Log.i("prompt", component.toString());
+            boolean isEvent = false;
+            while ((line = br.readLine()) != null) { // if there is a line
+                if (isEvent) // if the line is part of an event
+                    data += line + "\n"; // get the line
 
-        } catch (IOException | ParserException e) {
+                if (line.contains("BEGIN:VEVENT")) // if the line is the start of an event
+                    isEvent = true;
+
+                if (line.contains("END:VEVENT")) { // if the line is the end of an event
+                    courses.add(Course.readData(data)); // extract the data of the text end ad it to courses
+
+                    isEvent = false;
+                    data = ""; // reset the data
+                }
+            }
+
+            br.close();
+            for (Course course : courses)
+                Log.i("prompt", course.toString()); // primpt all courses in the console
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Change the current date of the calendar to the previous one
+     */
     private void previousDate() {
         changeDate(-1);
     }
 
+    /**
+     * Change the current date of the calendar to the next one
+     */
     private void nextDate() {
         changeDate(1);
     }
 
+    /**
+     * Change the day in the calendar to the amount of day computed in the argument
+     * and set the dateView to the current date of the calendar
+     *
+     * @param amountOfDay The amount of days to add to the calendar
+     * @return the string value of the date
+     */
     private String changeDate(int amountOfDay) {
-        calendar.add(Calendar.DAY_OF_YEAR, amountOfDay);
-        Date date = calendar.getTime();
-        String dateText = date.getDate() + " " + months[date.getMonth()] + " " + (date.getYear() + 1900);
-        dateView.setText(dateText);
+        calendar.add(Calendar.DAY_OF_YEAR, amountOfDay); // change the day in the calendar
+        String dateText = getDateFormated(calendar.getTime()); // get a string from the date
+        dateView.setText(dateText); // set dateView to this string
         return dateText;
+    }
+
+    /**
+     * Get the string value of the day
+     *
+     * @param date Date used for the day
+     * @return the string value of the date
+     */
+    public static String getDateFormated(Date date) {
+        return date.getDate() + " " + MONTHS[date.getMonth()] + " " + (date.getYear() + 1900);
+    }
+
+    /**
+     * Get the string value of the hour
+     *
+     * @param date Date used for the hour
+     * @return the string value of the date
+     */
+    public static String getHourFormated(Date date) {
+        return date.getHours() + ":" + date.getMinutes();
     }
 
 }
