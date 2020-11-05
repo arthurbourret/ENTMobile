@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.entmobile.R;
-import com.example.entmobile.schedule.ui.main.ScheduleFragment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,12 +33,6 @@ public class Schedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_activity);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, ScheduleFragment.newInstance())
-                    .commitNow();
-        }
 
         // instantiation
         dateView = findViewById(R.id.dateView);

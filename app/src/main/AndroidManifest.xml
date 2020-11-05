@@ -9,13 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ENTMobile">
-        <activity android:name=".schedule.Schedule"></activity>
+        <activity android:name=".schedule.Schedule" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".Login" />
         <activity android:name=".MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
