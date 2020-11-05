@@ -83,22 +83,33 @@ public class Course {
                     case "DTSTART": // if TYPE is start time
                         start = convertStringIntoDate(st.nextToken());
                         break;
+
                     case "DTEND": // if TYPE is end time
                         end = convertStringIntoDate(st.nextToken());
                         break;
+
                     case "SUMMARY": // if TYPE is name of the course
                         courseName = st.nextToken();
                         break;
+
                     case "LOCATION": // if TYPE is emplacement
                         room = st.nextToken();
                         break;
+
                     case "DESCRIPTION": // if TYPE is group attending and teacher
                         // this part is formated this way : group \n teacher
                         StringTokenizer people = new StringTokenizer(st.nextToken(), "\\n");
-                        if (people.hasMoreTokens()) {
-                            groupAttending = people.nextToken();
-                            if (people.hasMoreTokens())
-                                teacher = people.nextToken();
+                        while (people.hasMoreTokens()) {
+
+                            String peopleText = people.nextToken();
+                            if (!peopleText.contains("Exported")) {
+                                if (peopleText.matches("(.*)[0-9](.*)")
+                                        || peopleText.contains("DUT")
+                                        || !peopleText.equals(peopleText.toUpperCase())) {
+                                    // if is a student (the teachers have their name and surname in all caps)
+                                    groupAttending += peopleText + " ";
+                                } else teacher += peopleText + " ";
+                            }
                         }
                         break;
                 }
@@ -111,6 +122,8 @@ public class Course {
             }
         }
 
+        Log.i("prompt prof", teacher);
+        Log.i("prompt student", groupAttending);
         // creation of a new course containing the data of the string
         return new Course(courseName, room, teacher, groupAttending, start, end, duration);
     }
