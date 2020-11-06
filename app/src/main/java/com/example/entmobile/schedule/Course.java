@@ -98,7 +98,8 @@ public class Course {
 
                     case "DESCRIPTION": // if TYPE is group attending and teacher
                         // this part is formated this way : group \n teacher
-                        StringTokenizer people = new StringTokenizer(st.nextToken(), "\\n");
+                        String value = st.nextToken().replace("\\n", ":");
+                        StringTokenizer people = new StringTokenizer(value, ":");
                         while (people.hasMoreTokens()) {
 
                             String peopleText = people.nextToken();
