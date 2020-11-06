@@ -23,7 +23,7 @@ public class DialogOpenCourse extends DialogFragment {
     public DialogOpenCourse(View view, Course course) {
         ViewGroup viewGroup = view.findViewById(android.R.id.content); // create a new ViewGroup
         View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.schedule_dialog_course, viewGroup, false);
-        //dialogView.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //a adapter : sert a mettre les coins de la popup arrondis
+        //viewGroup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //a adapter : sert a mettre les coins de la popup arrondis
         // get the layout for the dialog
 
         String[] infos = course.getTotalInfos();
