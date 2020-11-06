@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#F4655A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,20 +37,24 @@
                 android:text="Start"
                 android:textColor="#070707"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginEnd="1dp"/>
 
             <TextView
                 android:id="@+id/name_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-medium"
+                android:gravity="center_horizontal"
                 android:text="Name"
+                android:textAlignment="center"
                 android:textColor="#070707"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/room_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/start_view" />
 
             <TextView
                 android:id="@+id/end_view"
@@ -66,13 +70,15 @@
                 android:id="@+id/room_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="15dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="room"
                 android:textColor="#070707"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/end_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name_view" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
