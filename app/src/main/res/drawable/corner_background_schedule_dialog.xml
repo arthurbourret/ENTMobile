@@ -6,5 +6,5 @@
     <stroke android:width="3dp"
         android:color="#F4655A" />
 
-    <corners android:radius="35dp"/>
+    <corners android:radius="@dimen/corner_dialog"/>
 </shape>

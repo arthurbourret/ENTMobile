@@ -134,7 +134,7 @@ public class Course {
      * @param secondDate The second date to compare
      * @return The difference between the two in Duration
      */
-    private static Duration getHourMinuteDiference(Date firstDate, Date secondDate) {
+    public static Duration getHourMinuteDiference(Date firstDate, Date secondDate) {
         Duration diference = null;
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

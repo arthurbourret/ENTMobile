@@ -1,8 +1,8 @@
 package com.example.entmobile.schedule;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.entmobile.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.function.Consumer;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The main class for the schedule module
@@ -37,6 +37,8 @@ public class Schedule extends AppCompatActivity {
     private static String[] MONTHS;
 
     private TextView dateView;
+
+    FloatingActionButton backToCurrentDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,12 @@ public class Schedule extends AppCompatActivity {
         scheduleView.setHasFixedSize(true);
 
         dateView = findViewById(R.id.dateView); // instantiate the view of the date
+        dateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCalendar(v);
+            }
+        });
 
         // Set a listener on the Previous Date button
         ImageButton button_previous = findViewById(R.id.button_previousDate);
@@ -73,7 +81,45 @@ public class Schedule extends AppCompatActivity {
             }
         });
 
+        backToCurrentDay = findViewById(R.id.floating_back_to_current_day);
+        backToCurrentDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBackToCurrentDay();
+            }
+        });
+
         changeDate(0); // instantiate the recycler and the date view
+    }
+
+    /**
+     * Open a dialog view with a calendar to change the date
+     *
+     * @param v The view where to launch the dialog
+     */
+    private void openCalendar(View v) {
+        DialogChangeDay changeDay = new DialogChangeDay(v, calendar.getTimeInMillis());
+
+        changeDay.getButton_validate().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date = changeDay.getSelectedDate();
+                int dif = getDifInDays(calendar.getTime(), date);
+                changeDate(dif - 1);
+
+                // TODO dismiss changeDay
+                /*
+                Fragment prev = getSupportFragmentManager().findFragmentByTag("fragment_dialog");
+                if (prev != null) {
+                    DialogFragment df = (DialogFragment) prev;
+                    df.dismiss();
+                }
+
+                 */
+            }
+        });
+
+        changeDay.show();
     }
 
     /**
@@ -88,9 +134,12 @@ public class Schedule extends AppCompatActivity {
         String dateText = getDateFormated(calendar.getTime()); // get a string from the date
         dateView.setText(dateText); // set dateView to this string
 
-        //scheduleView.removeAllViews(); // reset the schedules
-        ArrayList<Course> thisDayCourses = getCoursesOfTheDay();
-        showCourses(thisDayCourses);
+        ArrayList<Course> thisDayCourses = getCoursesOfTheDay(); // get course for the day
+        showCourses(thisDayCourses); // and show them
+
+        if (getDifInDays(calendar.getTime(), new Date()) != 1)
+            backToCurrentDay.setVisibility(View.VISIBLE);
+        else backToCurrentDay.setVisibility(View.INVISIBLE);
 
         return dateText;
     }
@@ -171,6 +220,40 @@ public class Schedule extends AppCompatActivity {
     }
 
     /**
+     * Change the date of the calendar to the current one
+     */
+    private void goBackToCurrentDay() {
+        int dif = getDifInDays(new Date(), calendar.getTime()); // the difference in days
+
+        changeDate(dif * -1); // go back to today
+    }
+
+    /**
+     * Get the difference in days between two dates. If the second date is before the first it will return < 0,
+     * if its after it will return > 0 and if they are the same, it will return 0
+     *
+     * @param firstDate  The first date
+     * @param secondDate The second date
+     * @return The difference in int between those dates from the first date to the second
+     */
+    public static int getDifInDays(Date firstDate, Date secondDate) {
+        int diference = 0;
+
+        if (firstDate != null && secondDate != null) { // if there really are dates
+
+            if (firstDate.compareTo(secondDate) != 0) {
+                long diffInMillies = secondDate.getTime() - firstDate.getTime();
+                diference = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+                if (secondDate.compareTo(firstDate) == 1)
+                    diference += 1;
+            }
+        }
+
+        return diference;
+    }
+
+    /**
      * Change the current date of the calendar to the previous one
      */
     private void previousDate() {
@@ -201,7 +284,7 @@ public class Schedule extends AppCompatActivity {
      * @return the string value of the date
      */
     public static String getHourFormated(Date date) {
-        return date.getHours() + "h" + ((date.getMinutes()>0)?date.getMinutes():"");
+        return date.getHours() + "h" + ((date.getMinutes() > 0) ? date.getMinutes() : "");
     }
 
 }

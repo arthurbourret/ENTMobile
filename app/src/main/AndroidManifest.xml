@@ -11,7 +11,8 @@
         android:theme="@style/Theme.ENTMobile">
         <activity android:name=".schedule.Schedule" />
         <activity android:name=".CreateAccount" />
-        <activity android:name=".Login" />
+        <activity android:name=".Login" >
+        </activity>
         <activity android:name=".MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

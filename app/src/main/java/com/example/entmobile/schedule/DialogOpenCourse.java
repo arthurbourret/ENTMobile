@@ -1,14 +1,17 @@
 package com.example.entmobile.schedule;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.entmobile.R;
@@ -18,23 +21,22 @@ import com.example.entmobile.R;
  * It is accessible by clicking on a course on the Schedule
  */
 public class DialogOpenCourse extends DialogFragment {
-    AlertDialog.Builder builder;
+    androidx.appcompat.app.AlertDialog.Builder builder;
 
     public DialogOpenCourse(View view, Course course) {
         ViewGroup viewGroup = view.findViewById(android.R.id.content); // create a new ViewGroup
         View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.schedule_dialog_course, viewGroup, false);
-        //viewGroup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); //a adapter : sert a mettre les coins de la popup arrondis
+        //dialogView.getWindow().setBackground(new ColorDrawable(Color.TRANSPARENT)); //a adapter : sert a mettre les coins de la popup arrondis
         // get the layout for the dialog
 
         String[] infos = course.getTotalInfos();
-        Log.i("prompt", infos.length + "");
         toTextView(dialogView, R.id.start_dialog, infos[0]); // set start hour text
         toTextView(dialogView, R.id.end_dialog, infos[1]); // set end hour text
         toTextView(dialogView, R.id.name_dialog, infos[2]); // set course's name text
         toTextView(dialogView, R.id.room_dialog, infos[3]); // set room text
         toTextView(dialogView, R.id.teacher_dialog, infos[4]); // set teacher text
         toTextView(dialogView, R.id.students_dialog, infos[5]); // set students text
-        toTextView(dialogView, R.id.duration_dialog, infos[6]); // set duration text
+        toTextView(dialogView, R.id.duration_dialog, infos[6]); // set duration text*
 
         buildDialog(dialogView);
     }
@@ -56,10 +58,11 @@ public class DialogOpenCourse extends DialogFragment {
      * @param dialogView The view from where to build the Dialog
      */
     private void buildDialog(View dialogView) {
-        builder = new AlertDialog.Builder(dialogView.getContext()); // create a dialog builder
+        builder = new androidx.appcompat.app.AlertDialog.Builder(dialogView.getContext()); // create a dialog builder
         builder.setView(dialogView)
                 .setCancelable(true)
-                .setTitle(""); // build the dialog with this view
+                .setTitle("")
+                .getContext().getTheme().applyStyle(R.style.CourseAlertDialog, true);; // build the dialog with this view
     }
 
     /**
@@ -67,7 +70,7 @@ public class DialogOpenCourse extends DialogFragment {
      */
     public void show() {
         if (builder != null)
-            builder.create().show(); // show the dialog
+            builder.create().show();
     }
 
 }
