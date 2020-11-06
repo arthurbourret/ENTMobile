@@ -1,8 +1,13 @@
 package com.example.entmobile.schedule;
 
+import android.app.AlertDialog;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.entmobile.R;
@@ -20,7 +25,8 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * Initialize the text views with the info in course
+     * Initialize the text views with the info in course.
+     * Also initialize a dialog to show more details about the course
      *
      * @param course The course to display
      */
@@ -35,7 +41,15 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
                     R.id.room_view}; // the room view
 
             for (int i = 0; i < infos.length; i++)
-                ((TextView) view.findViewById(infoViewsId[i])).setText(infos[i]);
+                ((TextView) view.findViewById(infoViewsId[i])).setText(infos[i]); // set text value
+
+            (view.findViewById(R.id.cardview_edt)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogOpenCourse openCourse = new DialogOpenCourse(v, course); // create dialog
+                    openCourse.show(); // show the dialog
+                }
+            });
         }
     }
 

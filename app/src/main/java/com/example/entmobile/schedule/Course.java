@@ -122,8 +122,6 @@ public class Course {
             }
         }
 
-        Log.i("prompt prof", teacher);
-        Log.i("prompt student", groupAttending);
         // creation of a new course containing the data of the string
         return new Course(courseName, room, teacher, groupAttending, start, end, duration);
     }
@@ -183,6 +181,20 @@ public class Course {
 
     public String[] getInfos() {
         return new String[]{Schedule.getHourFormated(start), Schedule.getHourFormated(end), courseName, room};
+    }
+
+    public String[] getTotalInfos() {
+        String[] infos = getInfos();
+        int iLength = infos.length;
+        String[] total = new String[iLength + 3];
+        for (int i=0; i<iLength; i++)
+            total[i] = infos[i];
+
+        total[iLength] = teacher;
+        total[iLength + 1] = groupAttending;
+        total[iLength + 2] = duration;
+
+        return total;
     }
 
     @Override
