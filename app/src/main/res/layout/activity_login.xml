@@ -20,8 +20,12 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:background="#000000"
         android:orientation="vertical"
         android:padding="2dp"
@@ -43,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingLeft="5dp"
-                android:text="@string/connection"
+                android:text="@string/login"
                 android:textColor="@color/colorAccent"
                 android:textSize="24sp" />
         </LinearLayout>

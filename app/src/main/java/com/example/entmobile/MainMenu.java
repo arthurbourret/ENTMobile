@@ -19,6 +19,11 @@ public class MainMenu extends AppCompatActivity {
     private Button button_log_off; //Button used to launch the "openLogInMenu()" method.
     private Button button_umtice; //Button used to launch the "openENTinBrowser()" method.
     private Button button_ent; //Button used to launch the "openUMTICEinBrowser()" method.
+    private Button button_settings; //Button used to launch the "openSettings()" method.
+    private Button button_shedule; //Button used to launch the "openSchedule()" method.
+    private Button button_mails; //Button used to launch the "openMails()" method.
+    private Button button_notes; //Button used to launch the "openNotes()" method.
+    private Button button_results; //Button used to launch the "openResults()" method.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +32,11 @@ public class MainMenu extends AppCompatActivity {
 
         //Finds the object's IDs and initializes local variables
         button_log_off = findViewById(R.id.button_log_off);
-        Button button_settings = findViewById(R.id.button_settings);
-        Button button_shedule = findViewById(R.id.button_schedule);
-        Button button_mails = findViewById(R.id.button_mails);
-        Button button_notes = findViewById(R.id.button_notes);
-        Button button_results = findViewById(R.id.button_results);
+        button_settings = findViewById(R.id.button_settings);
+        button_shedule = findViewById(R.id.button_schedule);
+        button_mails = findViewById(R.id.button_mails);
+        button_notes = findViewById(R.id.button_notes);
+        button_results = findViewById(R.id.button_results);
         button_umtice = findViewById(R.id.button_umtice);
         button_ent = findViewById(R.id.button_ent);
 
@@ -111,7 +116,8 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Settings page.
      */
     private void openSettings() {
-        notImplemented();
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
     }
 
     /**
@@ -167,11 +173,10 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
-     * To remove at the end of the project
-     * Is a toast signaling a part not implemented yet
+     * To be removed at the end of the project
+     * Shows a toast signaling a part of the app that is not implemented yet
      */
     private void notImplemented() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show();
     }
-
 }
