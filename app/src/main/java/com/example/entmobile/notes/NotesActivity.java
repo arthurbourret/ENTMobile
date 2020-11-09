@@ -3,6 +3,7 @@ package com.example.entmobile.notes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,11 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.entmobile.R;
+import com.example.entmobile.activities.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notes extends AppCompatActivity {
+public class NotesActivity extends AppCompatActivity {
     /**
      * TextView used to show the user the amount of notes saved and available
      */
@@ -46,7 +48,7 @@ public class Notes extends AppCompatActivity {
         notes_settings_button = findViewById(R.id.notes_settings_button);
 
         //Sets up the custom feedback for the buttons that need it
-        setupButtonsFeedback();
+        //setupButtonsFeedback();
 
         //Sets up the buttons' listeners
         setupButtonsListeners();
@@ -115,7 +117,8 @@ public class Notes extends AppCompatActivity {
      * TODO
      */
     private void createNewNote() {
-        notImplemented();
+        Intent intent = new Intent(this, NoteEditorActivity.class);
+        startActivity(intent);
     }
 
     /**

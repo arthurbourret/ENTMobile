@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.entmobile.R;
-import com.example.entmobile.notes.Notes;
+import com.example.entmobile.notes.NotesActivity;
 import com.example.entmobile.schedule.Schedule;
 
 public class MainMenu extends AppCompatActivity {
@@ -162,7 +162,7 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Note page
      */
     private void openNotes() {
-        Intent intent = new Intent(this, Notes.class);
+        Intent intent = new Intent(this, NotesActivity.class);
         startActivity(intent);
     }
 
