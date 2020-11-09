@@ -139,6 +139,10 @@ public class NotesActivity extends AppCompatActivity {
         // If the noteList Array List isn't empty
         if (!noteList.isEmpty()) {
 
+            int nb_notes = noteList.size();
+
+            editor.putInt("nb_notes", nb_notes);
+
             //For each Note in the noteList
             for (int i=0; i<noteList.size(); i++) {
                 //Prepares the Keys that will be used to save the Note's attributes
