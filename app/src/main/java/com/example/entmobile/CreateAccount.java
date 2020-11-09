@@ -53,57 +53,63 @@ public class CreateAccount extends AppCompatActivity {
         final String passwordchecktext = password_check.getText().toString();
         final String mailtext = mail.getText().toString();
 
-
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
         String existing_username = preferences.getString("username", ""); //Gets the username from the SharedPreferences
 
-        if (!existing_username.equals("")) {
-            AlertDialog alerte = new AlertDialog.Builder(this).create();
-            alerte.setTitle("Warning !");
-            alerte.setMessage("There already is an account on this device.\n\nCreating a new account will result in the loss of all previously saved data on this app.\n\nDo you want to continue?");
+        // Checks if the fields are valid
+        if (!usernametext.equals("")) { //if the username is correct
+            if (passwordtext.equals(passwordchecktext)) { //if the password is correct
+                if ((!passwordtext.equals("")) && (!passwordchecktext.equals(""))) { //if the mail is correct
+                    if (!mailtext.equals("")) { //if the mail is correct
+                        if (!existing_username.equals("")) {
+                            AlertDialog alerte = new AlertDialog.Builder(this).create();
+                            alerte.setTitle("Warning !");
+                            alerte.setMessage("There already is an account on this device.\n\nCreating a new account will result in the loss of all previously saved data on this app.\n\nDo you want to continue?");
 
-            alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // Checks if the fields are valid
-                    if (!usernametext.equals("")) { //if the username is correct
-                        if (passwordtext.equals(passwordchecktext)) { //if the password is correct
-                            if ((!passwordtext.equals("")) && (!passwordchecktext.equals(""))) { //if the mail is correct
-                                if (!mailtext.equals("")) { //if the mail is correct
-
-                                    SharedPreferences.Editor editor = preferences.edit(); //Initializes the SharedPreferences' editor
-
-                                    //Saves each field in the SharedPreferences
-                                    editor.putString("username", usernametext);
-                                    editor.putString("password", passwordtext);
-                                    editor.putString("mail", mailtext);
-
-                                    editor.apply(); //Applies the changes
-
-                                    OpenLogInMenu(); //Opens the Log-In menu
+                            alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    saveAccount(usernametext, passwordtext, mailtext);
                                 }
-                                else { //If the password isn't correct
-                                    mail.setError("The e-mail adress is missing"); //Shows an error message indicating that the password isn't correct
+                            });
+                            alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
                                 }
-                            }
-                            else { //If the password isn't correct
-                                password.setError("The password is missing"); //Shows an error message indicating that the password isn't correct
-                            }
+                            });
+                            alerte.show();
                         }
-                        else { //If the password isn't correct
-                            password_check.setError("The passwords entered do not match"); //Shows an error message indicating that the password isn't correct
+                        else {
+                            saveAccount(usernametext, passwordtext, mailtext);
                         }
                     }
-                    else { //If the username isn't correct
-                        username.setError("The username is missing"); //Shows an error message indicating that the username isn't correct
+                    else { //If the password isn't correct
+                        mail.setError("The e-mail adress is missing"); //Shows an error message indicating that the password isn't correct
                     }
                 }
-            });
-            alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                else { //If the password isn't correct
+                    password.setError("The password is missing"); //Shows an error message indicating that the password isn't correct
                 }
-            });
-            alerte.show();
+            }
+            else { //If the password isn't correct
+                password_check.setError("The passwords entered do not match"); //Shows an error message indicating that the password isn't correct
+            }
         }
+        else { //If the username isn't correct
+            username.setError("The username is missing"); //Shows an error message indicating that the username isn't correct
+        }
+    }
+
+    private void saveAccount(String usernametext, String passwordtext, String mailtext) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+        SharedPreferences.Editor editor = preferences.edit(); //Initializes the SharedPreferences' editor
+
+        //Saves each field in the SharedPreferences
+        editor.putString("username", usernametext);
+        editor.putString("password", passwordtext);
+        editor.putString("mail", mailtext);
+
+        editor.apply(); //Applies the changes
+
+        OpenLogInMenu(); //Opens the Log-In menu
     }
 
     /**

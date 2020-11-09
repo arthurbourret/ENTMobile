@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +17,11 @@ public class MainMenu extends AppCompatActivity {
     private final static String Url_ENT = "http://mon-ent-etudiant.univ-lemans.fr/fr/index.html"; //String containing the URL to the ENT website
     private final static String Url_UMTICE = "http://umtice.univ-lemans.fr/my/"; //String containing the URL to the UMTICE website
 
-    private Button button_log_off; //Button used to launch the "openLogInMenu()" method.
+    private ImageButton button_log_off; //Button used to launch the "openLogInMenu()" method.
+    private ImageButton button_settings; //Button used to launch the "openSettings()" method.
+
     private Button button_umtice; //Button used to launch the "openENTinBrowser()" method.
     private Button button_ent; //Button used to launch the "openUMTICEinBrowser()" method.
-    private Button button_settings; //Button used to launch the "openSettings()" method.
     private Button button_shedule; //Button used to launch the "openSchedule()" method.
     private Button button_mails; //Button used to launch the "openMails()" method.
     private Button button_notes; //Button used to launch the "openNotes()" method.
@@ -138,7 +140,8 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Note page
      */
     private void openNotes() {
-        notImplemented();
+        Intent intent = new Intent(this, Notes.class);
+        startActivity(intent);
     }
 
     /**

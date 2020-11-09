@@ -48,7 +48,7 @@
     <string name="location">Location</string>
     <string name="teacher">Teacher(s)</string>
     <string name="student">Students</string>
-    <string name="logo_content_desc">Logo de l\'IUT de Laval</string>
+    <string name="logo_iut_content_desc">Logo de l\'IUT de Laval</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Settings-->
