@@ -1,18 +1,10 @@
 package com.example.entmobile.schedule;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.entmobile.R;
 
@@ -20,13 +12,13 @@ import com.example.entmobile.R;
  * Dialog class that show a more detailed version of a course
  * It is accessible by clicking on a course on the Schedule
  */
-public class DialogOpenCourse extends DialogFragment {
+public class DialogOpenCourse extends Dialog {
     androidx.appcompat.app.AlertDialog.Builder builder;
 
     public DialogOpenCourse(View view, Course course) {
+        super(view.getContext());
         ViewGroup viewGroup = view.findViewById(android.R.id.content); // create a new ViewGroup
         View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.schedule_dialog_course, viewGroup, false);
-        //dialogView.getWindow().setBackground(new ColorDrawable(Color.TRANSPARENT)); //a adapter : sert a mettre les coins de la popup arrondis
         // get the layout for the dialog
 
         String[] infos = course.getTotalInfos();
