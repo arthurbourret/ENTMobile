@@ -1,5 +1,7 @@
-package com.example.entmobile;
+package com.example.entmobile.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.entmobile.R;
+import com.example.entmobile.notes.Notes;
 import com.example.entmobile.schedule.Schedule;
 
 public class MainMenu extends AppCompatActivity {
@@ -111,7 +115,25 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Login page.
      */
     private void openLogInMenu() {
-        startActivity(new Intent(this, Login.class)); //Starts a new activity with the intent
+        AlertDialog alerte = new AlertDialog.Builder(this).create();
+        alerte.setTitle("Log Out");
+        alerte.setMessage("\nDo you really want to log out?");
+
+        alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                logOff();
+            }
+        });
+        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alerte.show();
+    }
+
+    private void logOff() {
+        Intent intent = new Intent(this, Login.class); //Prepares a new activity
+        startActivity(intent); //Opens the new activity
     }
 
     /**

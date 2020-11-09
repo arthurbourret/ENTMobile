@@ -1,4 +1,4 @@
-package com.example.entmobile;
+package com.example.entmobile.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.entmobile.R;
 
 public class Login extends AppCompatActivity {
 
@@ -52,19 +54,14 @@ public class Login extends AppCompatActivity {
         String password = TextIL_password.getText().toString(); //Gets the password typed by the user in the EditText
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+
         String user_username = preferences.getString("username", ""); //Gets the username from the SharedPreferences
         String user_pass = preferences.getString("password", ""); //Gets the password from the SharedPreferences
-
-        Log.e("username", username);
-        Log.e("password", password);
-        Log.e("user_username", user_username);
-        Log.e("user_pass", user_pass);
 
         // Compares the log-in credentials entered with the ones saved
         if ((username.equals(user_username)) && (!username.equals(""))) { //if the username is correct
             if (password.equals(user_pass) && (!password.equals(""))) { //if the password is correct
-                Intent intent = new Intent(this, MainMenu.class); //Prepares a new activity
-                startActivity(intent); //Opens the new activity
+                openMainMenu();
             }
             else { //If the password isn't correct
                 TextIL_password.setError(getString(R.string.wrong_pass_error)); //Shows an error message indicating that the password isn't correct
@@ -75,6 +72,13 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method used to open the Main Menu.
+     */
+    private void openMainMenu() {
+        Intent intent = new Intent(this, MainMenu.class); //Prepares a new activity
+        startActivity(intent); //Opens the new activity
+    }
     /**
      * Method used to open the CreateAccount Menu.
      */

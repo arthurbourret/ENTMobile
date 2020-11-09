@@ -1,4 +1,4 @@
-package com.example.entmobile;
+package com.example.entmobile.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.entmobile.R;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -117,6 +119,7 @@ public class CreateAccount extends AppCompatActivity {
      */
     private void OpenLogInMenu() {
         Intent intent = new Intent(this, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

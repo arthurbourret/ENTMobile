@@ -37,10 +37,12 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
             this.course = course;
 
             String[] infos = course.getInfos(); // infos about the course
-            int[] infoViewsId = {R.id.start_view, // the start hour view
+            int[] infoViewsId = {
+                    R.id.start_view, // the start hour view
                     R.id.end_view, // the end hour view
                     R.id.name_view, // the name view
-                    R.id.room_view}; // the room view
+                    R.id.room_view
+            }; // the room view
 
             for (int i = 0; i < infos.length; i++)
                 ((TextView) view.findViewById(infoViewsId[i])).setText(infos[i]); // set text value

@@ -5,7 +5,7 @@
     android:id="@+id/schedule_dialog_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/corner_background_schedule_dialog">
+    android:background="@drawable/app_res_bg_schedule">
 
     <TextView
         android:id="@+id/name_dialog"

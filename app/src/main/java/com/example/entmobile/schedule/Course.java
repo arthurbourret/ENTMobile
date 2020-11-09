@@ -52,8 +52,9 @@ public class Course {
         public int compare(Course c1, Course c2) {
             Duration dif = getHourMinuteDiference(c2.getStartDate(), c1.getStartDate());
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 return (int) dif.toMinutes();
+            }
             return 0;
         }
     };
@@ -104,12 +105,13 @@ public class Course {
 
                             String peopleText = people.nextToken();
                             if (!peopleText.contains("Exported")) {
-                                if (peopleText.matches("(.*)[0-9](.*)")
-                                        || peopleText.contains("DUT")
-                                        || !peopleText.equals(peopleText.toUpperCase())) {
+                                if (peopleText.matches("(.*)[0-9](.*)") || peopleText.contains("DUT") || !peopleText.equals(peopleText.toUpperCase())) {
                                     // if is a student (the teachers have their name and surname in all caps)
                                     groupAttending += peopleText + " ";
-                                } else teacher += peopleText + " ";
+                                }
+                                else {
+                                    teacher += peopleText + " ";
+                                }
                             }
                         }
                         break;

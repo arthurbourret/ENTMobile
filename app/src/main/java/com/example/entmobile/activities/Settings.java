@@ -1,9 +1,11 @@
-package com.example.entmobile;
+package com.example.entmobile.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.entmobile.R;
 
 public class Settings extends AppCompatActivity {
 

@@ -1,15 +1,13 @@
-package com.example.entmobile.model;
+package com.example.entmobile.user;
 
 public class User {
     private String username;
     private String password;
-    private String group;
     private String email;
 
-    public User(String username, String password, String group, String email) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
-        this.group = group;
         this.email = email;
     }
 
