@@ -1,38 +1,29 @@
 package com.example.entmobile.schedule;
 
 import android.app.AlertDialog;
-import android.os.Build;
-import android.util.Log;
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import com.example.entmobile.R;
 
-import java.time.Instant;
-import java.util.Calendar;
 import java.util.Date;
 
-public class DialogChangeDay extends DialogFragment {
+public class DialogChangeDay extends Dialog {
     private AlertDialog.Builder builder;
 
     private Date date;
 
-    private Button button_validate;
-
     public DialogChangeDay(View view, long time) {
+        super(view.getContext());
         ViewGroup viewGroup = view.findViewById(android.R.id.content); // create a new ViewGroup
         View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.schedule_dialog_calendar, viewGroup, false);
         // get the layout for the dialog
 
         date = new Date(); // instantiate the date with today's date
-
-        button_validate = dialogView.findViewById(R.id.validate_date_dialog);
 
         CalendarView calendarView = dialogView.findViewById(R.id.dialog_calendar_view);
         calendarView.setDate(time, true, true);
@@ -68,12 +59,12 @@ public class DialogChangeDay extends DialogFragment {
             builder.create().show(); // show the dialog
     }
 
-    public Date getSelectedDate() {
-        return date;
+    public AlertDialog.Builder getBuilder() {
+        return builder;
     }
 
-    public Button getButton_validate() {
-        return button_validate;
+    public Date getSelectedDate() {
+        return date;
     }
 
 }

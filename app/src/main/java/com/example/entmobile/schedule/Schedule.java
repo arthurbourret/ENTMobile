@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,10 +46,12 @@ public class Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_activity);
 
+        courses = new ArrayList<>();//new ParseWebData().loadFromHtml();
+
         // instantiation
         calendar = Calendar.getInstance();
         MONTHS = getResources().getStringArray(R.array.months);
-        courses = openScheduleData(); // extract the courses
+        //courses = ParseWebData.openScheduleData(this); // extract the courses
 
         scheduleView = (RecyclerView) findViewById(R.id.scheduleView); // instantiate the recycler
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this);
@@ -99,27 +102,17 @@ public class Schedule extends AppCompatActivity {
      */
     private void openCalendar(View v) {
         DialogChangeDay changeDay = new DialogChangeDay(v, calendar.getTimeInMillis());
-
-        changeDay.getButton_validate().setOnClickListener(new View.OnClickListener() {
+        changeDay.getBuilder().setPositiveButton(R.string.validate, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(DialogInterface dialog, int which) {
                 Date date = changeDay.getSelectedDate();
                 int dif = getDifInDays(calendar.getTime(), date);
                 changeDate(dif - 1);
 
-                // TODO dismiss changeDay
-                /*
-                Fragment prev = getSupportFragmentManager().findFragmentByTag("fragment_dialog");
-                if (prev != null) {
-                    DialogFragment df = (DialogFragment) prev;
-                    df.dismiss();
-                }
-
-                 */
+                dialog.dismiss();
             }
-        });
-
-        changeDay.show();
+        })
+        .create().show();
     }
 
     /**
@@ -142,45 +135,6 @@ public class Schedule extends AppCompatActivity {
         else backToCurrentDay.setVisibility(View.INVISIBLE);
 
         return dateText;
-    }
-
-    /**
-     * Method that read the calendar from the ent
-     * It should be called only once when the file is downloaded because it takes some times to read the data
-     */
-    private ArrayList<Course> openScheduleData() {
-        ArrayList<Course> coursesFromData = new ArrayList<>();
-        //TODO recuperer le lien url donner sur l'ent
-
-        try {
-            InputStream file = getAssets().open("ADECal.ics"); // temporary way of getting the calendar from the ent
-            BufferedReader br = new BufferedReader(new InputStreamReader(file)); // parsing the file
-            String data = "", // initialisation of the data
-                    line;
-
-            boolean isEvent = false;
-            while ((line = br.readLine()) != null) { // if there is a line
-                if (isEvent) // if the line is part of an event
-                    data += line + "\n"; // get the line
-
-                if (line.contains("BEGIN:VEVENT")) // if the line is the start of an event
-                    isEvent = true;
-
-                if (line.contains("END:VEVENT")) { // if the line is the end of an event
-                    coursesFromData.add(Course.readData(data)); // extract the data of the text end ad it to courses
-
-                    isEvent = false;
-                    data = ""; // reset the data
-                }
-            }
-
-            br.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return coursesFromData;
     }
 
     /**
