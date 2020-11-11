@@ -70,6 +70,9 @@ public class CreateAccount extends AppCompatActivity {
 
                             alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.clear();
+                                    editor.apply();
                                     saveAccount(usernametext, passwordtext, mailtext);
                                 }
                             });

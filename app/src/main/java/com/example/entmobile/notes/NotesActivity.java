@@ -1,12 +1,16 @@
 package com.example.entmobile.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.entmobile.R;
-import com.example.entmobile.activities.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,15 @@ public class NotesActivity extends AppCompatActivity {
      */
     ImageButton add_note_button;
 
+    /**
+     * ImageButton used to launch the createNewNote() method
+     */
+    RecyclerView note_recycler_view;
+
+    NotesAdapter notesAdapter;
+
+    final int NOTE_EDITION_DONE = 1;
+
     private List<Note> noteList = new ArrayList<Note>();
 
     @Override
@@ -44,14 +56,26 @@ public class NotesActivity extends AppCompatActivity {
 
         //Finds the object's IDs and initializes local variables
         notes_counter = findViewById(R.id.notes_counter);
-        add_note_button = findViewById(R.id.add_note_button);
+        add_note_button = findViewById(R.id.save_note_button);
         notes_settings_button = findViewById(R.id.notes_settings_button);
+        note_recycler_view = findViewById(R.id.note_recycler_view);
 
         //Sets up the custom feedback for the buttons that need it
         //setupButtonsFeedback();
 
+
+        loadNotesFromSharedPreferences();
+
+        reloadRecycleView();
+
         //Sets up the buttons' listeners
         setupButtonsListeners();
+    }
+
+    private void reloadRecycleView() {
+        note_recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        notesAdapter = new NotesAdapter(this, noteList);
+        note_recycler_view.setAdapter(notesAdapter);
     }
 
     /**
@@ -99,7 +123,7 @@ public class NotesActivity extends AppCompatActivity {
         add_note_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewNote();
+                newNote();
             }
         });
 
@@ -110,15 +134,29 @@ public class NotesActivity extends AppCompatActivity {
                 openNoteSettings();
             }
         });
+
+        //Set a listener on each of the notes
+        notesAdapter.setClickListener(new NotesAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                editNote(position+1);
+            }
+        });
     }
 
     /**
      * Method used to create a new note. Has to be implemented.
      * TODO
      */
-    private void createNewNote() {
+    private void newNote() {
         Intent intent = new Intent(this, NoteEditorActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, NOTE_EDITION_DONE);
+    }
+
+    private void editNote(int pos) {
+        Intent intent = new Intent(this, NoteEditorActivity.class);
+        intent.putExtra("note_edit", pos);
+        startActivityForResult(intent, NOTE_EDITION_DONE);
     }
 
     /**
@@ -170,9 +208,14 @@ public class NotesActivity extends AppCompatActivity {
      */
     private void loadNotesFromSharedPreferences() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+
         int nb_notes = preferences.getInt("nb_notes", 0); //Gets the amount of notes saved in the SharedPreferences
 
-        for (int i=0; i<nb_notes; i++) {
+        notes_counter.setText(Integer.toString(nb_notes));
+
+        noteList.clear();
+
+        for (int i=1; i<=nb_notes; i++) {
             //Prepares the Keys that will be used to retrieve the Note's attributes
             String categoryKey = "note_" + Integer.toString(i) + "_category";
             String titleKey = "note_" + Integer.toString(i) + "_title";
@@ -191,6 +234,22 @@ public class NotesActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NOTE_EDITION_DONE) {
+            loadNotesFromSharedPreferences();
+            reloadRecycleView();
+            setupButtonsListeners();
+        }
+    }
+
+    /*@Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        loadNotesFromSharedPreferences();
+    }*/
+
     /**
      * To be removed at the end of the project
      * Shows a toast signaling a part of the app that is not implemented yet
@@ -198,4 +257,5 @@ public class NotesActivity extends AppCompatActivity {
     private void notImplemented() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show();
     }
+
 }

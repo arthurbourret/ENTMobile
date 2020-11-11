@@ -54,7 +54,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/add_note_button"
+                android:id="@+id/save_note_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center|end"
@@ -110,7 +110,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".notes.NotesActivity" />
+            tools:context=".notes.NotesActivity">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/note_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
