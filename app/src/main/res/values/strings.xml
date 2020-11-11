@@ -17,11 +17,11 @@
     <!-- Login -->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="login">Log In</string>
+    <string name="login">LOG IN</string>
     <string name="createAccount">Create Account</string>
 
     <!-- New acount -->
-    <string name="newAccount">New account</string>
+    <string name="newAccount">NEW ACCOUNT</string>
     <string name="group">Group</string>
     <string name="mail">Mail</string>
     <string name="validate">Validate</string>
