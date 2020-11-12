@@ -1,9 +1,11 @@
 package com.example.entmobile.notes;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.entmobile.R;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class NoteEditorActivity extends AppCompatActivity {
 
@@ -23,6 +26,8 @@ public class NoteEditorActivity extends AppCompatActivity {
 
     EditText note_title_edit_text;
     EditText note_content_edit_text;
+    String note_category_string = "Misc";
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,11 @@ public class NoteEditorActivity extends AppCompatActivity {
         category_button = findViewById(R.id.category_button);
         note_title_edit_text = findViewById(R.id.note_title_edit_text);
         note_content_edit_text = findViewById(R.id.note_content_edit_text);
+        textView = findViewById(R.id.textView);
 
-        isEditedNote();
+        if (isEditedNote()) {
+            setupEditedNote(getEditedNote());
+        }
 
         setupButtonsListeners();
     }
@@ -56,44 +64,82 @@ public class NoteEditorActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        category_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCategoriesSelector();
+            }
+        });
     }
 
-    private void isEditedNote() {
+    private boolean isEditedNote() {
         Intent intent = getIntent();
         int edit_note = intent.getIntExtra("note_edit", -1);
 
         if (edit_note != -1) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
-
-            String categoryKey = "note_" + Integer.toString(edit_note) + "_category";
-            String titleKey = "note_" + Integer.toString(edit_note) + "_title";
-            String contentKey = "note_" + Integer.toString(edit_note) + "_content";
-
-            //Retrieves each of the Note's attributes from the SharedPreferences
-            String newNoteCategory = preferences.getString(categoryKey, ""); //Gets the amount of notes saved in the SharedPreferences
-            String newNoteTitle = preferences.getString(titleKey, ""); //Gets the amount of notes saved in the SharedPreferences
-            String newNoteContent = preferences.getString(contentKey, ""); //Gets the amount of notes saved in the SharedPreferences
-
-            note_title_edit_text.setText(newNoteTitle);
-            note_content_edit_text.setText(newNoteContent);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
-    /*/**
-     * This method is used to delete a note.
-     * @param position
-     */
-    /*public void deleteNote(int position) {
+    private int getEditedNote() {
+        Intent intent = getIntent();
+
+        return intent.getIntExtra("note_edit", -1);
+    }
+
+    private void setupEditedNote(int edit_note) {
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
 
-        String categoryKey = "note_" + Integer.toString(position) + "_category";
-        String titleKey = "note_" + Integer.toString(position) + "_title";
-        String contentKey = "note_" + Integer.toString(position) + "_content";
+        String categoryKey = "note_" + Integer.toString(edit_note) + "_category";
+        String titleKey = "note_" + Integer.toString(edit_note) + "_title";
+        String contentKey = "note_" + Integer.toString(edit_note) + "_content";
 
-        preferences.edit().remove(categoryKey).commit();
-        preferences.edit().remove(titleKey).commit();
-        preferences.edit().remove(contentKey).commit();
-    }*/
+        //Retrieves each of the Note's attributes from the SharedPreferences
+        String editedNoteCategory = preferences.getString(categoryKey, ""); //Gets the amount of notes saved in the SharedPreferences
+        String editedNoteTitle = preferences.getString(titleKey, ""); //Gets the amount of notes saved in the SharedPreferences
+        String editedNoteContent = preferences.getString(contentKey, ""); //Gets the amount of notes saved in the SharedPreferences
+
+        note_title_edit_text.setText(editedNoteTitle);
+        note_content_edit_text.setText(editedNoteContent);
+        textView.setText(editedNoteCategory);
+        note_category_string = editedNoteCategory;
+    }
+
+    private void showCategoriesSelector() {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose a category");// add a radio button list
+
+        String[] categories = {"Homework", "Appointment", "Misc"};
+
+        final String[] selectedCategoryName = {note_category_string};
+        int checkedItem = 2; // Misc
+
+        builder.setSingleChoiceItems(categories, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int selectedCategory) {
+                selectedCategoryName[0] = categories[selectedCategory];
+            }
+        });
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int selectedCategory) {
+                dialog.dismiss();
+                textView.setText(selectedCategoryName[0]);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", null);// create and show the alert dialog
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
     private void saveNewNote() {
 
@@ -125,7 +171,7 @@ public class NoteEditorActivity extends AppCompatActivity {
                 String contentKey = "note_" + Integer.toString(new_note_pos) + "_content";
 
                 //Prepares the Values that will be used to save the Note's attributes
-                String categoryValue = "default";
+                String categoryValue = note_category_string;
                 String titleValue = note_title_edit_text.getText().toString();
                 String contentValue = note_content_edit_text.getText().toString();
 

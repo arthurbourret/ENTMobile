@@ -1,11 +1,13 @@
 package com.example.entmobile.notes;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -153,6 +155,10 @@ public class NotesActivity extends AppCompatActivity {
         startActivityForResult(intent, NOTE_EDITION_DONE);
     }
 
+    /**
+     *
+     * @param pos
+     */
     private void editNote(int pos) {
         Intent intent = new Intent(this, NoteEditorActivity.class);
         intent.putExtra("note_edit", pos);
@@ -244,11 +250,6 @@ public class NotesActivity extends AppCompatActivity {
             setupButtonsListeners();
         }
     }
-
-    /*@Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        loadNotesFromSharedPreferences();
-    }*/
 
     /**
      * To be removed at the end of the project
