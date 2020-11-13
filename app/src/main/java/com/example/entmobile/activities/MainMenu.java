@@ -26,7 +26,7 @@ public class MainMenu extends AppCompatActivity {
 
     private Button button_umtice; //Button used to launch the "openENTinBrowser()" method.
     private Button button_ent; //Button used to launch the "openUMTICEinBrowser()" method.
-    private Button button_shedule; //Button used to launch the "openSchedule()" method.
+    private Button button_schedule; //Button used to launch the "openSchedule()" method.
     private Button button_mails; //Button used to launch the "openMails()" method.
     private Button button_notes; //Button used to launch the "openNotes()" method.
     private Button button_results; //Button used to launch the "openResults()" method.
@@ -39,7 +39,7 @@ public class MainMenu extends AppCompatActivity {
         //Finds the object's IDs and initializes local variables
         button_log_off = findViewById(R.id.button_log_off);
         button_settings = findViewById(R.id.button_settings);
-        button_shedule = findViewById(R.id.button_schedule);
+        button_schedule = findViewById(R.id.button_schedule);
         button_mails = findViewById(R.id.button_mails);
         button_notes = findViewById(R.id.button_notes);
         button_results = findViewById(R.id.button_results);
@@ -63,7 +63,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         //Set a listener on the Schedule button
-        button_shedule.setOnClickListener(new View.OnClickListener() {
+        button_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSchedule();
@@ -112,7 +112,9 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
-     * Method used to open the Login page.
+     * Method used to launch the logOff() method.
+     *
+     * It warns the user that he is about to log out
      */
     private void openLogInMenu() {
         AlertDialog alerte = new AlertDialog.Builder(this).create();
@@ -131,6 +133,9 @@ public class MainMenu extends AppCompatActivity {
         alerte.show();
     }
 
+    /**
+     * Method used to open the Log in page.
+     */
     private void logOff() {
         Intent intent = new Intent(this, Login.class); //Prepares a new activity
         startActivity(intent); //Opens the new activity

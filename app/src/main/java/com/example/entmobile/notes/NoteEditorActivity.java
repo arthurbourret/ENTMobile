@@ -14,20 +14,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteEditorActivity extends AppCompatActivity {
 
     Button save_note_button;
     Button cancel_note_button;
-
     ImageButton tasks_button;
     ImageButton category_button;
 
     EditText note_title_edit_text;
     EditText note_content_edit_text;
-    String note_category_string = "Misc";
     TextView textView;
+
+    String currentNoteCategory = "None";
+
+    private List<Category> categoriesList = new ArrayList<Category>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +49,24 @@ public class NoteEditorActivity extends AppCompatActivity {
         note_content_edit_text = findViewById(R.id.note_content_edit_text);
         textView = findViewById(R.id.textView);
 
+        //If the Editor was opened to edit a note, then it loads that note
         if (isEditedNote()) {
             setupEditedNote(getEditedNote());
         }
 
+        //Sets the Button Listeners
         setupButtonsListeners();
+
+        //Sets the categories
+        loadCategoriesFromSharedPreferences();
+
+        //to be removed
+        textView.setText(currentNoteCategory);
     }
 
+    /**
+     * Sets up all of the buttons listeners as well as the listeners for each Note
+     */
     private void setupButtonsListeners() {
         save_note_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +90,10 @@ public class NoteEditorActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method used to know if a current note is an edited or a new one
+     * @return Boolean indicating if the note is an edited one.
+     */
     private boolean isEditedNote() {
         Intent intent = getIntent();
         int edit_note = intent.getIntExtra("note_edit", -1);
@@ -85,12 +106,20 @@ public class NoteEditorActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method used to retrive the number of the note currently edited
+     * @return Int containing the number of the note currently edited
+     */
     private int getEditedNote() {
         Intent intent = getIntent();
 
         return intent.getIntExtra("note_edit", -1);
     }
 
+    /**
+     * Method used to set up the Note Editor
+     * @param edit_note Int containing the number of the note that will be loaded in the Note Editor
+     */
     private void setupEditedNote(int edit_note) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
@@ -106,32 +135,43 @@ public class NoteEditorActivity extends AppCompatActivity {
 
         note_title_edit_text.setText(editedNoteTitle);
         note_content_edit_text.setText(editedNoteContent);
-        textView.setText(editedNoteCategory);
-        note_category_string = editedNoteCategory;
+        currentNoteCategory = editedNoteCategory;
+        textView.setText(currentNoteCategory);
     }
 
+    /**
+     * Method used to show the Categories Selector
+     */
     private void showCategoriesSelector() {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose a category");// add a radio button list
 
-        String[] categories = {"Homework", "Appointment", "Misc"};
+        int checkedItem[] = {0};
 
-        final String[] selectedCategoryName = {note_category_string};
-        int checkedItem = 2; // Misc
+        String[] categoriesNames = new String[categoriesList.size()];
 
-        builder.setSingleChoiceItems(categories, checkedItem, new DialogInterface.OnClickListener() {
+        if (!categoriesList.isEmpty()) {
+            for (int i=0; i<categoriesList.size(); i++) {
+                if (currentNoteCategory.matches(categoriesList.get(i).getName())) {
+                    checkedItem[0] = i;
+                }
+                categoriesNames[i] = categoriesList.get(i).getName();
+            }
+        }
+
+        builder.setSingleChoiceItems(categoriesNames, checkedItem[0], new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int selectedCategory) {
-                selectedCategoryName[0] = categories[selectedCategory];
+            public void onClick(DialogInterface dialog, int which) {
+                checkedItem[0] = which;
             }
         });
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int selectedCategory) {
-                dialog.dismiss();
-                textView.setText(selectedCategoryName[0]);
+                currentNoteCategory = categoriesNames[checkedItem[0]];
+                textView.setText(currentNoteCategory);
             }
         });
 
@@ -141,6 +181,9 @@ public class NoteEditorActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Method used to save the current Note's data in the Shared Preferences
+     */
     private void saveNewNote() {
 
         if (!note_title_edit_text.getText().toString().equals("")) {
@@ -171,7 +214,7 @@ public class NoteEditorActivity extends AppCompatActivity {
                 String contentKey = "note_" + Integer.toString(new_note_pos) + "_content";
 
                 //Prepares the Values that will be used to save the Note's attributes
-                String categoryValue = note_category_string;
+                String categoryValue = currentNoteCategory;
                 String titleValue = note_title_edit_text.getText().toString();
                 String contentValue = note_content_edit_text.getText().toString();
 
@@ -194,4 +237,35 @@ public class NoteEditorActivity extends AppCompatActivity {
             note_title_edit_text.setError("You need to set a title."); //Shows an error message indicating that the password isn't correct
         }
     }
+
+    /**
+     * This method is used to recreate all of the Category objects contained in the SharedPreferences and then stores them in the categoriesList Array List.
+     */
+    private void loadCategoriesFromSharedPreferences() {
+        //Initializes the SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+
+        //Retrieves the number of notes from the SharedPreferences
+        int nb_categories = preferences.getInt("nb_categories", 0); //Gets the amount of notes saved in the SharedPreferences
+
+        //Clears the current noteList
+        categoriesList.clear();
+
+        for (int i=1; i<=nb_categories; i++) {
+            //Prepares the Keys that will be used to retrieve the Note's attributes
+            String categoryNameKey = "note_category_" + Integer.toString(i) + "_name";
+            String categoryDisplayedKey = "note_category_" + Integer.toString(i) + "_displayed";
+
+            //Retrieves each of the Note's attributes from the SharedPreferences
+            String categoryNameValue = preferences.getString(categoryNameKey, "error"); //Gets the amount of notes saved in the SharedPreferences
+            Boolean categoryDisplayedValue = preferences.getBoolean(categoryDisplayedKey, true); //Gets the amount of notes saved in the SharedPreferences
+
+            //Creates a new Note using the data retrieved from the SharedPreferences
+            Category newCategory = new Category(categoryNameValue, categoryDisplayedValue);
+
+            //Adds that note to the noteList Array List
+            categoriesList.add(newCategory);
+        }
+    }
+
 }

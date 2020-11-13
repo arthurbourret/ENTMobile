@@ -54,7 +54,7 @@
     <!-- Settings-->
     <string name="example_1_header">Example 1</string>
     <string name="edit_text_example_title">EditText example</string>
-    <string name="list_example_title">List example</string>
+    <string name="list_example_title">Language</string>
 
     <string name="example_2_header">Example 2</string>
     <string name="condition_example_title">Condition example</string>

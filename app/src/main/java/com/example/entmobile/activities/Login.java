@@ -79,6 +79,7 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(this, MainMenu.class); //Prepares a new activity
         startActivity(intent); //Opens the new activity
     }
+
     /**
      * Method used to open the CreateAccount Menu.
      */

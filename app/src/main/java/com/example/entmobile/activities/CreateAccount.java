@@ -103,6 +103,12 @@ public class CreateAccount extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method used to save an account in the Shared Preferences
+     * @param usernametext String containing the username of the account that will be saved
+     * @param passwordtext String containing the password of the account that will be saved
+     * @param mailtext String containing the email address of the account that will be saved
+     */
     private void saveAccount(String usernametext, String passwordtext, String mailtext) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
         SharedPreferences.Editor editor = preferences.edit(); //Initializes the SharedPreferences' editor
@@ -119,6 +125,8 @@ public class CreateAccount extends AppCompatActivity {
 
     /**
      * Method used to open the Main Menu.
+     *
+     * It sets a flag "FLAG_ACTIVITY_NO_HISTORY" so that the user cannot press the back button and go back to the Account Creation page.
      */
     private void OpenLogInMenu() {
         Intent intent = new Intent(this, Login.class);
