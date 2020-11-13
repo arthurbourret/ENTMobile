@@ -160,7 +160,7 @@ public class NotesActivity extends AppCompatActivity {
             }
         });
 
-        //When the Add button is pressed
+        //When the OK button is pressed
         builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -168,7 +168,7 @@ public class NotesActivity extends AppCompatActivity {
             }
         });
 
-        //When the OK button is pressed
+        //When the Add button is pressed
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -176,17 +176,26 @@ public class NotesActivity extends AppCompatActivity {
             }
         });
 
-        //When the Cancel button is pressed
+        //When the Remove button is pressed
         builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ShowRemoveCategoriesDialog();
+                if (!categoriesList.isEmpty()) {
+                    ShowRemoveCategoriesDialog();
+                }
+                else {
+                    ShowAlertNoCategories();
+                }
             }
         });
 
         //Creates and shows the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void ShowAlertNoCategories() {
+        Toast.makeText(this, "There are no categories", Toast.LENGTH_LONG).show();
     }
 
     private void ShowRemoveCategoriesDialog() {
