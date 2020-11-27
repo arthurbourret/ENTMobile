@@ -133,4 +133,6 @@ public class CreateAccount extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
+
+    //ceci est une modification
 }
