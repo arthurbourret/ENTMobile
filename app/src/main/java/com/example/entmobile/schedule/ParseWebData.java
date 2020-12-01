@@ -39,7 +39,7 @@ public class ParseWebData {
 
             while ((line = br.readLine()) != null) {
                 Log.i("prompt line", line);
-                data += line + "\n";
+                data += line + "\n"; // add line to the stream of data
             }
 
             return saveData(data);
