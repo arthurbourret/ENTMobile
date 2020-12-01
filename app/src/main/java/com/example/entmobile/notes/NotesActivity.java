@@ -364,7 +364,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
             editor.putInt("nb_notes", 0);
 
-
             for (int i=0; i<old_nb_notes; i++) {
                 String name_to_delete = "note_" + Integer.toString(i) + "_name";
                 String category_to_delete = "note_" + Integer.toString(i) + "_category";
@@ -461,6 +460,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                     notes_counter.setText(Integer.toString(noteList.size()));
 
                     saveNotesInSharedPreferences();
+                    setupButtonsListeners();
                 }
             });
             snackbar.setActionTextColor(Color.YELLOW);
