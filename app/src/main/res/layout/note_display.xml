@@ -55,7 +55,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="9dp"
                 android:text="note_title_place_holder"
                 android:textSize="20sp"
                 android:textStyle="bold" />
