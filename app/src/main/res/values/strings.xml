@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ENT Mobile</string>
 
     <!-- MainMenu -->
@@ -61,5 +61,12 @@
     <string name="dependency_example_title">Depends on the condition example</string>
     <string name="dependency_example_on">Yes</string>
     <string name="dependency_example_off">No</string>
+
+
+    <!-- Notes -->
+
+    <string name="action_settings">Settings</string>
+    <string name="my_cart">My Cart</string>
+    <string name="delete">DELETE</string>
 
 </resources>

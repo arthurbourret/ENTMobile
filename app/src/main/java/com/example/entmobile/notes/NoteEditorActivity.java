@@ -170,8 +170,11 @@ public class NoteEditorActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int selectedCategory) {
-                currentNoteCategory = categoriesNames[checkedItem[0]];
-                textView.setText(currentNoteCategory);
+
+                if (!categoriesList.isEmpty()) {
+                    currentNoteCategory = categoriesNames[checkedItem[0]];
+                    textView.setText(currentNoteCategory);
+                }
             }
         });
 

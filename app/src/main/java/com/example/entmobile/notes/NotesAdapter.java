@@ -2,26 +2,33 @@ package com.example.entmobile.notes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.entmobile.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
-    private List<Note> mData;
+    public List<Note> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private Context context;
+
 
     // data is passed into the constructor
     NotesAdapter(Context context, List<Note> data) {
+        this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -51,6 +58,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        View viewForeground;
+        View viewBackground;
         TextView note_title;
         TextView note_cat;
         TextView note_cont;
@@ -60,6 +69,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             note_title = itemView.findViewById(R.id.note_title);
             note_cat = itemView.findViewById(R.id.note_category);
             note_cont = itemView.findViewById(R.id.note_content);
+            viewBackground = itemView.findViewById(R.id.view_background);
+            viewForeground = itemView.findViewById(R.id.view_foreground);
             itemView.setOnClickListener(this);
         }
 
@@ -82,5 +93,31 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public void removeItem(int position) {
+
+        if (mData == null || mData.isEmpty()) {
+            return;
+        }
+        else if (position > -1) {
+            mData.remove(position);
+
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, mData.size());
+        }
+        Log.e("position", String.valueOf(position));
+
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+
+        //notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Note note, int position) {
+        mData.add(position, note);
+        // notify item added by position
+        notifyItemInserted(position);
     }
 }

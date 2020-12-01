@@ -2,53 +2,61 @@ package com.example.entmobile.notes;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.entmobile.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesActivity extends AppCompatActivity {
+public class NotesActivity extends AppCompatActivity implements NoteItemTouchHelper.RecyclerItemTouchHelperListener {
 
     /**
      * TextView used to show the user the amount of notes saved and available
      */
-    TextView notes_counter;
+    public TextView notes_counter;
+
+    public TextView no_notes_hint;
 
     /**
      * ImageButton used to launch the openNoteSettings() method
      */
-    ImageButton notes_settings_button;
+    public ImageButton notes_settings_button;
 
     /**
      * ImageButton used to launch the createNewNote() method
      */
-    ImageButton add_note_button;
+    public ImageButton add_note_button;
 
-    RecyclerView note_recycler_view;
+    public RecyclerView note_recycler_view;
 
-    NotesAdapter notesAdapter;
+    public NotesAdapter notesAdapter;
+
+    private CoordinatorLayout coordinatorLayout;
 
     final int NOTE_EDITION_DONE = 1;
 
     private List<Note> noteList = new ArrayList<Note>();
+
     private List<Category> categoriesList = new ArrayList<Category>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +65,22 @@ public class NotesActivity extends AppCompatActivity {
 
         //Finds the object's IDs and initializes local variables
         notes_counter = findViewById(R.id.notes_counter);
+        no_notes_hint = findViewById(R.id.no_notes_hint);
         add_note_button = findViewById(R.id.save_note_button);
         notes_settings_button = findViewById(R.id.notes_settings_button);
         note_recycler_view = findViewById(R.id.note_recycler_view);
-
-        //Sets up the custom feedback for the buttons that need it
-        //setupButtonsFeedback();
+        coordinatorLayout = findViewById(R.id.coordinator_layout);
 
         //Loads the data from the Shared Preferences
         loadNotesFromSharedPreferences();
 
         loadCategoriesFromSharedPreferences();
+
+        //Swipe
+        NoteItemTouchHelper noteItemTouchHelper = new NoteItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+
+        //attaching the touch helper to recycler view
+        new ItemTouchHelper(noteItemTouchHelper).attachToRecyclerView(note_recycler_view);
 
         //Loads the data in the recycler view
         reloadRecycleView();
@@ -75,41 +88,8 @@ public class NotesActivity extends AppCompatActivity {
         //Sets up the buttons' listeners
         setupButtonsListeners();
 
-    }
-
-    private void reloadRecycleView() {
-        note_recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        notesAdapter = new NotesAdapter(this, noteList);
-        note_recycler_view.setAdapter(notesAdapter);
-    }
-
-    /**
-     * Method used to set up the buttons' listeners.
-     */
-    private void setupButtonsListeners() {
-        //Set a listener on the Add Note button
-        add_note_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newNote();
-            }
-        });
-
-        //Set a listener on the Settings button
-        notes_settings_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowNotesSettingsDialog();
-            }
-        });
-
-        //Set a listener on each of the notes
-        notesAdapter.setClickListener(new NotesAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                editNote(position+1);
-            }
-        });
+        //Sets up the visibility of the hint if there are no notes currently saved
+        setupNoNoteHint();
     }
 
     /**
@@ -194,10 +174,6 @@ public class NotesActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void ShowAlertNoCategories() {
-        Toast.makeText(this, "There are no categories", Toast.LENGTH_LONG).show();
-    }
-
     private void ShowRemoveCategoriesDialog() {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -271,6 +247,10 @@ public class NotesActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void ShowAlertNoCategories() {
+        Toast.makeText(this, "There are no categories", Toast.LENGTH_LONG).show();
+    }
+
     private void addNewCategory(String name) {
         Category newCategory = new Category(name, true);
         categoriesList.add(newCategory);
@@ -286,6 +266,11 @@ public class NotesActivity extends AppCompatActivity {
 
         //Retrieves the number of notes from the SharedPreferences
         int nb_notes = preferences.getInt("nb_notes", 0); //Gets the amount of notes saved in the SharedPreferences
+
+        //Saves the number of notes of the last time the notes were loaded
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("old_nb_notes", nb_notes);
+        editor.apply();
 
         //Updates the notes_counter EditText with the current amount of notes
         notes_counter.setText(Integer.toString(nb_notes));
@@ -373,9 +358,31 @@ public class NotesActivity extends AppCompatActivity {
                 editor.putString(contentKey, noteContent);
             }
         }
+        else {
+            //Retrieves the number of notes of the last time note were loaded from the SharedPreferences
+            int old_nb_notes = preferences.getInt("old_nb_notes", 0); //Gets the amount of notes saved in the SharedPreferences
+
+            editor.putInt("nb_notes", 0);
+
+
+            for (int i=0; i<old_nb_notes; i++) {
+                String name_to_delete = "note_" + Integer.toString(i) + "_name";
+                String category_to_delete = "note_" + Integer.toString(i) + "_category";
+                String content_to_delete = "note_" + Integer.toString(i) + "_content";
+
+                editor.remove(name_to_delete); // will delete key key_name4
+                editor.remove(category_to_delete); // will delete key key_name4
+                editor.remove(content_to_delete); // will delete key key_name4
+            }
+
+            // Save the changes in SharedPreferences
+            editor.commit(); // commit changes
+        }
 
         //Applies the changes
         editor.apply();
+
+        setupNoNoteHint();
     }
 
     private void saveCategoriesInSharedPreferences() {
@@ -420,6 +427,91 @@ public class NotesActivity extends AppCompatActivity {
             loadCategoriesFromSharedPreferences();
             reloadRecycleView();
             setupButtonsListeners();
+            setupNoNoteHint();
+        }
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
+        if (viewHolder instanceof NotesAdapter.ViewHolder) {
+            // get the removed item name to display it in snack bar
+            String name = noteList.get(position).getTitle();
+
+            // backup of removed item for undo purpose
+            final Note deletedItem = noteList.get(position);
+            final int deletedIndex = position;
+
+            // remove the item from recycler view
+            notesAdapter.removeItem(position);
+
+            //Updates the notes_counter EditText with the current amount of notes
+            notes_counter.setText(Integer.toString(noteList.size()));
+
+            // showing snack bar with Undo option
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, "\"" + name + "\" was deleted!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // undo is selected, restore the deleted item
+                    notesAdapter.restoreItem(deletedItem, deletedIndex);
+
+                    //Updates the notes_counter EditText with the current amount of notes
+                    notes_counter.setText(Integer.toString(noteList.size()));
+
+                    saveNotesInSharedPreferences();
+                }
+            });
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
+        }
+
+        saveNotesInSharedPreferences();
+        reloadRecycleView();
+    }
+
+    private void reloadRecycleView() {
+        note_recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        notesAdapter = new NotesAdapter(this, noteList);
+        note_recycler_view.setAdapter(notesAdapter);
+    }
+
+    /**
+     * Method used to set up the buttons' listeners.
+     */
+    private void setupButtonsListeners() {
+        //Set a listener on the Add Note button
+        add_note_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newNote();
+            }
+        });
+
+        //Set a listener on the Settings button
+        notes_settings_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowNotesSettingsDialog();
+            }
+        });
+
+        //Set a listener on each of the notes
+        notesAdapter.setClickListener(new NotesAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                editNote(position+1);
+            }
+        });
+    }
+
+    private void setupNoNoteHint() {
+        if (noteList.isEmpty()) {
+            no_notes_hint.setVisibility(View.VISIBLE);
+        }
+        else {
+            no_notes_hint.setVisibility(View.GONE);
         }
     }
 
