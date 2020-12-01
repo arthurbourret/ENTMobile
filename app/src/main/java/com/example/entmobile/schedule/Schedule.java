@@ -1,14 +1,11 @@
 package com.example.entmobile.schedule;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,10 +13,6 @@ import android.widget.TextView;
 import com.example.entmobile.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -46,12 +39,14 @@ public class Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule_activity);
 
-        courses = new ArrayList<>();//new ParseWebData().loadFromHtml();
+        // load data
+        ParseWebData parser = new ParseWebData(this);
+        parser.loadDataFromHtml();
+        courses = parser.readScheduleData();
 
         // instantiation
         calendar = Calendar.getInstance();
         MONTHS = getResources().getStringArray(R.array.months);
-        //courses = ParseWebData.openScheduleData(this); // extract the courses
 
         scheduleView = (RecyclerView) findViewById(R.id.scheduleView); // instantiate the recycler
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this);
@@ -112,7 +107,7 @@ public class Schedule extends AppCompatActivity {
                 dialog.dismiss();
             }
         })
-        .create().show();
+                .create().show();
     }
 
     /**
@@ -162,7 +157,8 @@ public class Schedule extends AppCompatActivity {
 
         for (Course course : courses) {
             Date cDate = course.getStartDate();
-            if (currentDate.getYear() == cDate.getYear() &&
+            if (cDate!=null &&
+                    currentDate.getYear() == cDate.getYear() &&
                     currentDate.getMonth() == cDate.getMonth() &&
                     currentDate.getDate() == cDate.getDate()) {
                 // if same year, month, day
