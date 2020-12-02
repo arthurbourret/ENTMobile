@@ -134,5 +134,4 @@ public class CreateAccount extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //ceci est une modification
 }
