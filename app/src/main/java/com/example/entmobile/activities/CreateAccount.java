@@ -17,6 +17,7 @@ import com.example.entmobile.R;
 public class CreateAccount extends AppCompatActivity {
 
     private Button button_validate; // Button used to launch the "openMainMenu()" method.
+    private Button button_login; // Another button used to launch the "openMainMenu()" method.
     private EditText username; // EditText where the user sets his username
     private EditText password; // EditText where the user sets his password
     private EditText password_check; // EditText where the user sets his group
@@ -29,6 +30,7 @@ public class CreateAccount extends AppCompatActivity {
 
         //Finds the object's IDs and initializes local variables
         button_validate = findViewById(R.id.button_validate);
+        button_login = findViewById(R.id.button_login);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         password_check = (EditText) findViewById(R.id.password_check);
@@ -39,6 +41,14 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createAccount();
+            }
+        });
+
+        // Set a listener on the Log In button
+        button_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLogInMenu();
             }
         });
     }
@@ -120,7 +130,7 @@ public class CreateAccount extends AppCompatActivity {
 
         editor.apply(); //Applies the changes
 
-        OpenLogInMenu(); //Opens the Log-In menu
+        openLogInMenu(); //Opens the Log-In menu
     }
 
     /**
@@ -128,7 +138,7 @@ public class CreateAccount extends AppCompatActivity {
      *
      * It sets a flag "FLAG_ACTIVITY_NO_HISTORY" so that the user cannot press the back button and go back to the Account Creation page.
      */
-    private void OpenLogInMenu() {
+    private void openLogInMenu() {
         Intent intent = new Intent(this, Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
