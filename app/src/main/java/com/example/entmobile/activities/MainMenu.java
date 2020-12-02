@@ -32,6 +32,8 @@ public class MainMenu extends AppCompatActivity {
     private Button button_notes; //Button used to launch the "openNotes()" method.
     private Button button_results; //Button used to launch the "openResults()" method.
 
+    private final static int EXIT_CODE = 100; // code used to finish this activity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +141,7 @@ public class MainMenu extends AppCompatActivity {
      */
     private void logOff() {
         Intent intent = new Intent(this, Login.class); //Prepares a new activity
-        startActivity(intent); //Opens the new activity
+        startActivityForResult(intent, EXIT_CODE); //Opens the new activity with an exit code
     }
 
     /**
@@ -209,5 +211,23 @@ public class MainMenu extends AppCompatActivity {
      */
     private void notImplemented() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Method used to finish the MainMenu Activity and disabled the back pressed button
+     * @param requestCode the request code of this activity
+     * @param resultCode the result of the Login Activity to finish the MainMenu Activity
+     * @param data the boolean to finish the MainMenu Activity
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EXIT_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra("EXIT", true)) {
+                    finish();
+                }
+            }
+        }
     }
 }

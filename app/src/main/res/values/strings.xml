@@ -25,6 +25,7 @@
     <string name="group">Group</string>
     <string name="mail">Mail</string>
     <string name="validate">Validate</string>
+    <string name="back_to_login">Back to Log In</string>
     <string name="wrong_pass_error">Incorrect password.</string>
     <string name="wrong_username_error">Incorrect username.</string>
     <string name="unmatch_pass_error">The passwords do not match</string>
