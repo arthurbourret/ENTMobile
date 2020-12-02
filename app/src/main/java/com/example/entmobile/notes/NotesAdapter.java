@@ -2,6 +2,7 @@ package com.example.entmobile.notes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.entmobile.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> implements ItemMoveCallback.ItemTouchHelperContract {
 
     public List<Note> mData;
     private LayoutInflater mInflater;
@@ -53,6 +55,30 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    @Override
+    public void onRowMoved(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(mData, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(mData, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onRowSelected(ViewHolder myViewHolder) {
+        myViewHolder.viewForeground.setBackgroundColor(Color.GRAY);
+    }
+
+    @Override
+    public void onRowClear(ViewHolder myViewHolder) {
+        myViewHolder.viewForeground.setBackgroundColor(Color.WHITE);
     }
 
 

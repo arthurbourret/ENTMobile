@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class NoteItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
-
     private RecyclerItemTouchHelperListener listener;
 
     public NoteItemTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener) {
@@ -32,12 +31,9 @@ public class NoteItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
-    public void onChildDrawOver(Canvas c, RecyclerView recyclerView,
-                                RecyclerView.ViewHolder viewHolder, float dX, float dY,
-                                int actionState, boolean isCurrentlyActive) {
+    public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((NotesAdapter.ViewHolder) viewHolder).viewForeground;
-        getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
-                actionState, isCurrentlyActive);
+        getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override
@@ -47,13 +43,10 @@ public class NoteItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView,
-                            RecyclerView.ViewHolder viewHolder, float dX, float dY,
-                            int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((NotesAdapter.ViewHolder) viewHolder).viewForeground;
 
-        getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
-                actionState, isCurrentlyActive);
+        getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override

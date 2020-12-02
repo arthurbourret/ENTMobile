@@ -35,6 +35,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
     public TextView no_notes_hint;
 
+    public TextView notes_text_view;
+
     /**
      * ImageButton used to launch the openNoteSettings() method
      */
@@ -65,6 +67,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
         //Finds the object's IDs and initializes local variables
         notes_counter = findViewById(R.id.notes_counter);
+        notes_text_view = findViewById(R.id.notes_text_view);
         no_notes_hint = findViewById(R.id.no_notes_hint);
         add_note_button = findViewById(R.id.save_note_button);
         notes_settings_button = findViewById(R.id.notes_settings_button);
@@ -272,9 +275,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         editor.putInt("old_nb_notes", nb_notes);
         editor.apply();
 
-        //Updates the notes_counter EditText with the current amount of notes
-        notes_counter.setText(Integer.toString(nb_notes));
-
         //Clears the current noteList
         noteList.clear();
 
@@ -295,6 +295,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             //Adds that note to the noteList Array List
             noteList.add(newNote);
         }
+
+        //Updates the notes_counter EditText with the current amount of notes
+        setupNoteCounter();
     }
 
     /**
@@ -445,7 +448,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             notesAdapter.removeItem(position);
 
             //Updates the notes_counter EditText with the current amount of notes
-            notes_counter.setText(Integer.toString(noteList.size()));
+            setupNoteCounter();
 
             // showing snack bar with Undo option
             Snackbar snackbar = Snackbar.make(coordinatorLayout, "\"" + name + "\" was deleted!", Snackbar.LENGTH_LONG);
@@ -456,11 +459,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                     // undo is selected, restore the deleted item
                     notesAdapter.restoreItem(deletedItem, deletedIndex);
 
-                    //Updates the notes_counter EditText with the current amount of notes
-                    notes_counter.setText(Integer.toString(noteList.size()));
-
                     saveNotesInSharedPreferences();
                     setupButtonsListeners();
+                    setupNoteCounter();
                 }
             });
             snackbar.setActionTextColor(Color.YELLOW);
@@ -474,6 +475,10 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     private void reloadRecycleView() {
         note_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         notesAdapter = new NotesAdapter(this, noteList);
+
+        ItemTouchHelper.Callback callback = new ItemMoveCallback(notesAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);touchHelper.attachToRecyclerView(note_recycler_view);
+
         note_recycler_view.setAdapter(notesAdapter);
     }
 
@@ -506,6 +511,17 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         });
     }
 
+    private void setupNoteCounter() {
+        notes_counter.setText(Integer.toString(noteList.size()));
+
+        if (noteList.size() == 1) {
+            notes_text_view.setText(" note");
+        }
+        else {
+            notes_text_view.setText(" notes");
+        }
+    }
+
     private void setupNoNoteHint() {
         if (noteList.isEmpty()) {
             no_notes_hint.setVisibility(View.VISIBLE);
@@ -514,5 +530,4 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             no_notes_hint.setVisibility(View.GONE);
         }
     }
-
 }

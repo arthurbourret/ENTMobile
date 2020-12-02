@@ -19,6 +19,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/logo_iut_content_desc"
             android:padding="30dp"
             android:src="@drawable/app_res_img_logo_iut" />
