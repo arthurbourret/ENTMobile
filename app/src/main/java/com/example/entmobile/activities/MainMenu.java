@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.entmobile.R;
 import com.example.entmobile.mails.MailsActivity;
 import com.example.entmobile.notes.NotesActivity;
+import com.example.entmobile.results.ResultsActivity;
 import com.example.entmobile.schedule.Schedule;
 
 public class MainMenu extends AppCompatActivity {
@@ -170,15 +171,14 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Note page
      */
     private void openNotes() {
-        Intent intent = new Intent(this, NotesActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, NotesActivity.class));
     }
 
     /**
      * Method used to open the Results page
      */
     private void openResults() {
-        notImplemented();
+        startActivity(new Intent(this, ResultsActivity.class));
     }
 
     /**
