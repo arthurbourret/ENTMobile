@@ -13,6 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,70 +101,69 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button_schedule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:minWidth="100dip"
-                    android:minHeight="100dip"
-                    android:text="@string/schedule"
-                    android:textColor="#F44336"
-                    android:textSize="18sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button_mails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <Button
+                        android:id="@+id/button_schedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minWidth="100dip"
+                        android:minHeight="100dip"
+                        android:text="@string/schedule"
+                        android:textColor="#F44336"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/button_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minWidth="100dip"
+                        android:minHeight="100dip"
+                        android:text="@string/notes"
+                        android:textColor="#4CAF50"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:minWidth="100dip"
-                    android:minHeight="100dip"
-                    android:text="@string/mails"
-                    android:textColor="#FF9800"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-        </TableRow>
+                    <Button
+                        android:id="@+id/button_mails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minWidth="100dip"
+                        android:minHeight="100dip"
+                        android:text="@string/mails"
+                        android:textColor="#FF9800"
+                        android:textSize="18sp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
+                    <Button
+                        android:id="@+id/button_results"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minWidth="100dip"
+                        android:minHeight="100dip"
+                        android:text="@string/results"
+                        android:textColor="#2196F3"
+                        android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_notes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:minWidth="100dip"
-                    android:minHeight="100dip"
-                    android:text="@string/notes"
-                    android:textColor="#4CAF50"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/button_results"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:minWidth="100dip"
-                    android:minHeight="100dip"
-                    android:text="@string/results"
-                    android:textColor="#2196F3"
-                    android:textSize="18sp" />
+                </LinearLayout>
             </LinearLayout>
         </TableRow>
 
@@ -192,32 +192,48 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button_umtice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:minWidth="100dip"
-                    android:minHeight="100dip"
-                    android:text="@string/umtice"
-                    android:textColor="#673AB7"
-                    android:textSize="18sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button_ent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <Button
+                        android:id="@+id/button_umtice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minWidth="100dip"
+                        android:minHeight="100dip"
+                        android:text="@string/umtice"
+                        android:textColor="#673AB7"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:minWidth="100dip"
-                    android:minHeight="100dip"
-                    android:text="@string/ent"
-                    android:textColor="#E91E63"
-                    android:textSize="18sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button_ent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minWidth="100dip"
+                        android:minHeight="100dip"
+                        android:text="@string/ent"
+                        android:textColor="#E91E63"
+                        android:textSize="18sp" />
+                </LinearLayout>
             </LinearLayout>
+
         </TableRow>
 
     </TableLayout>

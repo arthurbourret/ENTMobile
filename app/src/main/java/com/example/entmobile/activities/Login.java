@@ -1,5 +1,7 @@
 package com.example.entmobile.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -88,4 +90,18 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method uses to open an Alert Dialog when back button is pressed
+     */
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.yes, (arg0, arg1) -> {
+                    setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
+                    finish();
+                }).create().show();
+    }
 }

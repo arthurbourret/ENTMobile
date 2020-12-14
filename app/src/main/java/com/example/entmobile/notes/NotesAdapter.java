@@ -2,10 +2,6 @@ package com.example.entmobile.notes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,16 +43,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         Note note = mData.get(position);
         holder.note_title.setText(note.getTitle());
         holder.note_cat.setText(note.getCategory());
         holder.note_cont.setText(note.getContent());
-
-        String category = mData.get(position).getCategory();
-
-        putColorOnCategrory(holder, category);
-
     }
 
     // total number of rows
@@ -129,57 +119,5 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         mData.add(position, note);
         // notify item added by position
         notifyItemInserted(position);
-    }
-
-
-    public int findColorCategory(String categoryToFind){
-
-        //Initializes the SharedPreferences
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context); //Initializes the SharedPreferences
-
-        //Retrieves the number of notes from the SharedPreferences
-        int nb_categories = preferences.getInt("nb_categories", 0); //Gets the amount of notes saved in the SharedPreferences
-
-        int colorFound = 0;
-        
-        for (int i=1; i<=nb_categories; i++) {
-            //Prepares the Keys that will be used to retrieve the Note's attributes
-            String categoryNameKey = "note_category_" + Integer.toString(i) + "_name";
-            String categoryColor = "note_category_" + Integer.toString(i) + "_color";
-
-
-            //Retrieves each of the Note's attributes from the SharedPreferences
-            String categoryNameValue = preferences.getString(categoryNameKey, "error"); //Gets the amount of notes saved in the SharedPreferences
-            int categoryColorValue = preferences.getInt(categoryColor, 0);
-
-            Log.e("findCat", categoryNameValue);
-
-            if (categoryToFind == categoryNameValue){
-                colorFound =  categoryColorValue;
-            }
-        }
-        return  colorFound;
-    }
-
-    public void putColorOnCategrory(ViewHolder holder, String category){
-
-        int colorCategory = findColorCategory(category);
-
-        Log.e("category", category);
-
-        GradientDrawable foreGround_Background = new GradientDrawable();
-        foreGround_Background.setColor(Color.WHITE);
-        foreGround_Background.setCornerRadius(20);
-        foreGround_Background.mutate();
-        foreGround_Background.setStroke(10, colorCategory);
-
-        holder.viewForeground.setBackground(foreGround_Background);
-
-        GradientDrawable backGround_Background = new GradientDrawable();
-        backGround_Background.setColor(Color.RED);
-        backGround_Background.setCornerRadius(20);
-        foreGround_Background.mutate();
-        //backGround_Background.setStroke(10, Color.RED);
-        holder.viewBackground.setBackground(backGround_Background);
     }
 }

@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.entmobile.R;
+import com.example.entmobile.mails.MailsActivity;
 import com.example.entmobile.notes.NotesActivity;
+import com.example.entmobile.results.ResultsActivity;
 import com.example.entmobile.schedule.Schedule;
 
 public class MainMenu extends AppCompatActivity {
@@ -30,6 +32,8 @@ public class MainMenu extends AppCompatActivity {
     private Button button_mails; //Button used to launch the "openMails()" method.
     private Button button_notes; //Button used to launch the "openNotes()" method.
     private Button button_results; //Button used to launch the "openResults()" method.
+
+    private final static int EXIT_CODE = 100; // code used to finish this activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +142,7 @@ public class MainMenu extends AppCompatActivity {
      */
     private void logOff() {
         Intent intent = new Intent(this, Login.class); //Prepares a new activity
-        startActivity(intent); //Opens the new activity
+        startActivityForResult(intent, EXIT_CODE); //Opens the new activity with an exit code
     }
 
     /**
@@ -160,22 +164,21 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Mail page
      */
     private void openMails() {
-        notImplemented();
+        startActivity(new Intent(this, MailsActivity.class));
     }
 
     /**
      * Method used to open the Note page
      */
     private void openNotes() {
-        Intent intent = new Intent(this, NotesActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, NotesActivity.class));
     }
 
     /**
      * Method used to open the Results page
      */
     private void openResults() {
-        notImplemented();
+        startActivity(new Intent(this, ResultsActivity.class));
     }
 
     /**
@@ -208,5 +211,23 @@ public class MainMenu extends AppCompatActivity {
      */
     private void notImplemented() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Method used to finish the MainMenu Activity and disabled the back pressed button
+     * @param requestCode the request code of this activity
+     * @param resultCode the result of the Login Activity to finish the MainMenu Activity
+     * @param data the boolean to finish the MainMenu Activity
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EXIT_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra("EXIT", true)) {
+                    finish();
+                }
+            }
+        }
     }
 }

@@ -28,6 +28,7 @@ public class Schedule extends AppCompatActivity {
     ArrayList<Course> courses;
 
     private Calendar calendar;
+    
     private static String[] MONTHS;
 
     private TextView dateView;
