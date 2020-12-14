@@ -3,20 +3,25 @@ package com.example.entmobile.notes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +30,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class NotesActivity extends AppCompatActivity implements NoteItemTouchHelper.RecyclerItemTouchHelperListener {
 
@@ -57,6 +64,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
     private List<Category> categoriesList = new ArrayList<Category>();
 
+    private int default_color;
+
+    public LinearLayout note_category_background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +80,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         notes_settings_button = findViewById(R.id.notes_settings_button);
         note_recycler_view = findViewById(R.id.note_recycler_view);
         coordinatorLayout = findViewById(R.id.coordinator_layout);
+        note_category_background = findViewById(R.id.note_category_background);
+
+        default_color = ContextCompat.getColor(NotesActivity.this, R.color.colorPrimary);
 
         //Loads the data from the Shared Preferences
         loadNotesFromSharedPreferences();
@@ -152,6 +165,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 ShowAddNewCategoriesDialog();
             }
         });
@@ -224,8 +238,20 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("New category");
 
+
+
+
         // set the custom layout
         final View categories_display = getLayoutInflater().inflate(R.layout.categories_display, null);
+
+        Button button_Color = categories_display.findViewById(R.id.buttonColor);
+        button_Color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openColorPicker();
+            }
+        });
+
 
         builder.setView(categories_display);
 
@@ -235,7 +261,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             public void onClick(DialogInterface dialog, int which) {
                 // send data from the AlertDialog to the Activity
                 EditText editText = categories_display.findViewById(R.id.editText);
-                addNewCategory(editText.getText().toString());
+                addNewCategory(editText.getText().toString(), default_color);
             }
         });
 
@@ -247,12 +273,33 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         dialog.show();
     }
 
+    private void openColorPicker() {
+        AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, default_color, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                default_color = color;
+
+            }
+        });
+        colorPicker.show();
+    }
+
     private void ShowAlertNoCategories() {
         Toast.makeText(this, "There are no categories", Toast.LENGTH_LONG).show();
     }
 
-    private void addNewCategory(String name) {
-        Category newCategory = new Category(name, true);
+    private void addNewCategory(String name, int color) {
+        Category newCategory = new Category(name, true, color);
+
+        /*GradientDrawable myGrad = (GradientDrawable)note_category_background.getBackground();
+        myGrad.setStroke(2, color);*/
+
         categoriesList.add(newCategory);
         saveCategoriesInSharedPreferences();
     }
@@ -314,13 +361,18 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             //Prepares the Keys that will be used to retrieve the Note's attributes
             String categoryNameKey = "note_category_" + Integer.toString(i) + "_name";
             String categoryDisplayedKey = "note_category_" + Integer.toString(i) + "_displayed";
+            String categoryColor = "note_category_" + Integer.toString(i) + "_color";
+
 
             //Retrieves each of the Note's attributes from the SharedPreferences
             String categoryNameValue = preferences.getString(categoryNameKey, "error"); //Gets the amount of notes saved in the SharedPreferences
             Boolean categoryDisplayedValue = preferences.getBoolean(categoryDisplayedKey, true); //Gets the amount of notes saved in the SharedPreferences
+            int categoryColorValue = preferences.getInt(categoryColor,-1);
+
+
 
             //Creates a new Note using the data retrieved from the SharedPreferences
-            Category newCategory = new Category(categoryNameValue, categoryDisplayedValue);
+            Category newCategory = new Category(categoryNameValue, categoryDisplayedValue, categoryColorValue);
 
             //Adds that note to the noteList Array List
             categoriesList.add(newCategory);
@@ -402,14 +454,17 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
                 String categoryNameKey = "note_category_" + Integer.toString(i+1) + "_name";
                 String categoryDisplayedKey = "note_category_" + Integer.toString(i+1) + "_displayed";
+                String categoryColor = "note_category_" + Integer.toString(i+1) + "_color";
 
                 //Prepares the Values that will be used to save the Note's attributes
                 String categoryNameValue = categoriesList.get(i).getName();
                 Boolean categoryDisplayedValue = categoriesList.get(i).isDisplayed();
+                int categoryColorValue = categoriesList.get(i).getColor();
 
                 //Saves each of the Note's attributes in the SharedPreferences
                 editor.putString(categoryNameKey, categoryNameValue);
                 editor.putBoolean(categoryDisplayedKey, categoryDisplayedValue);
+                editor.putInt(categoryColor, categoryColorValue);
             }
         }
 
