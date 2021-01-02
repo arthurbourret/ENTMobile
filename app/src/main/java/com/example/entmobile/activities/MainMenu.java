@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.entmobile.R;
-import com.example.entmobile.mails.MailsActivity;
+import com.example.entmobile.mails.MailViewerActivity;
 import com.example.entmobile.notes.NotesActivity;
 import com.example.entmobile.results.ResultsActivity;
 import com.example.entmobile.schedule.Schedule;
@@ -164,7 +164,7 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Mail page
      */
     private void openMails() {
-        startActivity(new Intent(this, MailsActivity.class));
+        startActivity(new Intent(this, MailViewerActivity.class));
     }
 
     /**

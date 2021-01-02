@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.example.entmobile.R;
 
-public class MailsActivity extends AppCompatActivity {
+public class MailWriterActivity extends AppCompatActivity {
 
     private EditText email_destination;
     private EditText email_subject;

@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/activity_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ENTMobile">
@@ -31,7 +31,10 @@
             android:name=".schedule.Schedule"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".mails.MailsActivity"
+            android:name=".mails.MailWriterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mails.MailViewerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".notes.NotesActivity"

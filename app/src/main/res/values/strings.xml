@@ -70,4 +70,10 @@
     <string name="my_cart">My Cart</string>
     <string name="delete">DELETE</string>
 
+    <!-- Mails -->
+
+    <string name="activity_name">Mails</string>
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
+
 </resources>

@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,6 +40,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
      * ImageButton used to launch the openNoteSettings() method
      */
     public ImageButton notes_settings_button;
+
+    public ImageButton notes_trash_button;
 
     /**
      * ImageButton used to launch the createNewNote() method
@@ -68,6 +71,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         no_notes_hint = findViewById(R.id.no_notes_hint);
         add_note_button = findViewById(R.id.save_note_button);
         notes_settings_button = findViewById(R.id.notes_settings_button);
+        notes_trash_button = findViewById(R.id.notes_trash_button);
         note_recycler_view = findViewById(R.id.note_recycler_view);
         coordinatorLayout = findViewById(R.id.coordinator_layout);
 
@@ -497,13 +501,50 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             }
         });
 
+        //Set a listener on the Settings button
+        notes_trash_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteAllAlert();
+            }
+        });
+
         //Set a listener on each of the notes
         notesAdapter.setClickListener(new NotesAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                editNote(position+1);
+
+                Note editedNote = noteList.get(position);
+                int itemPos = noteList.indexOf(editedNote);
+
+                noteList.remove(itemPos);
+                noteList.add(0, editedNote);
+
+                saveNotesInSharedPreferences();
+
+                editNote(1);
             }
         });
+    }
+
+    private void showDeleteAllAlert() {
+        android.app.AlertDialog alerte = new android.app.AlertDialog.Builder(this).create();
+        alerte.setTitle("Warning !");
+        alerte.setMessage("You're about to delete all notes saved on this device.\n\nDo you want to continue?");
+
+        alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                noteList.clear();
+                saveNotesInSharedPreferences();
+
+                loadNotesFromSharedPreferences();
+            }
+        });
+        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alerte.show();
     }
 
     private void setupNoNoteHint() {
