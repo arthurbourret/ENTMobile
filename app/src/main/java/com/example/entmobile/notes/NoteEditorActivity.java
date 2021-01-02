@@ -258,18 +258,13 @@ public class NoteEditorActivity extends AppCompatActivity {
             //Prepares the Keys that will be used to retrieve the Note's attributes
             String categoryNameKey = "note_category_" + Integer.toString(i) + "_name";
             String categoryDisplayedKey = "note_category_" + Integer.toString(i) + "_displayed";
-            String categoryColor = "note_category_" + Integer.toString(i+1) + "_color";
-
 
             //Retrieves each of the Note's attributes from the SharedPreferences
             String categoryNameValue = preferences.getString(categoryNameKey, "error"); //Gets the amount of notes saved in the SharedPreferences
             Boolean categoryDisplayedValue = preferences.getBoolean(categoryDisplayedKey, true); //Gets the amount of notes saved in the SharedPreferences
-            int categoryColorValue = preferences.getInt(categoryColor,0);
-
-
 
             //Creates a new Note using the data retrieved from the SharedPreferences
-            Category newCategory = new Category(categoryNameValue, categoryDisplayedValue, categoryColorValue);
+            Category newCategory = new Category(categoryNameValue, categoryDisplayedValue);
 
             //Adds that note to the noteList Array List
             categoriesList.add(newCategory);
