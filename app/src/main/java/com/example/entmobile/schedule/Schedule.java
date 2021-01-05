@@ -43,8 +43,7 @@ public class Schedule extends AppCompatActivity {
 
         // load data
         ParseWebData parser = new ParseWebData(this);
-        parser.loadDataFromHtml();
-        courses = parser.readScheduleData();
+        courses = parser.loadDataFromHtml();
 
         // instantiation
         calendar = Calendar.getInstance();

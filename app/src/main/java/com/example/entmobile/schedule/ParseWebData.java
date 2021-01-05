@@ -23,7 +23,7 @@ public class ParseWebData {
         this.context = context;
     }
 
-    protected Boolean loadDataFromHtml() {
+    protected ArrayList<Course> loadDataFromHtml() {
         try {
             String html = "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=2668&projectId=3&calType=ical&nbWeeks=4";
             URL url = new URL(html);
@@ -33,22 +33,10 @@ public class ParseWebData {
 
             InputStream file = conn.getInputStream();
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(file)); // parsing the file
-            String data = "", // initialisation of the data
-                    line;
-
-
-            Log.i("prompt all", br.toString() + "/");
-            while ((line = br.readLine()) != null) {
-                Log.i("prompt line", line);
-                data += line + "\n"; // add line to the stream of data
-            }
-
-            //Log.i("prompt", "-" + openScheduleData(file).get(0));
-            return saveData(data);
+            return openScheduleData(file);
         } catch (Exception e) {
             Log.w("parsing", e + ".");
-            return false;
+            return new ArrayList<>();
         }
     }
 
