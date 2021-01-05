@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi;
 public class Category {
 
     private String name;
-    private boolean displayed = false;
+    private boolean displayed = true;
 
     public Category(String name, Boolean isDisplayed) {
 

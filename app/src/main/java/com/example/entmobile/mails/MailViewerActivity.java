@@ -113,11 +113,16 @@ public class MailViewerActivity extends Activity implements SwipeRefreshLayout.O
         messageList.add("Bah salut quoi");
 
         List<String> timeList = new ArrayList<String>();
-        timeList.add("Yesterday");
-        timeList.add("Today");
-        timeList.add("3 days ago");
-        timeList.add("2 weeks ago");
-        timeList.add("26 years ago");
+        timeList.add(" hours ago");
+        timeList.add(" days ago");
+        timeList.add(" days ago");
+        timeList.add(" days ago");
+        timeList.add(" days ago");
+        timeList.add(" days ago");
+        timeList.add(" weeks ago");
+        timeList.add(" weeks ago");
+        timeList.add(" months ago");
+        timeList.add(" years ago");
 
         List<Boolean> importanceList = new ArrayList<Boolean>();
         importanceList.add(true);
@@ -137,7 +142,7 @@ public class MailViewerActivity extends Activity implements SwipeRefreshLayout.O
             newMessage.setFrom(namesList.get(rand.nextInt(5)));
             newMessage.setSubject(subjectList.get(rand.nextInt(5)));
             newMessage.setMessage(messageList.get(rand.nextInt(5)));
-            newMessage.setTimestamp(timeList.get(rand.nextInt(5)));
+            newMessage.setTimestamp(1+rand.nextInt(7)+timeList.get(i));
             newMessage.setImportant(importanceList.get(rand.nextInt(2)));
             newMessage.setRead(importanceList.get(rand.nextInt(2)));
 

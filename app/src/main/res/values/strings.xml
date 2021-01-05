@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">ENT Mobile</string>
+    <string name="app_name" translatable="false">ENT Mobile</string>
 
     <!-- MainMenu -->
     <string name="home">Home</string>
@@ -11,8 +11,8 @@
     <string name="links">Links</string>
     <string name="notes">Notes</string>
     <string name="results">Results</string>
-    <string name="umtice">UMTICE</string>
-    <string name="ent">ENT</string>
+    <string name="umtice" translatable="false">UMTICE</string>
+    <string name="ent" translatable="false">ENT</string>
 
     <!-- Login -->
     <string name="username">Username</string>
@@ -49,7 +49,7 @@
     <string name="location">Location</string>
     <string name="teacher">Teacher(s)</string>
     <string name="student">Students</string>
-    <string name="logo_iut_content_desc">Logo de l\'IUT de Laval</string>
+    <string name="logo_iut_content_desc">LAVAL IUT\'s logo</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Settings-->

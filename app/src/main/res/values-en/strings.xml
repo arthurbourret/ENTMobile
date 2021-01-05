@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="activity_name">ENT Mobile</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- MainMenu -->
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="log_off">LOG OFF</string>
+    <string name="schedule">Schedule</string>
+    <string name="modules">Modules</string>
+    <string name="links">Links</string>
+    <string name="notes">Notes</string>
+    <string name="results">Results</string>
+
+    <!-- Login -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">LOG IN</string>
+    <string name="createAccount">Create Account</string>
+
+    <!-- New acount -->
+    <string name="newAccount">NEW ACCOUNT</string>
+    <string name="group">Group</string>
+    <string name="mail">Mail</string>
+    <string name="validate">Validate</string>
+    <string name="back_to_login">Back to Log In</string>
+    <string name="wrong_pass_error">Incorrect password.</string>
+    <string name="wrong_username_error">Incorrect username.</string>
+    <string name="unmatch_pass_error">The passwords do not match</string>
+    <string name="empty_pass_error">The passwords cannot be left blank</string>
+
+    <!-- Schedule -->
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>Mai</item>
+        <item>Jun</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string name="location">Location</string>
+    <string name="teacher">Teacher(s)</string>
+    <string name="student">Students</string>
+    <string name="logo_iut_content_desc">LAVAL IUT\'s logo</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings-->
+    <string name="example_1_header">Example 1</string>
+    <string name="edit_text_example_title">EditText example</string>
+    <string name="list_example_title">Language</string>
+
+    <string name="example_2_header">Example 2</string>
+    <string name="condition_example_title">Condition example</string>
+    <string name="dependency_example_title">Depends on the condition example</string>
+    <string name="dependency_example_on">Yes</string>
+    <string name="dependency_example_off">No</string>
+
+
+    <!-- Notes -->
+
+    <string name="action_settings">Settings</string>
+    <string name="my_cart">My Cart</string>
+    <string name="delete">DELETE</string>
+
+    <!-- Mails -->
+
+    <string name="activity_name">Mails</string>
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
+    <string name="mails">Mails</string>
+
 </resources>

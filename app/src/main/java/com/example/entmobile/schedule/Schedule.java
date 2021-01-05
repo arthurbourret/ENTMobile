@@ -126,10 +126,18 @@ public class Schedule extends AppCompatActivity {
         ArrayList<Course> thisDayCourses = getCoursesOfTheDay(); // get course for the day
         showCourses(thisDayCourses); // and show them
 
-        if (getDifInDays(calendar.getTime(), new Date()) != 1)
+        if (getDifInDays(calendar.getTime(), new Date()) < 1) {
+            backToCurrentDay.setRotationY(0);
             backToCurrentDay.setVisibility(View.VISIBLE);
-        else backToCurrentDay.setVisibility(View.INVISIBLE);
-
+        }
+        else if (getDifInDays(calendar.getTime(), new Date()) > 1) {
+            backToCurrentDay.setRotationY(180);
+            backToCurrentDay.setVisibility(View.VISIBLE);
+        }
+        else {
+            backToCurrentDay.setRotationY(0);
+            backToCurrentDay.setVisibility(View.INVISIBLE);
+        }
         return dateText;
     }
 

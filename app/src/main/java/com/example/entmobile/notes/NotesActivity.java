@@ -75,10 +75,10 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         note_recycler_view = findViewById(R.id.note_recycler_view);
         coordinatorLayout = findViewById(R.id.coordinator_layout);
 
-        //Loads the data from the Shared Preferences
-        loadNotesFromSharedPreferences();
-
         loadCategoriesFromSharedPreferences();
+        //Loads the data from the Shared Preferences
+
+        loadNotesFromSharedPreferences();
 
         //Swipe
         NoteItemTouchHelper noteItemTouchHelper = new NoteItemTouchHelper(0, ItemTouchHelper.LEFT, this);
@@ -97,8 +97,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     }
 
     /**
-     * Method used to create a new note. Has to be implemented.
-     * TODO
+     * Method used to create a new note.
      */
     private void newNote() {
         Intent intent = new Intent(this, NoteEditorActivity.class);
@@ -116,8 +115,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     }
 
     /**
-     * Method used to open the notes settings. Has to be implemented.
-     * TODO
+     * Method used to open the notes settings.
      */
     private void ShowNotesSettingsDialog() {
         //Setup the alert builder
@@ -149,6 +147,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveCategoriesInSharedPreferences();
+                loadNotesFromSharedPreferences();
+                reloadRecycleView();
             }
         });
 
@@ -156,6 +156,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                saveCategoriesInSharedPreferences();
+                loadNotesFromSharedPreferences();
+                reloadRecycleView();
                 ShowAddNewCategoriesDialog();
             }
         });
@@ -164,6 +167,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                saveCategoriesInSharedPreferences();
+                loadNotesFromSharedPreferences();
+                reloadRecycleView();
                 if (!categoriesList.isEmpty()) {
                     ShowRemoveCategoriesDialog();
                 }
@@ -276,9 +282,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         editor.putInt("old_nb_notes", nb_notes);
         editor.apply();
 
-        //Updates the notes_counter EditText with the current amount of notes
-        notes_counter.setText(Integer.toString(nb_notes));
-
         //Clears the current noteList
         noteList.clear();
 
@@ -293,12 +296,28 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             String newNoteTitle = preferences.getString(titleKey, ""); //Gets the amount of notes saved in the SharedPreferences
             String newNoteContent = preferences.getString(contentKey, ""); //Gets the amount of notes saved in the SharedPreferences
 
-            //Creates a new Note using the data retrieved from the SharedPreferences
-            Note newNote = new Note(newNoteCategory, newNoteTitle, newNoteContent);
+            for(Category category : categoriesList) {
+                if (newNoteCategory.matches(category.getName())) {
+                    if (category.isDisplayed()) {
+                        createNote(newNoteCategory, newNoteTitle, newNoteContent);
+                    }
+                }
+            }
+            if (newNoteCategory.matches("None")) {
+                createNote(newNoteCategory, newNoteTitle, newNoteContent);
+            }
 
-            //Adds that note to the noteList Array List
-            noteList.add(newNote);
+            //Updates the notes_counter EditText with the current amount of notes
+            notes_counter.setText(Integer.toString(noteList.size()));
         }
+    }
+
+    private void createNote(String category, String Title, String Content) {
+        //Creates a new Note using the data retrieved from the SharedPreferences
+        Note newNote = new Note(category, Title, Content);
+
+        //Adds that note to the noteList Array List
+        noteList.add(newNote);
     }
 
     /**
@@ -426,8 +445,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NOTE_EDITION_DONE) {
-            loadNotesFromSharedPreferences();
             loadCategoriesFromSharedPreferences();
+            loadNotesFromSharedPreferences();
             reloadRecycleView();
             setupButtonsListeners();
             setupNoNoteHint();

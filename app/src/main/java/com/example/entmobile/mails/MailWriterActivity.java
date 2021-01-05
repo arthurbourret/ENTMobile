@@ -23,10 +23,10 @@ public class MailWriterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mails);
 
         //Associates the local variables to their correspondence in the view
-        email_destination = (EditText) findViewById(R.id.txtTo);
-        email_subject = (EditText) findViewById(R.id.txtSub);
-        email_content = (EditText) findViewById(R.id.txtMsg);
-        send_button = (Button) findViewById(R.id.btnSend);
+        email_destination = findViewById(R.id.txtTo);
+        email_subject = findViewById(R.id.txtSub);
+        email_content = findViewById(R.id.txtMsg);
+        send_button = findViewById(R.id.btnSend);
 
         //Sets up the Send button listener
         send_button.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +34,6 @@ public class MailWriterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Creates a new intent
                 Intent it = new Intent(Intent.ACTION_SEND);
-
                 //Adds the mail's data to the intent
                 it.putExtra(Intent.EXTRA_EMAIL, new String[]{email_destination.getText().toString()});
                 it.putExtra(Intent.EXTRA_SUBJECT, email_subject.getText().toString());

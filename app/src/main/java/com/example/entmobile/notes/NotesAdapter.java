@@ -106,7 +106,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, mData.size());
         }
-        Log.e("position", String.valueOf(position));
 
         // notify the item removed by position
         // to perform recycler view delete animations
