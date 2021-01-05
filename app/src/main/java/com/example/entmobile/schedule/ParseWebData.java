@@ -37,11 +37,14 @@ public class ParseWebData {
             String data = "", // initialisation of the data
                     line;
 
+
+            Log.i("prompt all", br.toString() + "/");
             while ((line = br.readLine()) != null) {
                 Log.i("prompt line", line);
                 data += line + "\n"; // add line to the stream of data
             }
 
+            //Log.i("prompt", "-" + openScheduleData(file).get(0));
             return saveData(data);
         } catch (Exception e) {
             Log.w("parsing", e + ".");
