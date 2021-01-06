@@ -33,6 +33,9 @@ public class Login extends AppCompatActivity {
         TextIL_username = findViewById(R.id.TextIL_username);
         TextIL_password = findViewById(R.id.TextIL_password);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+        TextIL_username.setText(preferences.getString("username", ""));//Gets the username from the SharedPreferences
+
         // Set a listener on the Log-In button
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,9 +47,11 @@ public class Login extends AppCompatActivity {
         // Set a listener on the Create Account button
         button_createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { openCreateAccountMenu();
+            public void onClick(View v) {
+                openCreateAccountMenu();
             }
-        });}
+        });
+    }
 
     /**
      * Method used to open check the log-in credentials and opens the Main Menu if they are correct.
@@ -64,12 +69,10 @@ public class Login extends AppCompatActivity {
         if ((username.equals(user_username)) && (!username.equals(""))) { //if the username is correct
             if (password.equals(user_pass) && (!password.equals(""))) { //if the password is correct
                 openMainMenu();
-            }
-            else { //If the password isn't correct
+            } else { //If the password isn't correct
                 TextIL_password.setError(getString(R.string.wrong_pass_error)); //Shows an error message indicating that the password isn't correct
             }
-        }
-        else { //If the username isn't correct
+        } else { //If the username isn't correct
             TextIL_username.setError(getString(R.string.wrong_username_error)); //Shows an error message indicating that the username isn't correct
         }
     }
