@@ -31,7 +31,7 @@ public class ParseWebData {
             URLConnection conn = url.openConnection();
             conn.setConnectTimeout(60000); // timing out in a minute
 
-            InputStream file = conn.getInputStream();
+            InputStream file = context.getAssets().open("ADECal.ics");
 
             return openScheduleData(file);
         } catch (Exception e) {

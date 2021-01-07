@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         TextIL_password = findViewById(R.id.TextIL_password);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
-        TextIL_username.setText(preferences.getString("username", ""));//Gets the username from the SharedPreferences
+        TextIL_username.setText(preferences.getString("username", "")); //Gets the username from the SharedPreferences and put it in the user name space
 
         // Set a listener on the Log-In button
         button_login.setOnClickListener(new View.OnClickListener() {
