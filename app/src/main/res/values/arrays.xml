@@ -6,7 +6,7 @@
     </string-array>
 
     <string-array name="reply_values">
-        <item>french</item>
-        <item>english</item>
+        <item>fr</item>
+        <item>en</item>
     </string-array>
 </resources>

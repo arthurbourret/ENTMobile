@@ -1,22 +1,30 @@
 package com.example.entmobile.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.entmobile.R;
 import com.example.entmobile.mails.MailViewerActivity;
 import com.example.entmobile.notes.NotesActivity;
 import com.example.entmobile.results.ResultsActivity;
 import com.example.entmobile.schedule.Schedule;
+
+import java.util.Locale;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -115,9 +123,39 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this); // preferences
+        String current_lang = pref.getString("loc", ""); // prefered language
+
+        // if language is not same as in preferences
+        if (!current_lang.equals(Locale.getDefault().toString())) {
+            // change to language in preferences
+            setLocale(getResources(), current_lang);
+        }
+    }
+
+    /**
+     * Change the language of the app depanding on a language in parameter
+     *
+     * @param resources The resources used to change the language
+     * @param language  The language we want the app to display
+     */
+    private void setLocale(Resources resources, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Configuration configuration = new Configuration(resources.getConfiguration());
+        configuration.locale = locale;
+
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        recreate();
+    }
+
     /**
      * Method used to launch the logOff() method.
-     *
+     * <p>
      * It warns the user that he is about to log out
      */
     private void openLogInMenu() {
@@ -197,6 +235,7 @@ public class MainMenu extends AppCompatActivity {
 
     /**
      * This method takes an url and open it in a web browser
+     *
      * @param url The string url of the web page
      */
     private void openInBrowser(String url) {
@@ -206,18 +245,11 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
-     * To be removed at the end of the project
-     * Shows a toast signaling a part of the app that is not implemented yet
-     */
-    private void notImplemented() {
-        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
      * Method used to finish the MainMenu Activity and disabled the back pressed button
+     *
      * @param requestCode the request code of this activity
-     * @param resultCode the result of the Login Activity to finish the MainMenu Activity
-     * @param data the boolean to finish the MainMenu Activity
+     * @param resultCode  the result of the Login Activity to finish the MainMenu Activity
+     * @param data        the boolean to finish the MainMenu Activity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
