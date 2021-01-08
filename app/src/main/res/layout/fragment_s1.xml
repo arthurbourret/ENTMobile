@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/titleborder"
+        android:background="@drawable/moyenne_ue"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="60dp"
-        android:background="@drawable/titleborder"
+        android:background="@drawable/moyenne_ue"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,12 +108,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -128,7 +128,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -147,7 +147,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -168,12 +168,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -189,7 +189,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -204,7 +204,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -333,12 +333,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -354,7 +354,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -369,7 +369,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -497,12 +497,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -518,7 +518,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -533,7 +533,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -661,12 +661,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -682,7 +682,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -697,7 +697,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -825,12 +825,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -846,7 +846,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -861,7 +861,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1044,12 +1044,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1065,7 +1065,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1080,7 +1080,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1161,12 +1161,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1181,7 +1181,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1200,7 +1200,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1221,12 +1221,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1242,7 +1242,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1257,7 +1257,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1386,12 +1386,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1407,7 +1407,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1422,7 +1422,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1550,12 +1550,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1571,7 +1571,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1586,7 +1586,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1714,12 +1714,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1735,7 +1735,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1750,7 +1750,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1877,12 +1877,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1898,7 +1898,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1913,7 +1913,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -1986,12 +1986,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -2007,7 +2007,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -2022,7 +2022,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -2149,12 +2149,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/titleborder">
+                android:background="@drawable/moyenne_matieres">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:orientation="horizontal">
 
                     <TextView
@@ -2170,7 +2170,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -2185,7 +2185,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/titleborder"
+                    android:background="@drawable/moyenne_matieres"
                     android:gravity="center"
                     android:orientation="horizontal">
 
