@@ -12,7 +12,7 @@ import com.example.entmobile.R;
 import java.util.ArrayList;
 
 public class CourseAdaptator extends RecyclerView.Adapter<ContentViewHolder> {
-    private ArrayList<Course> adaptedCourses;
+    private final ArrayList<Course> adaptedCourses;
 
     /**
      * Instantiate the class with the courses to be displayed

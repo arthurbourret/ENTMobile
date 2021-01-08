@@ -29,13 +29,13 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyViewHolder> {
 
-    private Context mContext;
-    private List<Message> messages;
-    private MessageAdapterListener listener;
-    private SparseBooleanArray selectedItems;
+    private final Context mContext;
+    private final List<Message> messages;
+    private final MessageAdapterListener listener;
+    private final SparseBooleanArray selectedItems;
 
     // array used to perform multiple animation at once
-    private SparseBooleanArray animationItemsIndex;
+    private final SparseBooleanArray animationItemsIndex;
     private boolean reverseAllAnimations = false;
 
     // index is used to animate only the selected row
@@ -50,17 +50,17 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
 
         public MyViewHolder(View view) {
             super(view);
-            from = (TextView) view.findViewById(R.id.from);
-            subject = (TextView) view.findViewById(R.id.txt_primary);
-            message = (TextView) view.findViewById(R.id.txt_secondary);
-            iconText = (TextView) view.findViewById(R.id.icon_text);
-            timestamp = (TextView) view.findViewById(R.id.timestamp);
-            iconBack = (RelativeLayout) view.findViewById(R.id.icon_back);
-            iconFront = (RelativeLayout) view.findViewById(R.id.icon_front);
-            iconImp = (ImageView) view.findViewById(R.id.icon_star);
-            imgProfile = (ImageView) view.findViewById(R.id.icon_profile);
-            messageContainer = (LinearLayout) view.findViewById(R.id.message_container);
-            iconContainer = (RelativeLayout) view.findViewById(R.id.icon_container);
+            from = view.findViewById(R.id.from);
+            subject = view.findViewById(R.id.txt_primary);
+            message = view.findViewById(R.id.txt_secondary);
+            iconText = view.findViewById(R.id.icon_text);
+            timestamp = view.findViewById(R.id.timestamp);
+            iconBack = view.findViewById(R.id.icon_back);
+            iconFront = view.findViewById(R.id.icon_front);
+            iconImp = view.findViewById(R.id.icon_star);
+            imgProfile = view.findViewById(R.id.icon_profile);
+            messageContainer = view.findViewById(R.id.message_container);
+            iconContainer = view.findViewById(R.id.icon_container);
             view.setOnLongClickListener(this);
         }
 

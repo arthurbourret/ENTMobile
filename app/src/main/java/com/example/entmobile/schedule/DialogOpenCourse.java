@@ -54,7 +54,7 @@ public class DialogOpenCourse extends Dialog {
         builder.setView(dialogView)
                 .setCancelable(true)
                 .setTitle("")
-                .getContext().getTheme().applyStyle(R.style.CourseAlertDialog, true);; // build the dialog with this view
+                .getContext().getTheme().applyStyle(R.style.CourseAlertDialog, true);// build the dialog with this view
     }
 
     /**

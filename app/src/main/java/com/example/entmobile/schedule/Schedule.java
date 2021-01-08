@@ -49,7 +49,7 @@ public class Schedule extends AppCompatActivity {
         calendar = Calendar.getInstance();
         MONTHS = getResources().getStringArray(R.array.months);
 
-        scheduleView = (RecyclerView) findViewById(R.id.scheduleView); // instantiate the recycler
+        scheduleView = findViewById(R.id.scheduleView); // instantiate the recycler
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(this);
         scheduleView.setLayoutManager(recyclerManager); // set a manager for the recycler
         scheduleView.setHasFixedSize(true);

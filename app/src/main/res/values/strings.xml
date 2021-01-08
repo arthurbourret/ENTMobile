@@ -67,7 +67,6 @@
     <!-- Notes -->
 
     <string name="action_settings">Settings</string>
-    <string name="my_cart">My Cart</string>
     <string name="delete">DELETE</string>
 
     <!-- Mails -->
@@ -83,5 +82,13 @@
     <string name="title_s2">S2</string>
     <string name="title_s3">S3</string>
     <string name="title_s4">S4</string>
+    <string name="note_et">" note"</string>
+    <string name="notes_et">notes</string>
+    <string name="coefs">Coefs</string>
+    <string name="grades">Grades</string>
+    <string name="global">Global</string>
+    <string name="ue11" translatable="false">UE11</string>
+    <string name="ue12" translatable="false">UE12</string>
+    <string name="averages">Averages</string>
 
 </resources>

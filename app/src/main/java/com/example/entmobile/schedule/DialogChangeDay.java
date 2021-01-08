@@ -15,7 +15,7 @@ import java.util.Date;
 public class DialogChangeDay extends Dialog {
     private AlertDialog.Builder builder;
 
-    private Date date;
+    private final Date date;
 
     public DialogChangeDay(View view, long time) {
         super(view.getContext());

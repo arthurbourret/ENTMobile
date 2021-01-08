@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class NoteItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
-    private RecyclerItemTouchHelperListener listener;
+    private final RecyclerItemTouchHelperListener listener;
 
     public NoteItemTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener) {
         super(dragDirs, swipeDirs);

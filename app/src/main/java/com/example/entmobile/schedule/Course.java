@@ -21,19 +21,19 @@ public class Course {
      * Contain the number of the class, its type and its name
      * for exemple : M3103 - TDm - Algo avancée
      */
-    private String courseName;
-    private String room;
+    private final String courseName;
+    private final String room;
 
-    private String teacher;
+    private final String teacher;
     /**
      * Is the group of student attending to the course
      * for exemple : TD21A
      */
-    private String groupAttending;
+    private final String groupAttending;
 
-    private Date start;
-    private Date end;
-    private String duration;
+    private final Date start;
+    private final Date end;
+    private final String duration;
 
     public Course(String courseName, String room, String teacher, String groupAttending, Date start, Date end, String duration) {
         this.courseName = courseName;

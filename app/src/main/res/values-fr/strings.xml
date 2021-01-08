@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home">A</string>
+    <string name="home">Accueil</string>
     <string name="mails">Emails</string>
     <string name="settings">Paramètres</string>
     <string name="log_off">Se déconnecter</string>
@@ -35,7 +35,6 @@
     <string name="dependency_example_on">Oui</string>
     <string name="dependency_example_off">Non</string>
     <string name="action_settings">Paramètres</string>
-    <string name="my_cart">Hein</string>
     <string name="delete">SUPPRIMER</string>
     <string name="activity_name">Emails</string>
     <string name="action_search">Rechercher</string>
@@ -49,4 +48,10 @@
     <string name="title_s2">S2</string>
     <string name="title_s3">S3</string>
     <string name="title_s4">S4</string>
+    <string name="note_et">" note"</string>
+    <string name="notes_et">" notes"</string>
+    <string name="coefs">Coefs</string>
+    <string name="averages">Moyennes</string>
+    <string name="global">Générale</string>
+    <string name="grades">Notes</string>
 </resources>

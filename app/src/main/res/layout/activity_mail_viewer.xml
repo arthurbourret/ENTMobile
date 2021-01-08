@@ -20,11 +20,11 @@
             android:theme="@style/Theme.ENTMobile"
             android:title="@string/app_name"
             android:titleTextAppearance="@style/AppTheme.AppBarTitle"
-            android:titleTextColor="@color/colorPrimary" />
+            android:titleTextColor="@android:color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/mail_display" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

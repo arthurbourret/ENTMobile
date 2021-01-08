@@ -7,96 +7,123 @@
     tools:context=".results.s1.S1Fragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/titleborder"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="Moyenne générale :"
-            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/averages"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/moyenne_s1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/moyenne_ue"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="Moyenne UE11 :"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/ue11"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ue11_moyenne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/ue11_moyenne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/moyenne_ue"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="Moyenne UE12 :"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/ue12"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ue12_moyenne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/ue12_moyenne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/global"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/moyenne_s1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="90dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TableLayout
             android:id="@+id/tableau"
@@ -108,7 +135,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:background="@drawable/moyenne_matieres"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -139,7 +167,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Coefficients"
+                        android:text="@string/coefs"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -158,7 +186,7 @@
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Notes"
+                        android:text="@string/grades"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -168,7 +196,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -195,10 +223,10 @@
 
                     <TextView
                         android:id="@+id/m1101_coef"
-                        android:tag="coef1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -210,10 +238,10 @@
 
                     <TextView
                         android:id="@+id/m1101_note"
-                        android:tag="note1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note1" />
                 </LinearLayout>
 
             </TableRow>
@@ -221,7 +249,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -276,7 +305,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -329,11 +359,10 @@
             </TableRow>
 
 
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -360,10 +389,10 @@
 
                     <TextView
                         android:id="@+id/m1102_coef"
-                        android:tag="coef1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -375,10 +404,10 @@
 
                     <TextView
                         android:id="@+id/m1102_note"
-                        android:tag="note1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note1" />
                 </LinearLayout>
 
             </TableRow>
@@ -386,7 +415,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -441,7 +471,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -497,7 +528,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -524,10 +555,10 @@
 
                     <TextView
                         android:id="@+id/m1103_coef"
-                        android:tag="coef1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -539,10 +570,10 @@
 
                     <TextView
                         android:id="@+id/m1103_note"
-                        android:tag="note1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note1" />
                 </LinearLayout>
 
             </TableRow>
@@ -550,7 +581,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -605,7 +637,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -661,7 +694,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -688,10 +721,10 @@
 
                     <TextView
                         android:id="@+id/m1104_coef"
-                        android:tag="coef1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -703,10 +736,10 @@
 
                     <TextView
                         android:id="@+id/m1104_note"
-                        android:tag="note1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note1" />
                 </LinearLayout>
 
             </TableRow>
@@ -714,7 +747,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -769,7 +803,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -825,7 +860,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -852,10 +887,10 @@
 
                     <TextView
                         android:id="@+id/m1105_coef"
-                        android:tag="coef1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -867,10 +902,10 @@
 
                     <TextView
                         android:id="@+id/m1105_note"
-                        android:tag="note1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note1" />
                 </LinearLayout>
 
             </TableRow>
@@ -878,7 +913,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -933,7 +969,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -988,7 +1025,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1044,7 +1082,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1071,10 +1109,10 @@
 
                     <TextView
                         android:id="@+id/m1106_coef"
-                        android:tag="coef1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -1086,10 +1124,10 @@
 
                     <TextView
                         android:id="@+id/m1106_note"
-                        android:tag="note1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note1" />
                 </LinearLayout>
 
             </TableRow>
@@ -1097,7 +1135,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1150,23 +1189,15 @@
             </TableRow>
 
 
-
-
-
-
-
-
-
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/moyenne_matieres"
+                    android:background="@drawable/moyenne_ue"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1181,7 +1212,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/moyenne_matieres"
+                    android:background="@drawable/moyenne_ue"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1192,7 +1223,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Coefficients"
+                        android:text="@string/coefs"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -1200,7 +1231,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/moyenne_matieres"
+                    android:background="@drawable/moyenne_ue"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1211,7 +1242,7 @@
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Notes"
+                        android:text="@string/grades"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -1221,7 +1252,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1248,10 +1279,10 @@
 
                     <TextView
                         android:id="@+id/m1201_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -1263,10 +1294,10 @@
 
                     <TextView
                         android:id="@+id/m1201_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -1274,7 +1305,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1329,7 +1361,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1382,11 +1415,10 @@
             </TableRow>
 
 
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1413,10 +1445,10 @@
 
                     <TextView
                         android:id="@+id/m1202_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -1428,10 +1460,10 @@
 
                     <TextView
                         android:id="@+id/m1202_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -1439,7 +1471,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1494,7 +1527,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1550,7 +1584,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1577,10 +1611,10 @@
 
                     <TextView
                         android:id="@+id/m1203_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -1592,10 +1626,10 @@
 
                     <TextView
                         android:id="@+id/m1203_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -1603,7 +1637,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1658,7 +1693,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1714,7 +1750,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1741,10 +1777,10 @@
 
                     <TextView
                         android:id="@+id/m1204_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -1756,10 +1792,10 @@
 
                     <TextView
                         android:id="@+id/m1204_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -1767,7 +1803,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1822,7 +1859,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1877,7 +1915,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1904,10 +1942,10 @@
 
                     <TextView
                         android:id="@+id/m1205_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -1919,10 +1957,10 @@
 
                     <TextView
                         android:id="@+id/m1205_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -1930,7 +1968,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1986,7 +2025,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -2013,10 +2052,10 @@
 
                     <TextView
                         android:id="@+id/m1206_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -2028,10 +2067,10 @@
 
                     <TextView
                         android:id="@+id/m1206_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -2039,7 +2078,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -2094,7 +2133,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -2149,7 +2189,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/moyenne_matieres">
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -2176,10 +2216,10 @@
 
                     <TextView
                         android:id="@+id/m1207_coef"
-                        android:tag="coef2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="coef2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -2191,10 +2231,10 @@
 
                     <TextView
                         android:id="@+id/m1207_note"
-                        android:tag="note2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:tag="note2" />
                 </LinearLayout>
 
             </TableRow>
@@ -2202,7 +2242,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/normalborder">
+                android:background="@drawable/normalborder"
+                android:minHeight="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

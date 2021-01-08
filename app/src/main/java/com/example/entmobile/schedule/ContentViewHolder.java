@@ -18,7 +18,7 @@ import com.example.entmobile.R;
  * A class that holds the schedule_card_view.xml layout
  */
 public class ContentViewHolder extends RecyclerView.ViewHolder {
-    private View view;
+    private final View view;
     private Course course;
 
     ContentViewHolder(View view) {

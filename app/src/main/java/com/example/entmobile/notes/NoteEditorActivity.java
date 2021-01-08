@@ -33,7 +33,7 @@ public class NoteEditorActivity extends AppCompatActivity {
 
     String currentNoteCategory = "None";
 
-    private List<Category> categoriesList = new ArrayList<Category>();
+    private final List<Category> categoriesList = new ArrayList<Category>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,12 +98,7 @@ public class NoteEditorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int edit_note = intent.getIntExtra("note_edit", -1);
 
-        if (edit_note != -1) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return edit_note != -1;
     }
 
     /**
@@ -124,9 +119,9 @@ public class NoteEditorActivity extends AppCompatActivity {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
 
-        String categoryKey = "note_" + Integer.toString(edit_note) + "_category";
-        String titleKey = "note_" + Integer.toString(edit_note) + "_title";
-        String contentKey = "note_" + Integer.toString(edit_note) + "_content";
+        String categoryKey = "note_" + edit_note + "_category";
+        String titleKey = "note_" + edit_note + "_title";
+        String contentKey = "note_" + edit_note + "_content";
 
         //Retrieves each of the Note's attributes from the SharedPreferences
         String editedNoteCategory = preferences.getString(categoryKey, ""); //Gets the amount of notes saved in the SharedPreferences
@@ -147,7 +142,7 @@ public class NoteEditorActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose a category");// add a radio button list
 
-        int checkedItem[] = {0};
+        int[] checkedItem = {0};
 
         String[] categoriesNames = new String[categoriesList.size()+1];
 
@@ -214,9 +209,9 @@ public class NoteEditorActivity extends AppCompatActivity {
                 editor.putInt("nb_notes", new_nb_notes);
 
                 //Prepares the Keys that will be used to save the Note's attributes
-                String categoryKey = "note_" + Integer.toString(new_note_pos) + "_category";
-                String titleKey = "note_" + Integer.toString(new_note_pos) + "_title";
-                String contentKey = "note_" + Integer.toString(new_note_pos) + "_content";
+                String categoryKey = "note_" + new_note_pos + "_category";
+                String titleKey = "note_" + new_note_pos + "_title";
+                String contentKey = "note_" + new_note_pos + "_content";
 
                 //Prepares the Values that will be used to save the Note's attributes
                 String categoryValue = currentNoteCategory;
@@ -258,8 +253,8 @@ public class NoteEditorActivity extends AppCompatActivity {
 
         for (int i=1; i<=nb_categories; i++) {
             //Prepares the Keys that will be used to retrieve the Note's attributes
-            String categoryNameKey = "note_category_" + Integer.toString(i) + "_name";
-            String categoryDisplayedKey = "note_category_" + Integer.toString(i) + "_displayed";
+            String categoryNameKey = "note_category_" + i + "_name";
+            String categoryDisplayedKey = "note_category_" + i + "_displayed";
 
             //Retrieves each of the Note's attributes from the SharedPreferences
             String categoryNameValue = preferences.getString(categoryNameKey, "error"); //Gets the amount of notes saved in the SharedPreferences

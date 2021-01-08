@@ -31,10 +31,10 @@ public class CreateAccount extends AppCompatActivity {
         //Finds the object's IDs and initializes local variables
         button_validate = findViewById(R.id.button_validate);
         button_login = findViewById(R.id.button_login);
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        password_check = (EditText) findViewById(R.id.password_check);
-        mail = (EditText) findViewById(R.id.mail);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        password_check = findViewById(R.id.password_check);
+        mail = findViewById(R.id.mail);
 
         // Set a listener on the Create Account button
         button_validate.setOnClickListener(new View.OnClickListener() {

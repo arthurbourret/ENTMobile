@@ -36,7 +36,7 @@ import retrofit2.Response;
 
 public class MailViewerActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, MessagesAdapter.MessageAdapterListener {
 
-    private List<Message> messages = new ArrayList<>();
+    private final List<Message> messages = new ArrayList<>();
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private Toolbar toolbar;
@@ -106,7 +106,6 @@ public class MailViewerActivity extends Activity implements SwipeRefreshLayout.O
                 // add all the messages
                 // messages.addAll(response.body());
 
-                // TODO - avoid looping
                 // the loop was performed to add colors to each message
                 for (Message message : response.body()) {
                     // generate a random color

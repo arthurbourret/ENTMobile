@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#F4655A"
+        app:cardBackgroundColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +35,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="Start"
-                android:textColor="#070707"
+                android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_goneMarginEnd="1dp"/>
+                app:layout_goneMarginEnd="1dp" />
 
             <TextView
                 android:id="@+id/name_view"
@@ -49,8 +49,9 @@
                 android:gravity="center_horizontal"
                 android:text="Name"
                 android:textAlignment="center"
-                android:textColor="#070707"
+                android:textColor="@android:color/white"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/room_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:text="end"
-                android:textColor="#070707"
+                android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -74,7 +75,7 @@
                 android:layout_marginBottom="15dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="room"
-                android:textColor="#070707"
+                android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="@id/end_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

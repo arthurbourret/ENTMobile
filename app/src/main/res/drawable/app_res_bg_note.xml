@@ -5,7 +5,7 @@
     <!--Sert a faire le contour-->
     <stroke
         android:width="3dp"
-        android:color="#F4655A" />
+        android:color="@color/colorAccent" />
 
     <corners android:radius="10dp"/>
 </shape>

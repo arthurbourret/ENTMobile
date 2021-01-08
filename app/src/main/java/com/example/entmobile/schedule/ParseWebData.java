@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ParseWebData {
     private static final String FILE_NAME = "ent_shcedule_data.txt";
-    private Context context;
+    private final Context context;
 
     public ParseWebData(Context context) {
         this.context = context;

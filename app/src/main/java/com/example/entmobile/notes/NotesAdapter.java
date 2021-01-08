@@ -21,9 +21,9 @@ import java.util.List;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     public List<Note> mData;
-    private LayoutInflater mInflater;
+    private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-    private Context context;
+    private final Context context;
 
 
     // data is passed into the constructor
