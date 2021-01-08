@@ -42,4 +42,11 @@
     <string name="action_delete">Supprimer</string>
     <string name="settings_edit_text_username">Nom de compte</string>
     <string name="autofill_username">Préremplir le nom d\'utilisateur</string>
+
+
+    <!-- Résultats -->
+    <string name="title_s1">S1</string>
+    <string name="title_s2">S2</string>
+    <string name="title_s3">S3</string>
+    <string name="title_s4">S4</string>
 </resources>
