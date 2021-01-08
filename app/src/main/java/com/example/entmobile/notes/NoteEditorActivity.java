@@ -149,14 +149,16 @@ public class NoteEditorActivity extends AppCompatActivity {
 
         int checkedItem[] = {0};
 
-        String[] categoriesNames = new String[categoriesList.size()];
+        String[] categoriesNames = new String[categoriesList.size()+1];
+
+        categoriesNames[0] = "None";
 
         if (!categoriesList.isEmpty()) {
             for (int i=0; i<categoriesList.size(); i++) {
                 if (currentNoteCategory.matches(categoriesList.get(i).getName())) {
                     checkedItem[0] = i;
                 }
-                categoriesNames[i] = categoriesList.get(i).getName();
+                categoriesNames[i+1] = categoriesList.get(i).getName();
             }
         }
 

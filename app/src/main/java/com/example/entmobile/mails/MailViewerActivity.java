@@ -23,11 +23,16 @@ import com.example.entmobile.R;
 import com.example.entmobile.mails.adapter.MessagesAdapter;
 import com.example.entmobile.mails.helper.DividerItemDecoration;
 import com.example.entmobile.mails.model.Message;
+import com.example.entmobile.mails.network.ApiClient;
+import com.example.entmobile.mails.network.ApiInterface;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MailViewerActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, MessagesAdapter.MessageAdapterListener {
 
@@ -89,68 +94,36 @@ public class MailViewerActivity extends Activity implements SwipeRefreshLayout.O
     private void getInbox() {
         swipeRefreshLayout.setRefreshing(true);
 
-        messages.clear();
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        List<String> namesList = new ArrayList<String>();
-        namesList.add("Robert");
-        namesList.add("Michou");
-        namesList.add("Patrick");
-        namesList.add("Bernard");
-        namesList.add("Jacques");
+        Call<List<Message>> call = apiService.getInbox();
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                // clear the inbox
+                messages.clear();
 
-        List<String> subjectList = new ArrayList<String>();
-        subjectList.add("Tu l'as vu?");
-        subjectList.add("J'ai un plumeau dans mon placard");
-        subjectList.add("Incroyable mais vrai !");
-        subjectList.add("Quatorze");
-        subjectList.add("J'ai plus d'inspi");
+                // add all the messages
+                // messages.addAll(response.body());
 
-        List<String> messageList = new ArrayList<String>();
-        messageList.add("Je t'envois un beau message");
-        messageList.add("Le message qui tue");
-        messageList.add("Pour un message acheté, un massage offert");
-        messageList.add("Il s'est passé un truc incroyable");
-        messageList.add("Bah salut quoi");
+                // TODO - avoid looping
+                // the loop was performed to add colors to each message
+                for (Message message : response.body()) {
+                    // generate a random color
+                    message.setColor(getRandomMaterialColor("400"));
+                    messages.add(message);
+                }
 
-        List<String> timeList = new ArrayList<String>();
-        timeList.add(" hours ago");
-        timeList.add(" days ago");
-        timeList.add(" days ago");
-        timeList.add(" days ago");
-        timeList.add(" days ago");
-        timeList.add(" days ago");
-        timeList.add(" weeks ago");
-        timeList.add(" weeks ago");
-        timeList.add(" months ago");
-        timeList.add(" years ago");
+                mAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
 
-        List<Boolean> importanceList = new ArrayList<Boolean>();
-        importanceList.add(true);
-        importanceList.add(false);
-
-        List<Boolean> readList = new ArrayList<Boolean>();
-        readList.add(true);
-        readList.add(false);
-
-        Random rand = new Random();
-
-        for (int i=0; i<10; i++) {
-            Message newMessage = new Message();
-
-            newMessage.setId(i);
-            newMessage.setColor(getRandomMaterialColor("400"));
-            newMessage.setFrom(namesList.get(rand.nextInt(5)));
-            newMessage.setSubject(subjectList.get(rand.nextInt(5)));
-            newMessage.setMessage(messageList.get(rand.nextInt(5)));
-            newMessage.setTimestamp(1+rand.nextInt(7)+timeList.get(i));
-            newMessage.setImportant(importanceList.get(rand.nextInt(2)));
-            newMessage.setRead(importanceList.get(rand.nextInt(2)));
-
-            messages.add(newMessage);
-        }
-
-        mAdapter.notifyDataSetChanged();
-        swipeRefreshLayout.setRefreshing(false);
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Unable to fetch json: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     /**

@@ -9,7 +9,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +23,7 @@ public class Login extends AppCompatActivity {
     private Button button_createAccount; // Button used to launch the "openCreateAccountMenu()" method.
     private EditText TextIL_username; // Button used to launch the "openMainMenu()" method.
     private EditText TextIL_password; // Button used to launch the "openMainMenu()" method.
+    private Switch switch_autofill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,17 @@ public class Login extends AppCompatActivity {
         button_createAccount = findViewById(R.id.button_createAccount);
         TextIL_username = findViewById(R.id.TextIL_username);
         TextIL_password = findViewById(R.id.TextIL_password);
+        switch_autofill = findViewById(R.id.switch_autofill);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
-        TextIL_username.setText(preferences.getString("username", "")); //Gets the username from the SharedPreferences and put it in the user name space
+
+        if(preferences.getBoolean("autofill", false)) {
+            switch_autofill.setChecked(true);
+            TextIL_username.setText(preferences.getString("username", "")); //Gets the username from the SharedPreferences and put it in the user name space
+        }
+        else {
+            switch_autofill.setChecked(false);
+        }
 
         // Set a listener on the Log-In button
         button_login.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +62,22 @@ public class Login extends AppCompatActivity {
                 openCreateAccountMenu();
             }
         });
+        // Set a listener on the Create Account button
+        switch_autofill.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                changeAutofillPolicy(isChecked);
+            }
+        });
+    }
+
+    private void changeAutofillPolicy(Boolean policy) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+        SharedPreferences.Editor editor = preferences.edit(); //Initializes the SharedPreferences' editor
+
+        //Saves the autofill policy in the SharedPreferences
+        editor.putBoolean("autofill", policy);
+
+        editor.apply(); //Applies the changes
     }
 
     /**

@@ -3,6 +3,7 @@ package com.example.entmobile.activities;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.entmobile.R;
@@ -20,6 +21,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings_ui, rootKey);

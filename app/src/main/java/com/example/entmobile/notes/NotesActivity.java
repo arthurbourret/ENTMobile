@@ -149,6 +149,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                 saveCategoriesInSharedPreferences();
                 loadNotesFromSharedPreferences();
                 reloadRecycleView();
+                setupNoNoteHint();
             }
         });
 
@@ -160,6 +161,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                 loadNotesFromSharedPreferences();
                 reloadRecycleView();
                 ShowAddNewCategoriesDialog();
+                setupNoNoteHint();
             }
         });
 
@@ -170,6 +172,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                 saveCategoriesInSharedPreferences();
                 loadNotesFromSharedPreferences();
                 reloadRecycleView();
+                setupNoNoteHint();
                 if (!categoriesList.isEmpty()) {
                     ShowRemoveCategoriesDialog();
                 }
@@ -387,6 +390,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
             editor.putInt("nb_notes", 0);
 
+            notes_counter.setText(Integer.toString(0));
+
             for (int i=0; i<old_nb_notes; i++) {
                 String name_to_delete = "note_" + Integer.toString(i) + "_name";
                 String category_to_delete = "note_" + Integer.toString(i) + "_category";
@@ -398,7 +403,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             }
 
             // Save the changes in SharedPreferences
-            editor.commit(); // commit changes
+            editor.apply(); // commit changes
         }
 
         //Applies the changes
@@ -555,8 +560,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             public void onClick(DialogInterface dialog, int which) {
                 noteList.clear();
                 saveNotesInSharedPreferences();
-
                 loadNotesFromSharedPreferences();
+                reloadRecycleView();
+                setupNoNoteHint();
             }
         });
         alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
@@ -574,5 +580,4 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             no_notes_hint.setVisibility(View.GONE);
         }
     }
-
 }
