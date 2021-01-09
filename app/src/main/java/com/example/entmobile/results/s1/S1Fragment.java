@@ -22,7 +22,7 @@ import java.text.ParseException;
 
 public class S1Fragment extends Fragment {
 
-    private TableLayout tableau;
+    private TableLayout tableau_s1;
 
     private TextView moyenne_s1;
     private TextView ue11_moyenne;
@@ -141,7 +141,7 @@ public class S1Fragment extends Fragment {
         /*
         Initialisation des TextView et EditText
          */
-        tableau = root.findViewById(R.id.tableau);
+        tableau_s1 = root.findViewById(R.id.tableau_s1);
 
         moyenne_s1 = root.findViewById(R.id.moyenne_s1);
         ue11_moyenne = root.findViewById(R.id.ue11_moyenne);
@@ -642,7 +642,7 @@ public class S1Fragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 refreshTextView.refresh3coef3grade(m1105_note, m1105_coef, m1105_webtp_note, m1105_webtp_coef, m1105_comecrit_note, m1105_comecrit_coef, m1105_comtp_note, m1105_comtp_coef);
                 save3CoefInSharedPreferences(m1105_name, m1105_webtp_coef, m1105_comecrit_coef, m1105_comtp_coef);
-                save3GradeInSharedPreferences(m1105_name, m1105_webtp_coef, m1105_comecrit_coef, m1105_comtp_coef);
+                save3GradeInSharedPreferences(m1105_name, m1105_webtp_note, m1105_comecrit_note, m1105_comtp_note);
                 calculerUE11Moyenne();
                 calculerMoyenneGenerale();
             }
@@ -1267,9 +1267,9 @@ public class S1Fragment extends Fragment {
         sommecoefue11 = 0;
         float ue11 = 0;
 
-        for (int i = 0; i < tableau.getChildCount(); i++) {
-            TextView coef = tableau.getChildAt(i).findViewWithTag("coef1");
-            TextView note = tableau.getChildAt(i).findViewWithTag("note1");
+        for (int i = 0; i < tableau_s1.getChildCount(); i++) {
+            TextView coef = tableau_s1.getChildAt(i).findViewWithTag("coef1");
+            TextView note = tableau_s1.getChildAt(i).findViewWithTag("note1");
             if (coef == null || note == null) continue;
             DecimalFormat decimalFormat = new DecimalFormat();
             try {
@@ -1288,9 +1288,9 @@ public class S1Fragment extends Fragment {
         sommecoefue12 = 0;
         float ue12 = 0;
 
-        for (int i = 0; i < tableau.getChildCount(); i++) {
-            TextView coef = tableau.getChildAt(i).findViewWithTag("coef2");
-            TextView note = tableau.getChildAt(i).findViewWithTag("note2");
+        for (int i = 0; i < tableau_s1.getChildCount(); i++) {
+            TextView coef = tableau_s1.getChildAt(i).findViewWithTag("coef2");
+            TextView note = tableau_s1.getChildAt(i).findViewWithTag("note2");
             if (coef == null || note == null) continue;
             DecimalFormat decimalFormat = new DecimalFormat();
             try {

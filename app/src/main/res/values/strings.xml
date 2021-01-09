@@ -89,6 +89,11 @@
     <string name="global">Global</string>
     <string name="ue11" translatable="false">UE11</string>
     <string name="ue12" translatable="false">UE12</string>
+    <string name="ue21" translatable="false">UE21</string>
+    <string name="ue22" translatable="false">UE22</string>
+    <string name="ue31" translatable="false">UE31</string>
+    <string name="ue32" translatable="false">UE32</string>
+    <string name="ue33" translatable="false">UE33</string>
     <string name="averages">Averages</string>
     <string name="copyright">Copyright © 2021 ENT Mobile All rights reserved.</string>
     <string name="app_version">Version v1.0.0 public</string>
