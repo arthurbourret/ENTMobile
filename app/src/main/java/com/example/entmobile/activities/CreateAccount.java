@@ -21,7 +21,6 @@ public class CreateAccount extends AppCompatActivity {
     private EditText username; // EditText where the user sets his username
     private EditText password; // EditText where the user sets his password
     private EditText password_check; // EditText where the user sets his group
-    private EditText mail; // EditText where the user sets his mail
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class CreateAccount extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         password_check = findViewById(R.id.password_check);
-        mail = findViewById(R.id.mail);
 
         // Set a listener on the Create Account button
         button_validate.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +61,6 @@ public class CreateAccount extends AppCompatActivity {
         final String usernametext = username.getText().toString();
         final String passwordtext = password.getText().toString();
         final String passwordchecktext = password_check.getText().toString();
-        final String mailtext = mail.getText().toString();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
         String existing_username = preferences.getString("username", ""); //Gets the username from the SharedPreferences
@@ -72,32 +69,27 @@ public class CreateAccount extends AppCompatActivity {
         if (!usernametext.equals("")) { //if the username is correct
             if (passwordtext.equals(passwordchecktext)) { //if the password is correct
                 if ((!passwordtext.equals("")) && (!passwordchecktext.equals(""))) { //if the mail is correct
-                    if (!mailtext.equals("")) { //if the mail is correct
-                        if (!existing_username.equals("")) {
-                            AlertDialog alerte = new AlertDialog.Builder(this).create();
-                            alerte.setTitle("Warning !");
-                            alerte.setMessage("There already is an account on this device.\n\nCreating a new account will result in the loss of all previously saved data on this app.\n\nDo you want to continue?");
+                    if (!existing_username.equals("")) {
+                        AlertDialog alerte = new AlertDialog.Builder(this).create();
+                        alerte.setTitle("Warning !");
+                        alerte.setMessage("There already is an account on this device.\n\nCreating a new account will result in the loss of all previously saved data on this app.\n\nDo you want to continue?");
 
-                            alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.clear();
-                                    editor.apply();
-                                    saveAccount(usernametext, passwordtext, mailtext);
-                                }
-                            });
-                            alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            });
-                            alerte.show();
-                        }
-                        else {
-                            saveAccount(usernametext, passwordtext, mailtext);
-                        }
+                        alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.apply();
+                                saveAccount(usernametext, passwordtext);
+                            }
+                        });
+                        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        alerte.show();
                     }
-                    else { //If the password isn't correct
-                        mail.setError("The e-mail adress is missing"); //Shows an error message indicating that the password isn't correct
+                    else {
+                        saveAccount(usernametext, passwordtext);
                     }
                 }
                 else { //If the password isn't correct
@@ -117,16 +109,14 @@ public class CreateAccount extends AppCompatActivity {
      * Method used to save an account in the Shared Preferences
      * @param usernametext String containing the username of the account that will be saved
      * @param passwordtext String containing the password of the account that will be saved
-     * @param mailtext String containing the email address of the account that will be saved
      */
-    private void saveAccount(String usernametext, String passwordtext, String mailtext) {
+    private void saveAccount(String usernametext, String passwordtext) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
         SharedPreferences.Editor editor = preferences.edit(); //Initializes the SharedPreferences' editor
 
         //Saves each field in the SharedPreferences
         editor.putString("username", usernametext);
         editor.putString("password", passwordtext);
-        editor.putString("mail", mailtext);
 
         editor.apply(); //Applies the changes
 

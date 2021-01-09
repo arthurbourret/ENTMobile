@@ -3,7 +3,6 @@ package com.example.entmobile.notes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -59,6 +56,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
     final int NOTE_EDITION_DONE = 1;
 
+    private final List<Note> displayedNoteList = new ArrayList<Note>();
+
     private final List<Note> noteList = new ArrayList<Note>();
 
     private final List<Category> categoriesList = new ArrayList<Category>();
@@ -91,6 +90,56 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         reloadAll();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NOTE_EDITION_DONE) {
+            loadAll();
+            reloadAll();
+        }
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
+        if (viewHolder instanceof NotesAdapter.ViewHolder) {
+            // get the removed item name to display it in snack bar
+            String name = displayedNoteList.get(position).getTitle();
+
+            // backup of removed item for undo purpose
+            final Note deletedItem = displayedNoteList.get(position);
+            final int deletedIndex = position;
+
+            // remove the item from recycler view
+            notesAdapter.removeItem(position);
+
+            //Updates the notes_counter EditText with the current amount of notes
+            notes_counter.setText(Integer.toString(displayedNoteList.size()));
+
+            // showing snack bar with Undo option
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, "\"" + name + "\" was deleted!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // undo is selected, restore the deleted item
+                    notesAdapter.restoreItem(deletedItem, deletedIndex);
+
+                    //Updates the notes_counter EditText with the current amount of notes
+                    notes_counter.setText(Integer.toString(displayedNoteList.size()));
+
+                    saveNotesInSharedPreferences();
+                    reloadAll();
+                }
+            });
+            snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
+            snackbar.show();
+        }
+        saveNotesInSharedPreferences();
+        reloadAll();
+    }
+
     /**
      * Method used to create a new note.
      */
@@ -107,6 +156,14 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         Intent intent = new Intent(this, NoteEditorActivity.class);
         intent.putExtra("note_edit", pos);
         startActivityForResult(intent, NOTE_EDITION_DONE);
+    }
+
+    private void createNote(String category, String Title, String Content) {
+        //Creates a new Note using the data retrieved from the SharedPreferences
+        Note newNote = new Note(category, Title, Content);
+
+        //Adds that note to the noteList Array List
+        displayedNoteList.add(newNote);
     }
 
     /**
@@ -206,9 +263,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                for (int i=0; i<noteList.size(); i++) {
-                    if (noteList.get(i).getCategory().matches(categoriesNames[checkedItem[0]])) {
-                        noteList.get(i).setCategory("None");
+                for (int i = 0; i< displayedNoteList.size(); i++) {
+                    if (displayedNoteList.get(i).getCategory().matches(categoriesNames[checkedItem[0]])) {
+                        displayedNoteList.get(i).setCategory("None");
                     }
                 }
                 categoriesList.remove(checkedItem[0]);
@@ -277,7 +334,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         editor.apply();
 
         //Clears the current noteList
-        noteList.clear();
+        displayedNoteList.clear();
 
         for (int i=1; i<=nb_notes; i++) {
             //Prepares the Keys that will be used to retrieve the Note's attributes
@@ -289,6 +346,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             String newNoteCategory = preferences.getString(categoryKey, ""); //Gets the amount of notes saved in the SharedPreferences
             String newNoteTitle = preferences.getString(titleKey, ""); //Gets the amount of notes saved in the SharedPreferences
             String newNoteContent = preferences.getString(contentKey, ""); //Gets the amount of notes saved in the SharedPreferences
+
+            noteList.add(new Note(newNoteCategory, newNoteTitle, newNoteContent));
 
             for(Category category : categoriesList) {
                 if (newNoteCategory.matches(category.getName())) {
@@ -303,14 +362,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         }
         setupNoteCounter();
         setupNoNoteHint();
-    }
-
-    private void createNote(String category, String Title, String Content) {
-        //Creates a new Note using the data retrieved from the SharedPreferences
-        Note newNote = new Note(category, Title, Content);
-
-        //Adds that note to the noteList Array List
-        noteList.add(newNote);
     }
 
     /**
@@ -348,6 +399,11 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
+
+        List<Note> notesToBeSaved = new ArrayList<Note>();
+
+
+
         // If the noteList Array List isn't empty
         if (!noteList.isEmpty()) {
 
@@ -356,7 +412,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             editor.putInt("nb_notes", nb_notes);
 
             //For each Note in the noteList
-            for (int i=0; i<noteList.size(); i++) {
+            for (int i = 0; i< noteList.size(); i++) {
                 //Prepares the Keys that will be used to save the Note's attributes
 
                 String categoryKey = "note_" + (i + 1) + "_category";
@@ -431,59 +487,9 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         editor.apply();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == NOTE_EDITION_DONE) {
-            loadAll();
-            reloadAll();
-        }
-    }
-
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-
-        if (viewHolder instanceof NotesAdapter.ViewHolder) {
-            // get the removed item name to display it in snack bar
-            String name = noteList.get(position).getTitle();
-
-            // backup of removed item for undo purpose
-            final Note deletedItem = noteList.get(position);
-            final int deletedIndex = position;
-
-            // remove the item from recycler view
-            notesAdapter.removeItem(position);
-
-            //Updates the notes_counter EditText with the current amount of notes
-            notes_counter.setText(Integer.toString(noteList.size()));
-
-            // showing snack bar with Undo option
-            Snackbar snackbar = Snackbar.make(coordinatorLayout, "\"" + name + "\" was deleted!", Snackbar.LENGTH_LONG);
-            snackbar.setAction("UNDO", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    // undo is selected, restore the deleted item
-                    notesAdapter.restoreItem(deletedItem, deletedIndex);
-
-                    //Updates the notes_counter EditText with the current amount of notes
-                    notes_counter.setText(Integer.toString(noteList.size()));
-
-                    saveNotesInSharedPreferences();
-                    reloadAll();
-                }
-            });
-            snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
-            snackbar.show();
-        }
-        saveNotesInSharedPreferences();
-        reloadAll();
-    }
-
     private void reloadRecycleView() {
         note_recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        notesAdapter = new NotesAdapter(this, noteList);
+        notesAdapter = new NotesAdapter(this, displayedNoteList);
         note_recycler_view.setAdapter(notesAdapter);
     }
 
@@ -520,10 +526,10 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             @Override
             public void onItemClick(View view, int position) {
 
-                Note editedNote = noteList.get(position);
+                Note editedNote = displayedNoteList.get(position);
 
-                noteList.remove(editedNote);
-                noteList.add(0, editedNote);
+                displayedNoteList.remove(editedNote);
+                displayedNoteList.add(0, editedNote);
 
                 saveNotesInSharedPreferences();
 
@@ -539,7 +545,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
         alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                noteList.clear();
+                displayedNoteList.clear();
                 saveAll();
                 reloadAll();
             }
@@ -569,7 +575,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     }
 
     private void setupNoNoteHint() {
-        if (noteList.isEmpty()) {
+        if (displayedNoteList.isEmpty()) {
             no_notes_hint.setVisibility(View.VISIBLE);
         }
         else {
@@ -585,12 +591,12 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     }
 
     private void saveAll() {
-        saveNotesInSharedPreferences();
         saveCategoriesInSharedPreferences();
+        saveNotesInSharedPreferences();
     }
 
     private void loadAll() {
-        loadNotesFromSharedPreferences();
         loadCategoriesFromSharedPreferences();
+        loadNotesFromSharedPreferences();
     }
 }
