@@ -90,5 +90,11 @@
     <string name="ue11" translatable="false">UE11</string>
     <string name="ue12" translatable="false">UE12</string>
     <string name="averages">Averages</string>
+    <string name="copyright">Copyright © 2021 ENT Mobile All rights reserved.</string>
+    <string name="app_version">Version v1.0.0 public</string>
+    <string name="category">Category : </string>
+    <string name="notes_editor_save">SAVE</string>
+    <string name="notes_editor_title">Title</string>
+    <string name="notes_editor_content">Content</string>
 
 </resources>

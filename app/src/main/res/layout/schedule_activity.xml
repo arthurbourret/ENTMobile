@@ -47,7 +47,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center_horizontal"
-            android:text="Date"
+            android:text="current_date"
             android:textAlignment="center"
             android:textSize="19sp"
             app:layout_constraintBottom_toBottomOf="parent"

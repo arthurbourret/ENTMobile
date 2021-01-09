@@ -24,12 +24,13 @@ public class NoteEditorActivity extends AppCompatActivity {
 
     Button save_note_button;
     Button cancel_note_button;
-    ImageButton tasks_button;
-    ImageButton category_button;
 
     EditText note_title_edit_text;
     EditText note_content_edit_text;
-    TextView textView;
+
+    ImageButton category_button;
+
+    TextView category;
 
     String currentNoteCategory = "None";
 
@@ -43,11 +44,10 @@ public class NoteEditorActivity extends AppCompatActivity {
         //Finds the object's IDs and initializes local variables
         save_note_button = findViewById(R.id.save_note_button);
         cancel_note_button = findViewById(R.id.cancel_note_button);
-        tasks_button = findViewById(R.id.tasks_button);
         category_button = findViewById(R.id.category_button);
         note_title_edit_text = findViewById(R.id.note_title_edit_text);
         note_content_edit_text = findViewById(R.id.note_content_edit_text);
-        textView = findViewById(R.id.textView);
+        category = findViewById(R.id.category);
 
         //If the Editor was opened to edit a note, then it loads that note
         if (isEditedNote()) {
@@ -61,7 +61,7 @@ public class NoteEditorActivity extends AppCompatActivity {
         loadCategoriesFromSharedPreferences();
 
         //to be removed
-        textView.setText(currentNoteCategory);
+        category.setText(currentNoteCategory);
     }
 
     /**
@@ -131,7 +131,7 @@ public class NoteEditorActivity extends AppCompatActivity {
         note_title_edit_text.setText(editedNoteTitle);
         note_content_edit_text.setText(editedNoteContent);
         currentNoteCategory = editedNoteCategory;
-        textView.setText(currentNoteCategory);
+        category.setText(currentNoteCategory);
     }
 
     /**
@@ -170,7 +170,7 @@ public class NoteEditorActivity extends AppCompatActivity {
 
                 if (!categoriesList.isEmpty()) {
                     currentNoteCategory = categoriesNames[checkedItem[0]];
-                    textView.setText(currentNoteCategory);
+                    category.setText(currentNoteCategory);
                 }
             }
         });

@@ -33,13 +33,6 @@
             app:key="autofill"
             app:title="@string/condition_example_title" />
 
-        <SwitchPreferenceCompat
-            app:dependency="autofill"
-            app:key="attachment"
-            app:summaryOff="@string/dependency_example_off"
-            app:summaryOn="@string/dependency_example_on"
-            app:title="Yes" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

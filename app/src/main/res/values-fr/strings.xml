@@ -54,4 +54,10 @@
     <string name="averages">Moyennes</string>
     <string name="global">Générale</string>
     <string name="grades">Notes</string>
+    <string name="copyright">Copyright © 2021 ENT Mobile Tous droits réservés.</string>
+    <string name="app_version">Version v1.0.0 public</string>
+    <string name="category">"Categorie : "</string>
+    <string name="notes_editor_save">SAUVEGARDER</string>
+    <string name="notes_editor_title">Titre</string>
+    <string name="notes_editor_content">Contenu</string>
 </resources>

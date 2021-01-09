@@ -5,7 +5,7 @@
     <color name="bg_row_background">@color/colorAccent</color>
     <color name="bg_action_mode">@color/colorAccent</color>
     <color name="bg_circle_default">@color/colorAccent</color>
-    <color name="icon_tint_selected">@color/colorAccent</color>
+    <color name="icon_tint_selected">#fed776</color>
     <color name="bg_moyenne_ue">#BFE91E63</color>
     <color name="bg_moyenne_matieres">#80E91E63</color>
     <color name="from">#000000</color>

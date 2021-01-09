@@ -2,7 +2,6 @@ package com.example.entmobile.mails.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
@@ -16,11 +15,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import com.example.entmobile.R;
-import com.example.entmobile.mails.helper.CircleTransform;
 import com.example.entmobile.mails.helper.FlipAnimator;
 import com.example.entmobile.mails.model.Message;
 
@@ -83,7 +78,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_list_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.mail_message_list_row, parent, false);
 
         return new MyViewHolder(itemView);
     }
