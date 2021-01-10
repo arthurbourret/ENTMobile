@@ -130,5 +130,10 @@
     <string name="create_acc_missing_pass">The password is missing.</string>
     <string name="create_acc_pass_mismatch">The passwords entered do not match.</string>
     <string name="create_acc_missing_username">The username is missing.</string>
+    <string name="settings_tutorials_header">Tutorials</string>
+    <string name="settings_result_tutorial">Results tutorial</string>
+    <string name="settings_notes_tutorial">Notes tutorial</string>
+    <string name="settings_mail_tutorial">Mails tutorial</string>
+    <string name="settings_schedule_tutorial">Schedule tutorial</string>
 
 </resources>

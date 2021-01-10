@@ -127,9 +127,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
-     * Method used to launch the logOff() method.
-     * <p>
-     * It warns the user that he is about to log out
+     * This method is used to alert the user that he's about to leave the app.
      */
     private void openLogInMenu() {
         AlertDialog alerte = new AlertDialog.Builder(this).create();

@@ -34,5 +34,8 @@
             app:title="@string/condition_example_title" />
 
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_tutorials_header">
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

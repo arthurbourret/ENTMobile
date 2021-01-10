@@ -86,4 +86,9 @@
     <string name="create_acc_missing_pass">Le mot de passe est manquant.</string>
     <string name="create_acc_pass_mismatch">Les mots de passe ne correspondent pas.</string>
     <string name="create_acc_missing_username">Le nom d\'utilisateur est manquant.</string>
+    <string name="settings_tutorials_header">Tutoriels</string>
+    <string name="settings_result_tutorial">Tutoriel résultats</string>
+    <string name="settings_notes_tutorial">Tutoriel notes</string>
+    <string name="settings_mail_tutorial">Tutoriel mails</string>
+    <string name="settings_schedule_tutorial">Tutoriel emploi du temps</string>
 </resources>
