@@ -53,15 +53,15 @@ public class NoteEditorActivity extends AppCompatActivity {
         if (isEditedNote()) {
             setupEditedNote(getEditedNote());
         }
+        else {
+            category.setText(currentNoteCategory);
+        }
 
         //Sets the Button Listeners
         setupButtonsListeners();
 
         //Sets the categories
         loadCategoriesFromSharedPreferences();
-
-        //to be removed
-        category.setText(currentNoteCategory);
     }
 
     /**
@@ -140,7 +140,7 @@ public class NoteEditorActivity extends AppCompatActivity {
     private void showCategoriesSelector() {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose a category");// add a radio button list
+        builder.setTitle(getString(R.string.notes_editor_choose_cat));// add a radio button list
 
         int[] checkedItem = {0};
 
@@ -164,7 +164,7 @@ public class NoteEditorActivity extends AppCompatActivity {
             }
         });
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int selectedCategory) {
 
@@ -175,7 +175,7 @@ public class NoteEditorActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Cancel", null);// create and show the alert dialog
+        builder.setNegativeButton(getString(R.string.cancel), null);// create and show the alert dialog
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -230,11 +230,11 @@ public class NoteEditorActivity extends AppCompatActivity {
                 finish();
             }
             else {
-                note_content_edit_text.setError("You need to fill the note."); //Shows an error message indicating that the password isn't correct
+                note_content_edit_text.setError(getString(R.string.notes_editor_fill_note)); //Shows an error message indicating that the password isn't correct
             }
         }
         else {
-            note_title_edit_text.setError("You need to set a title."); //Shows an error message indicating that the password isn't correct
+            note_title_edit_text.setError(getString(R.string.notes_editor_set_title)); //Shows an error message indicating that the password isn't correct
         }
     }
 
@@ -267,5 +267,4 @@ public class NoteEditorActivity extends AppCompatActivity {
             categoriesList.add(newCategory);
         }
     }
-
 }

@@ -101,5 +101,26 @@
     <string name="notes_editor_save">SAVE</string>
     <string name="notes_editor_title">Title</string>
     <string name="notes_editor_content">Content</string>
+    <string name="notes_displayed_cat">Displayed categories</string>
+    <string name="ok">OK</string>
+    <string name="remove">DELETE</string>
+    <string name="add">ADD</string>
+    <string name="notes_remove_cat">Delete a category</string>
+    <string name="cancel">CANCEL</string>
+    <string name="notes_new_cat">New category</string>
+    <string name="name">Name</string>
+    <string name="notes_no_cat">There are no categories</string>
+    <string name="notes_editor_choose_cat">Choose a category</string>
+    <string name="notes_editor_fill_note">You need to fill the note.</string>
+    <string name="notes_editor_set_title">You need to set a title.</string>
+    <string name="undo">UNDO</string>
+    <string name="notes_was_deleted">\" was deleted !</string>
+    <string name="notes_warning">Warning !</string>
+    <string name="notes_delete_all_wrng_msg_1">You\'re about to delete all notes saved on this device.</string>
+    <string name="notes_delete_all_wrng_msg_2">Do you want to continue?</string>
+    <string name="log_out">Log out</string>
+    <string name="log_out_msg">Do you really want to log out?</string>
+    <string name="exit">Exit?</string>
+    <string name="exit_msg">Are you sure you want to exit?</string>
 
 </resources>

@@ -60,4 +60,25 @@
     <string name="notes_editor_save">SAUVEGARDER</string>
     <string name="notes_editor_title">Titre</string>
     <string name="notes_editor_content">Contenu</string>
+    <string name="notes_displayed_cat">Catégories affichées</string>
+    <string name="ok">OK</string>
+    <string name="remove">SUPPRIMER</string>
+    <string name="add">AJOUTER</string>
+    <string name="notes_remove_cat">Supprimer une catégorie</string>
+    <string name="cancel">ANNULER</string>
+    <string name="notes_new_cat">Nouvelle catégorie</string>
+    <string name="name">Nom</string>
+    <string name="notes_no_cat">Il n\'y a aucune catégorie</string>
+    <string name="notes_editor_choose_cat">Sélectionnez une catégorie</string>
+    <string name="notes_editor_fill_note">Vous devez saisir le contenu.</string>
+    <string name="notes_editor_set_title">Vous devez saisir un titre.</string>
+    <string name="undo">ANNULER</string>
+    <string name="notes_was_deleted">\" a été supprimé !</string>
+    <string name="notes_delete_all_wrng_msg_1">Vous êtes sur le point de supprimer toutes les notes sauvegardées sur cet appareil.</string>
+    <string name="notes_warning">Attention !</string>
+    <string name="notes_delete_all_wrng_msg_2">Êtes vous sur de vouloir continuer?</string>
+    <string name="log_out">Déconnexion</string>
+    <string name="log_out_msg">Voulez-vous vraiment vous déconnecter?</string>
+    <string name="exit">Quitter?</string>
+    <string name="exit_msg">Êtes vous sur de vouloir quitter?</string>
 </resources>

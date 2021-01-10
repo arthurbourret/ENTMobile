@@ -56,8 +56,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
     final int NOTE_EDITION_DONE = 1;
 
-    private final List<Note> displayedNoteList = new ArrayList<Note>();
-
     private final List<Note> noteList = new ArrayList<Note>();
 
     private final List<Category> categoriesList = new ArrayList<Category>();
@@ -105,21 +103,21 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
         if (viewHolder instanceof NotesAdapter.ViewHolder) {
             // get the removed item name to display it in snack bar
-            String name = displayedNoteList.get(position).getTitle();
+            String name = noteList.get(position).getTitle();
 
             // backup of removed item for undo purpose
-            final Note deletedItem = displayedNoteList.get(position);
+            final Note deletedItem = noteList.get(position);
             final int deletedIndex = position;
 
             // remove the item from recycler view
             notesAdapter.removeItem(position);
 
             //Updates the notes_counter EditText with the current amount of notes
-            notes_counter.setText(Integer.toString(displayedNoteList.size()));
+            notes_counter.setText(Integer.toString(noteList.size()));
 
             // showing snack bar with Undo option
-            Snackbar snackbar = Snackbar.make(coordinatorLayout, "\"" + name + "\" was deleted!", Snackbar.LENGTH_LONG);
-            snackbar.setAction("UNDO", new View.OnClickListener() {
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, "\"" + name + getString(R.string.notes_was_deleted), Snackbar.LENGTH_LONG);
+            snackbar.setAction(getString(R.string.undo), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -127,7 +125,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                     notesAdapter.restoreItem(deletedItem, deletedIndex);
 
                     //Updates the notes_counter EditText with the current amount of notes
-                    notes_counter.setText(Integer.toString(displayedNoteList.size()));
+                    notes_counter.setText(Integer.toString(noteList.size()));
 
                     saveNotesInSharedPreferences();
                     reloadAll();
@@ -163,7 +161,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         Note newNote = new Note(category, Title, Content);
 
         //Adds that note to the noteList Array List
-        displayedNoteList.add(newNote);
+        noteList.add(newNote);
     }
 
     /**
@@ -174,7 +172,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Sets the dialog's title
-        builder.setTitle("Displayed categories");// add a checkbox list
+        builder.setTitle(getString(R.string.notes_displayed_cat));// add a checkbox list
 
         //Initializes the tables
         String[] categoriesNames = new String[categoriesList.size()];
@@ -195,7 +193,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         });
 
         //When the OK button is pressed
-        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveCategoriesInSharedPreferences();
@@ -205,7 +203,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         });
 
         //When the Add button is pressed
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.add), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveCategoriesInSharedPreferences();
@@ -216,7 +214,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         });
 
         //When the Remove button is pressed
-        builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveCategoriesInSharedPreferences();
@@ -239,7 +237,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     private void ShowRemoveCategoriesDialog() {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Remove category");// add a radio button list
+        builder.setTitle(getString(R.string.notes_remove_cat));// add a radio button list
 
         //Initializes the tables
         int[] checkedItem = {0};
@@ -259,23 +257,22 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             }
         });
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                for (int i = 0; i< displayedNoteList.size(); i++) {
-                    if (displayedNoteList.get(i).getCategory().matches(categoriesNames[checkedItem[0]])) {
-                        displayedNoteList.get(i).setCategory("None");
+                for (int i = 0; i<noteList.size(); i++) {
+                    if (noteList.get(i).getCategory().matches(categoriesNames[checkedItem[0]])) {
+                        noteList.get(i).setCategory("None");
                     }
                 }
                 categoriesList.remove(checkedItem[0]);
-                saveCategoriesInSharedPreferences();
-                saveNotesInSharedPreferences();
+                saveAll();
                 reloadAll();
             }
         });
 
-        builder.setNegativeButton("Cancel", null);// create and show the alert dialog
+        builder.setNegativeButton(getString(R.string.cancel), null);// create and show the alert dialog
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -283,7 +280,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
     private void ShowAddNewCategoriesDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("New category");
+        builder.setTitle(getString(R.string.notes_new_cat));
 
         // set the custom layout
         final View categories_display = getLayoutInflater().inflate(R.layout.categories_display, null);
@@ -291,7 +288,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         builder.setView(categories_display);
 
         // add a button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // send data from the AlertDialog to the Activity
@@ -301,7 +298,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         });
 
         //When the Cancel button is pressed
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getString(R.string.cancel), null);
 
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
@@ -309,7 +306,26 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     }
 
     private void ShowAlertNoCategories() {
-        Toast.makeText(this, "There are no categories", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.notes_no_cat), Toast.LENGTH_LONG).show();
+    }
+
+    private void showDeleteAllAlert() {
+        android.app.AlertDialog alerte = new android.app.AlertDialog.Builder(this).create();
+        alerte.setTitle(getString(R.string.notes_warning));
+        alerte.setMessage(getString(R.string.notes_delete_all_wrng_msg_1)+"\n\n"+getString(R.string.notes_delete_all_wrng_msg_2));
+
+        alerte.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                noteList.clear();
+                saveAll();
+                reloadAll();
+            }
+        });
+        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alerte.show();
     }
 
     private void addNewCategory(String name) {
@@ -334,7 +350,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         editor.apply();
 
         //Clears the current noteList
-        displayedNoteList.clear();
+        noteList.clear();
 
         for (int i=1; i<=nb_notes; i++) {
             //Prepares the Keys that will be used to retrieve the Note's attributes
@@ -346,8 +362,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             String newNoteCategory = preferences.getString(categoryKey, ""); //Gets the amount of notes saved in the SharedPreferences
             String newNoteTitle = preferences.getString(titleKey, ""); //Gets the amount of notes saved in the SharedPreferences
             String newNoteContent = preferences.getString(contentKey, ""); //Gets the amount of notes saved in the SharedPreferences
-
-            noteList.add(new Note(newNoteCategory, newNoteTitle, newNoteContent));
 
             for(Category category : categoriesList) {
                 if (newNoteCategory.matches(category.getName())) {
@@ -399,11 +413,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
-
-        List<Note> notesToBeSaved = new ArrayList<Note>();
-
-
-
         // If the noteList Array List isn't empty
         if (!noteList.isEmpty()) {
 
@@ -447,9 +456,6 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                 editor.remove(category_to_delete); // will delete key key_name4
                 editor.remove(content_to_delete); // will delete key key_name4
             }
-
-            // Save the changes in SharedPreferences
-            editor.apply(); // commit changes
         }
         //Applies the changes
         editor.apply();
@@ -483,13 +489,26 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
                 editor.putBoolean(categoryDisplayedKey, categoryDisplayedValue);
             }
         }
+        else {
+            editor.putInt("nb_categories", 0);
+
+            for (int i=0; i<1; i++) {
+
+                String categoryNameKey = "note_category_" + (i + 1) + "_name";
+                String categoryDisplayedKey = "note_category_" + (i + 1) + "_displayed";
+
+                editor.remove(categoryNameKey); // will delete key key_name4
+                editor.remove(categoryDisplayedKey); // will delete key key_name4
+            }
+        }
+
         //Applies the changes
         editor.apply();
     }
 
     private void reloadRecycleView() {
         note_recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        notesAdapter = new NotesAdapter(this, displayedNoteList);
+        notesAdapter = new NotesAdapter(this, noteList);
         note_recycler_view.setAdapter(notesAdapter);
     }
 
@@ -526,35 +545,16 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
             @Override
             public void onItemClick(View view, int position) {
 
-                Note editedNote = displayedNoteList.get(position);
+                Note editedNote = noteList.get(position);
 
-                displayedNoteList.remove(editedNote);
-                displayedNoteList.add(0, editedNote);
+                noteList.remove(editedNote);
+                noteList.add(0, editedNote);
 
                 saveNotesInSharedPreferences();
 
                 editNote(1);
             }
         });
-    }
-
-    private void showDeleteAllAlert() {
-        android.app.AlertDialog alerte = new android.app.AlertDialog.Builder(this).create();
-        alerte.setTitle("Warning !");
-        alerte.setMessage("You're about to delete all notes saved on this device.\n\nDo you want to continue?");
-
-        alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                displayedNoteList.clear();
-                saveAll();
-                reloadAll();
-            }
-        });
-        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        alerte.show();
     }
 
     private void setupNoteCounter() {
@@ -575,7 +575,7 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
     }
 
     private void setupNoNoteHint() {
-        if (displayedNoteList.isEmpty()) {
+        if (noteList.isEmpty()) {
             no_notes_hint.setVisibility(View.VISIBLE);
         }
         else {

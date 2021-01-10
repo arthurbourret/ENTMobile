@@ -137,7 +137,15 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
-     * Change the language of the app depanding on a language in parameter
+     * Method used to launch the openLogInMenu() method when the back button is pressed
+     */
+    @Override
+    public void onBackPressed() {
+        openLogInMenu();
+    }
+
+    /**
+     * Change the language of the app depending on a language in parameter
      *
      * @param resources The resources used to change the language
      * @param language  The language we want the app to display
@@ -160,15 +168,15 @@ public class MainMenu extends AppCompatActivity {
      */
     private void openLogInMenu() {
         AlertDialog alerte = new AlertDialog.Builder(this).create();
-        alerte.setTitle("Log Out");
-        alerte.setMessage("\nDo you really want to log out?");
+        alerte.setTitle(getString(R.string.log_out));
+        alerte.setMessage("\n"+ getString(R.string.log_out_msg));
 
-        alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+        alerte.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 logOff();
             }
         });
-        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             }
         });

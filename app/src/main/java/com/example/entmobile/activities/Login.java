@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
                 openCreateAccountMenu();
             }
         });
-        // Set a listener on the Create Account button
+        // Set a listener on the Autofill switch
         switch_autofill.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 changeAutofillPolicy(isChecked);
@@ -126,8 +126,8 @@ public class Login extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit?")
+                .setTitle(getString(R.string.exit))
+                .setMessage(getString(R.string.exit_msg))
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.yes, (arg0, arg1) -> {
                     setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
