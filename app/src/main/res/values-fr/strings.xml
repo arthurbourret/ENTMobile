@@ -75,12 +75,13 @@
     <string name="undo">ANNULER</string>
     <string name="notes_was_deleted">\" a été supprimé !</string>
     <string name="notes_delete_all_wrng_msg_1">Vous êtes sur le point de supprimer toutes les notes sauvegardées sur cet appareil.</string>
-    <string name="warning">Attention !</string>
-    <string name="wrng_continue">Êtes vous sur de vouloir continuer?</string>
+    <string name="notes_warning">Attention !</string>
+    <string name="notes_delete_all_wrng_msg_2">Êtes vous sur de vouloir continuer?</string>
     <string name="log_out">Déconnexion</string>
     <string name="log_out_msg">Voulez-vous vraiment vous déconnecter?</string>
     <string name="exit">Quitter?</string>
     <string name="exit_msg">Êtes vous sur de vouloir quitter?</string>
+
     <string name="create_acc_wrng_msg_1">Un compte existe déjà sur cet appareil.</string>
     <string name="create_acc_wrng_msg_2">La création d\'un nouveau compte engendrera la perte de toutes les données précédemment sauvegardées sur cette application.</string>
     <string name="create_acc_missing_pass">Le mot de passe est manquant.</string>
@@ -91,4 +92,15 @@
     <string name="settings_notes_tutorial">Tutoriel notes</string>
     <string name="settings_mail_tutorial">Tutoriel mails</string>
     <string name="settings_schedule_tutorial">Tutoriel emploi du temps</string>
+
+    <!-- Résultats -->
+    <string name="start">Commencer</string>
+    <string name="next">Suivant</string>
+    <string name="skip">Passer</string>
+    <string name="tuto_result_slide1_title">Regarde les matières.</string>
+    <string name="tuto_result_slide1_content">Swipe vers le haut pour voir toutes les matières du semestre !</string>
+    <string name="tuto_result_slide2_title">Différents semestres !</string>
+    <string name="tuto_result_slide2_content">Navigue sur les différents semestres pour consulter les matières de chaque semestres !</string>
+    <string name="tuto_result_slide3_content">Remplis les notes et les coefficients en cliquant dessus. Ta moyenne sera alors automatiquement calculée !</string>
+    <string name="tuto_result_slide3_title">Remplir les notes et les coefficients.</string>
 </resources>

@@ -118,13 +118,14 @@
     <string name="notes_editor_set_title">You need to set a title.</string>
     <string name="undo">UNDO</string>
     <string name="notes_was_deleted">\" was deleted !</string>
-    <string name="warning">Warning !</string>
+    <string name="notes_warning">Warning !</string>
     <string name="notes_delete_all_wrng_msg_1">You\'re about to delete all notes saved on this device.</string>
-    <string name="wrng_continue">Do you want to continue?</string>
+    <string name="notes_delete_all_wrng_msg_2">Do you want to continue?</string>
     <string name="log_out">Log out</string>
     <string name="log_out_msg">Do you really want to log out?</string>
     <string name="exit">Exit?</string>
     <string name="exit_msg">Are you sure you want to exit?</string>
+
     <string name="create_acc_wrng_msg_1">There already is an account on this device.</string>
     <string name="create_acc_wrng_msg_2">Creating a new account will result in the loss of all previously saved data on this app.</string>
     <string name="create_acc_missing_pass">The password is missing.</string>
@@ -135,5 +136,17 @@
     <string name="settings_notes_tutorial">Notes tutorial</string>
     <string name="settings_mail_tutorial">Mails tutorial</string>
     <string name="settings_schedule_tutorial">Schedule tutorial</string>
+
+    <string name="start">Start</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="tuto_note_slide1_title">Manage your notes !</string>
+    <string name="tuto_note_slide1_content">Manage the notes with the buttons at the top of the screen.</string>
+    <string name="tuto_note_slide2_title">Manage your categories !</string>
+    <string name="tuto_note_slide2_content">Create, remove, or select a category with the Categories button.</string>
+    <string name="tuto_note_slide3_title">Browse your notes !</string>
+    <string name="tuto_note_slide3_content">Browse the notes you have created.</string>
+    <string name="tuto_note_slide4_title">Delete notes individually.</string>
+    <string name="tuto_note_slide4_content">Swipe on a note to delete it.</string>
 
 </resources>

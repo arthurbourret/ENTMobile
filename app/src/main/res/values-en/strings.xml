@@ -122,4 +122,21 @@
     <string name="settings_mail_tutorial">Mails tutorial</string>
     <string name="settings_schedule_tutorial">Schedule tutorial</string>
 
+
+    <!-- Résultats -->
+    <string name="start">Start</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="tuto_note_slide1_title">Manage your notes !</string>
+    <string name="tuto_note_slide1_content">Manage the notes with the buttons at the top of the screen.</string>
+
+    <string name="tuto_note_slide2_title">Manage your categories !</string>
+    <string name="tuto_note_slide2_content">Create, remove, or select a category with the Categories button.</string>
+
+    <string name="tuto_note_slide3_title">Browse your notes !</string>
+    <string name="tuto_note_slide3_content">Browse the notes you have created.</string>
+
+    <string name="tuto_note_slide4_title">Delete notes individually.</string>
+    <string name="tuto_note_slide4_content">Swipe on a note to delete it.</string>
+
 </resources>

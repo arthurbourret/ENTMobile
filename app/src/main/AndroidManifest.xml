@@ -68,5 +68,10 @@
             android:name=".results.ResultsActivity"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity
+            android:name=".activities.TutoActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>
