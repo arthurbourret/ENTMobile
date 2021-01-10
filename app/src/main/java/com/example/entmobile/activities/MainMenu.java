@@ -158,7 +158,9 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Schedule page
      */
     private void openSchedule() {
-        Intent intent = new Intent(this, TutoActivity.class);
+        Intent intent = new Intent(this, Schedule.class);
+        startActivity(intent);
+        intent = new Intent(this, TutoActivity.class);
         intent.putExtra("Name", "Schedule");
         startActivity(intent);
     }
@@ -167,7 +169,9 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Mail page
      */
     private void openMails() {
-        Intent intent = new Intent(this, TutoActivity.class);
+        Intent intent = new Intent(this, MailViewerActivity.class);
+        startActivity(intent);
+        intent = new Intent(this, TutoActivity.class);
         intent.putExtra("Name", "Mails");
         startActivity(intent);
     }
@@ -176,7 +180,9 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Note page
      */
     private void openNotes() {
-        Intent intent = new Intent(this, TutoActivity.class);
+        Intent intent = new Intent(this, NotesActivity.class);
+        startActivity(intent);
+        intent = new Intent(this, TutoActivity.class);
         intent.putExtra("Name", "Notes");
         startActivity(intent);
     }
@@ -185,7 +191,9 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Results page
      */
     private void openResults() {
-        Intent intent = new Intent(this, TutoActivity.class);
+        Intent intent = new Intent(this, ResultsActivity.class);
+        startActivity(intent);
+        intent = new Intent(this, TutoActivity.class);
         intent.putExtra("Name", "Results");
         startActivity(intent);
     }
