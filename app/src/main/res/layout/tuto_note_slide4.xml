@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-smallcaps"
             android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
             android:text="@string/tuto_note_slide4_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"

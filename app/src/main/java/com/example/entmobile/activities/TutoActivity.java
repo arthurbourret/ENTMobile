@@ -35,6 +35,8 @@ public class TutoActivity extends AppCompatActivity {
     private Button btnSkip, btnNext;
     private PrefManager prefManager;
 
+    Boolean launchActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +47,13 @@ public class TutoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String nameOfActivity = intent.getStringExtra("Name");
+        launchActivity = intent.getBooleanExtra("Launch", false);
 
         /**
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Notes
          */
         if (!prefManager.isNotesFirstTimeLaunch() && nameOfActivity.equals("Notes")) {
-            launchActivity();
+            launchNotesActivityOrNot();
             finish();
         }
         if (prefManager.isNotesFirstTimeLaunch() && nameOfActivity.equals("Notes")) {
@@ -89,7 +92,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchActivity();
+                    launchNotesActivityOrNot();
                 }
             });
 
@@ -103,7 +106,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchActivity();
+                        launchNotesActivityOrNot();
                     }
                 }
             });
@@ -114,7 +117,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité de l'Emploi du temps
          */
         if (!prefManager.isScheduleFirstTimeLaunch() && nameOfActivity.equals("Schedule")) {
-            launchActivity();
+            launchScheduleActivityOrNot();
             finish();
         }
         if (prefManager.isScheduleFirstTimeLaunch() && nameOfActivity.equals("Schedule")) {
@@ -159,7 +162,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchActivity();
+                    launchScheduleActivityOrNot();
                 }
             });
 
@@ -173,7 +176,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchActivity();
+                        launchScheduleActivityOrNot();
                     }
                 }
             });
@@ -185,7 +188,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Mails
          */
         if (!prefManager.isMailsFirstTimeLaunch() && nameOfActivity.equals("Mails")) {
-            launchActivity();
+            launchMailsActivityOrNot();
             finish();
         }
         if (prefManager.isMailsFirstTimeLaunch() && nameOfActivity.equals("Mails")) {
@@ -230,7 +233,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchActivity();
+                    launchMailsActivityOrNot();
                 }
             });
 
@@ -244,7 +247,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchActivity();
+                        launchMailsActivityOrNot();
                     }
                 }
             });
@@ -256,7 +259,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Resultats
          */
         if (!prefManager.isResultsFirstTimeLaunch() && nameOfActivity.equals("Results")) {
-            launchActivity();
+            launchResultsActivityOrNot();
             finish();
         }
         if (prefManager.isResultsFirstTimeLaunch() && nameOfActivity.equals("Results")) {
@@ -294,7 +297,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchActivity();
+                    launchResultsActivityOrNot();
                 }
             });
 
@@ -308,7 +311,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchActivity();
+                        launchResultsActivityOrNot();
                     }
                 }
             });
@@ -356,8 +359,27 @@ public class TutoActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    public void launchActivity() {
+    public void launchResultsActivityOrNot() {
         prefManager.setResultsFirstTimeLaunch(false);
+        if (launchActivity) startActivity(new Intent(TutoActivity.this, ResultsActivity.class));
+        finish();
+    }
+
+    public void launchScheduleActivityOrNot() {
+        prefManager.setScheduleFirstTimeLaunch(false);
+        if (launchActivity) startActivity(new Intent(TutoActivity.this, Schedule.class));
+        finish();
+    }
+
+    public void launchMailsActivityOrNot() {
+        prefManager.setMailsFirstTimeLaunch(false);
+        if (launchActivity) startActivity(new Intent(TutoActivity.this, MailViewerActivity.class));
+        finish();
+    }
+
+    public void launchNotesActivityOrNot() {
+        prefManager.setNotesFirstTimeLaunch(false);
+        if (launchActivity) startActivity(new Intent(TutoActivity.this, NotesActivity.class));
         finish();
     }
 
