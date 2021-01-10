@@ -1,12 +1,10 @@
 package com.example.entmobile.activities;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -16,6 +14,8 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.entmobile.R;
+
+import java.util.Locale;
 
 public class Login extends AppCompatActivity {
 
@@ -30,6 +30,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
+        String current_lang = preferences.getString("loc", ""); // prefered language
+
+        // if language is not same as in preferences
+        if (!current_lang.equals(Locale.getDefault().toString())) {
+            // change to language in preferences
+            Settings.setLocale(getResources(), current_lang);
+            recreate();
+        }
+
         //Finds the object's IDs and initializes local variables
         button_login = findViewById(R.id.button_login);
         button_createAccount = findViewById(R.id.button_createAccount);
@@ -37,13 +47,10 @@ public class Login extends AppCompatActivity {
         TextIL_password = findViewById(R.id.TextIL_password);
         switch_autofill = findViewById(R.id.switch_autofill);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this); //Initializes the SharedPreferences
-
-        if(preferences.getBoolean("autofill", false)) {
+        if (preferences.getBoolean("autofill", false)) {
             switch_autofill.setChecked(true);
             TextIL_username.setText(preferences.getString("username", "")); //Gets the username from the SharedPreferences and put it in the user name space
-        }
-        else {
+        } else {
             switch_autofill.setChecked(false);
         }
 
@@ -133,5 +140,11 @@ public class Login extends AppCompatActivity {
                     setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
                     finish();
                 }).create().show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }

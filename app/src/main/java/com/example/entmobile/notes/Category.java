@@ -1,10 +1,5 @@
 package com.example.entmobile.notes;
 
-import android.graphics.Color;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 public class Category {
 
     private String name;
