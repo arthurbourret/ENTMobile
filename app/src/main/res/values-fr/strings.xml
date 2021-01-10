@@ -75,7 +75,7 @@
     <string name="undo">ANNULER</string>
     <string name="notes_was_deleted">\" a été supprimé !</string>
     <string name="notes_delete_all_wrng_msg_1">Vous êtes sur le point de supprimer toutes les notes sauvegardées sur cet appareil.</string>
-    <string name="notes_warning">Attention !</string>
+    <string name="warning">Attention !</string>
     <string name="notes_delete_all_wrng_msg_2">Êtes vous sur de vouloir continuer?</string>
     <string name="log_out">Déconnexion</string>
     <string name="log_out_msg">Voulez-vous vraiment vous déconnecter?</string>
@@ -103,4 +103,13 @@
     <string name="tuto_result_slide2_content">Navigue sur les différents semestres pour consulter les matières de chaque semestres !</string>
     <string name="tuto_result_slide3_content">Remplis les notes et les coefficients en cliquant dessus. Ta moyenne sera alors automatiquement calculée !</string>
     <string name="tuto_result_slide3_title">Remplir les notes et les coefficients.</string>
+    <string name="wrng_continue">Êtes vous sûr de vouloir continuer?</string>
+    <string name="tuto_note_slide4_content">Swipe vers la gauche pour la supprimer</string>
+    <string name="tuto_note_slide4_title">Supprime les notes individuellement</string>
+    <string name="tuto_note_slide3_title">Consultes tes notes !</string>
+    <string name="tuto_note_slide3_content">Consulte les notes que tu as créé.</string>
+    <string name="tuto_note_slide2_content">Crée, supprime ou selectionne une catégorie avec le bouton Catégories.</string>
+    <string name="tuto_note_slide2_title">Gère tes catégories !</string>
+    <string name="tuto_note_slide1_title">Gère tes notes !</string>
+    <string name="tuto_note_slide1_content">Gère les notes avec les boutons en haut de l\'écran.</string>
 </resources>
