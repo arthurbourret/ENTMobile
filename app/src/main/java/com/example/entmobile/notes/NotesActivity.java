@@ -311,8 +311,8 @@ public class NotesActivity extends AppCompatActivity implements NoteItemTouchHel
 
     private void showDeleteAllAlert() {
         android.app.AlertDialog alerte = new android.app.AlertDialog.Builder(this).create();
-        alerte.setTitle(getString(R.string.notes_warning));
-        alerte.setMessage(getString(R.string.notes_delete_all_wrng_msg_1)+"\n\n"+getString(R.string.notes_delete_all_wrng_msg_2));
+        alerte.setTitle(getString(R.string.warning));
+        alerte.setMessage(getString(R.string.notes_delete_all_wrng_msg_1)+"\n\n"+getString(R.string.wrng_continue));
 
         alerte.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

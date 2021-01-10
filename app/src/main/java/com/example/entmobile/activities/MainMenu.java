@@ -133,12 +133,12 @@ public class MainMenu extends AppCompatActivity {
      */
     private void openLogInMenu() {
         AlertDialog alerte = new AlertDialog.Builder(this).create();
-        alerte.setTitle(getString(R.string.log_out));
-        alerte.setMessage("\n"+ getString(R.string.log_out_msg));
+        alerte.setTitle(getString(R.string.exit));
+        alerte.setMessage("\n"+ getString(R.string.exit_msg));
 
         alerte.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                logOff();
+                finish();
             }
         });
         alerte.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -146,14 +146,6 @@ public class MainMenu extends AppCompatActivity {
             }
         });
         alerte.show();
-    }
-
-    /**
-     * Method used to open the Log in page.
-     */
-    private void logOff() {
-        Intent intent = new Intent(this, Login.class); //Prepares a new activity
-        startActivityForResult(intent, EXIT_CODE); //Opens the new activity with an exit code
     }
 
     /**

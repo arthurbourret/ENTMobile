@@ -75,10 +75,15 @@
     <string name="undo">ANNULER</string>
     <string name="notes_was_deleted">\" a été supprimé !</string>
     <string name="notes_delete_all_wrng_msg_1">Vous êtes sur le point de supprimer toutes les notes sauvegardées sur cet appareil.</string>
-    <string name="notes_warning">Attention !</string>
-    <string name="notes_delete_all_wrng_msg_2">Êtes vous sur de vouloir continuer?</string>
+    <string name="warning">Attention !</string>
+    <string name="wrng_continue">Êtes vous sur de vouloir continuer?</string>
     <string name="log_out">Déconnexion</string>
     <string name="log_out_msg">Voulez-vous vraiment vous déconnecter?</string>
     <string name="exit">Quitter?</string>
     <string name="exit_msg">Êtes vous sur de vouloir quitter?</string>
+    <string name="create_acc_wrng_msg_1">Un compte existe déjà sur cet appareil.</string>
+    <string name="create_acc_wrng_msg_2">La création d\'un nouveau compte engendrera la perte de toutes les données précédemment sauvegardées sur cette application.</string>
+    <string name="create_acc_missing_pass">Le mot de passe est manquant.</string>
+    <string name="create_acc_pass_mismatch">Les mots de passe ne correspondent pas.</string>
+    <string name="create_acc_missing_username">Le nom d\'utilisateur est manquant.</string>
 </resources>

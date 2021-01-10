@@ -105,11 +105,16 @@
     <string name="undo">UNDO</string>
     <string name="notes_was_deleted">\" was deleted !</string>
     <string name="notes_delete_all_wrng_msg_1">You\'re about to delete all notes saved on this device.</string>
-    <string name="notes_warning">Warning !</string>
-    <string name="notes_delete_all_wrng_msg_2">Do you want to continue?</string>
+    <string name="warning">Warning !</string>
+    <string name="wrng_continue">Do you want to continue?</string>
     <string name="log_out">Log out</string>
     <string name="log_out_msg">Do you really want to log out?</string>
     <string name="exit">Exit?</string>
     <string name="exit_msg">Are you sure you want to exit?</string>
+    <string name="create_acc_wrng_msg_1">There already is an account on this device.</string>
+    <string name="create_acc_wrng_msg_2">Creating a new account will result in the loss of all previously saved data on this app.</string>
+    <string name="create_acc_missing_pass">The password is missing.</string>
+    <string name="create_acc_pass_mismatch">The passwords entered do not match.</string>
+    <string name="create_acc_missing_username">The username is missing.</string>
 
 </resources>

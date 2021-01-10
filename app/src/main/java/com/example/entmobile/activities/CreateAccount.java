@@ -71,10 +71,10 @@ public class CreateAccount extends AppCompatActivity {
                 if ((!passwordtext.equals("")) && (!passwordchecktext.equals(""))) { //if the mail is correct
                     if (!existing_username.equals("")) {
                         AlertDialog alerte = new AlertDialog.Builder(this).create();
-                        alerte.setTitle("Warning !");
-                        alerte.setMessage("There already is an account on this device.\n\nCreating a new account will result in the loss of all previously saved data on this app.\n\nDo you want to continue?");
+                        alerte.setTitle(getString(R.string.warning));
+                        alerte.setMessage(getString(R.string.create_acc_wrng_msg_1)+"\n\n" + getString(R.string.create_acc_wrng_msg_2)+"\n\n" + getString(R.string.wrng_continue));
 
-                        alerte.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        alerte.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.clear();
@@ -82,7 +82,7 @@ public class CreateAccount extends AppCompatActivity {
                                 saveAccount(usernametext, passwordtext);
                             }
                         });
-                        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+                        alerte.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                             }
                         });
@@ -93,15 +93,15 @@ public class CreateAccount extends AppCompatActivity {
                     }
                 }
                 else { //If the password isn't correct
-                    password.setError("The password is missing"); //Shows an error message indicating that the password isn't correct
+                    password.setError(getString(R.string.create_acc_missing_pass)); //Shows an error message indicating that the password isn't correct
                 }
             }
             else { //If the password isn't correct
-                password_check.setError("The passwords entered do not match"); //Shows an error message indicating that the password isn't correct
+                password_check.setError(getString(R.string.create_acc_pass_mismatch)); //Shows an error message indicating that the password isn't correct
             }
         }
         else { //If the username isn't correct
-            username.setError("The username is missing"); //Shows an error message indicating that the username isn't correct
+            username.setError(getString(R.string.create_acc_missing_username)); //Shows an error message indicating that the username isn't correct
         }
     }
 
