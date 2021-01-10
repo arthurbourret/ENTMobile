@@ -94,6 +94,9 @@
     <string name="ue31" translatable="false">UE31</string>
     <string name="ue32" translatable="false">UE32</string>
     <string name="ue33" translatable="false">UE33</string>
+    <string name="ue41" translatable="false">UE41</string>
+    <string name="ue42" translatable="false">UE42</string>
+    <string name="ue43" translatable="false">UE43</string>
     <string name="averages">Averages</string>
     <string name="copyright">Copyright © 2021 ENT Mobile All rights reserved.</string>
     <string name="app_version">Version v1.0.0 public</string>
