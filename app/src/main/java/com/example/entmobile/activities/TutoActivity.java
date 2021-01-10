@@ -50,7 +50,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Notes
          */
         if (!prefManager.isNotesFirstTimeLaunch() && nameOfActivity.equals("Notes")) {
-            launchNoteScreen();
+            launchActivity();
             finish();
         }
         if (prefManager.isNotesFirstTimeLaunch() && nameOfActivity.equals("Notes")) {
@@ -89,7 +89,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchNoteScreen();
+                    launchActivity();
                 }
             });
 
@@ -103,7 +103,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchNoteScreen();
+                        launchActivity();
                     }
                 }
             });
@@ -114,7 +114,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité de l'Emploi du temps
          */
         if (!prefManager.isScheduleFirstTimeLaunch() && nameOfActivity.equals("Schedule")) {
-            launchScheduleScreen();
+            launchActivity();
             finish();
         }
         if (prefManager.isScheduleFirstTimeLaunch() && nameOfActivity.equals("Schedule")) {
@@ -159,7 +159,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchScheduleScreen();
+                    launchActivity();
                 }
             });
 
@@ -173,7 +173,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchScheduleScreen();
+                        launchActivity();
                     }
                 }
             });
@@ -185,7 +185,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Mails
          */
         if (!prefManager.isMailsFirstTimeLaunch() && nameOfActivity.equals("Mails")) {
-            launchMailScreen();
+            launchActivity();
             finish();
         }
         if (prefManager.isMailsFirstTimeLaunch() && nameOfActivity.equals("Mails")) {
@@ -230,7 +230,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchMailScreen();
+                    launchActivity();
                 }
             });
 
@@ -244,7 +244,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchMailScreen();
+                        launchActivity();
                     }
                 }
             });
@@ -256,7 +256,7 @@ public class TutoActivity extends AppCompatActivity {
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Resultats
          */
         if (!prefManager.isResultsFirstTimeLaunch() && nameOfActivity.equals("Results")) {
-            launchResultScreen();
+            launchActivity();
             finish();
         }
         if (prefManager.isResultsFirstTimeLaunch() && nameOfActivity.equals("Results")) {
@@ -294,7 +294,7 @@ public class TutoActivity extends AppCompatActivity {
             btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchResultScreen();
+                    launchActivity();
                 }
             });
 
@@ -308,7 +308,7 @@ public class TutoActivity extends AppCompatActivity {
                         // move to next screen
                         viewPager.setCurrentItem(current);
                     } else {
-                        launchResultScreen();
+                        launchActivity();
                     }
                 }
             });
@@ -356,27 +356,8 @@ public class TutoActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    public void launchNoteScreen() {
-        prefManager.setNotesFirstTimeLaunch(false);
-        startActivity(new Intent(TutoActivity.this, NotesActivity.class));
-        finish();
-    }
-
-    public void launchScheduleScreen() {
-        prefManager.setScheduleFirstTimeLaunch(false);
-        startActivity(new Intent(TutoActivity.this, Schedule.class));
-        finish();
-    }
-
-    public void launchMailScreen() {
-        prefManager.setMailsFirstTimeLaunch(false);
-        startActivity(new Intent(TutoActivity.this, MailViewerActivity.class));
-        finish();
-    }
-
-    public void launchResultScreen() {
+    public void launchActivity() {
         prefManager.setResultsFirstTimeLaunch(false);
-        startActivity(new Intent(TutoActivity.this, ResultsActivity.class));
         finish();
     }
 
@@ -401,12 +382,10 @@ public class TutoActivity extends AppCompatActivity {
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-
         }
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
-
         }
     };
 
