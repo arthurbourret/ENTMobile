@@ -122,6 +122,15 @@
     <string name="settings_schedule_tutorial">Schedule tutorial</string>
 
 
+    <string name="warning">Warning !</string>
+    <string name="notes_delete_all_wrng_msg_2">Do you want to continue</string>
+    <string name="tuto_result_slide1_title">Look at the modules.</string>
+    <string name="tuto_result_slide1_content">Swipe up to see all the modules in the semester !</string>
+    <string name="tuto_result_slide2_title">Different semesters !</string>
+    <string name="tuto_result_slide2_content">Browse through the different semesters to access the modules for each of them !</string>
+    <string name="tuto_result_slide3_content">Fill the grades and the coeficients by clicking on them. Your average will automatically be calculated !</string>
+    <string name="tuto_result_slide3_title">Fill the notes and the coeficients.</string>
+
     <!-- Résultats -->
     <string name="start">Start</string>
     <string name="next">Next</string>
@@ -137,13 +146,5 @@
 
     <string name="tuto_note_slide4_title">Delete notes individually.</string>
     <string name="tuto_note_slide4_content">Swipe on a note to delete it.</string>
-    <string name="warning">Warning !</string>
-    <string name="notes_delete_all_wrng_msg_2">Do you want to continue</string>
-    <string name="tuto_result_slide1_title">Look at the modules.</string>
-    <string name="tuto_result_slide1_content">Swipe up to see all the modules in the semester !</string>
-    <string name="tuto_result_slide2_title">Different semesters !</string>
-    <string name="tuto_result_slide2_content">Browse through the different semesters to access the modules for each of them !</string>
-    <string name="tuto_result_slide3_content">Fill the grades and the coeficients by clicking on them. Your average will automatically be calculated !</string>
-    <string name="tuto_result_slide3_title">Fill the notes and the coeficients.</string>
 
 </resources>

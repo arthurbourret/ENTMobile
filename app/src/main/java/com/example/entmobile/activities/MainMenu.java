@@ -158,28 +158,36 @@ public class MainMenu extends AppCompatActivity {
      * Method used to open the Schedule page
      */
     private void openSchedule() {
-        startActivity(new Intent(this, TutoActivity.class));
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Schedule");
+        startActivity(intent);
     }
 
     /**
      * Method used to open the Mail page
      */
     private void openMails() {
-        startActivity(new Intent(this, TutoActivity.class));
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Mails");
+        startActivity(intent);
     }
 
     /**
      * Method used to open the Note page
      */
     private void openNotes() {
-        startActivity(new Intent(this, TutoActivity.class));
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Notes");
+        startActivity(intent);
     }
 
     /**
      * Method used to open the Results page
      */
     private void openResults() {
-        startActivity(new Intent(this, TutoActivity.class));
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Results");
+        startActivity(intent);
     }
 
     /**

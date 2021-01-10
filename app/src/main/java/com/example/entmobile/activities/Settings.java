@@ -1,5 +1,6 @@
 package com.example.entmobile.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -21,10 +22,15 @@ public class Settings extends AppCompatActivity {
     Button button_tuto_notes;
     Button button_tuto_results;
 
+    private PrefManager prefManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+
+        prefManager = new PrefManager(this);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.settings, new SettingsFragment()).commit();
@@ -40,7 +46,8 @@ public class Settings extends AppCompatActivity {
         button_tuto_edt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTutorialEDT();
+                prefManager.setScheduleFirstTimeLaunch(true);
+                openScheduleTutorial();
             }
         });
 
@@ -48,7 +55,8 @@ public class Settings extends AppCompatActivity {
         button_tuto_mails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTutorialMails();
+                prefManager.setMailsFirstTimeLaunch(true);
+                openMailsTutorial();
             }
         });
 
@@ -56,7 +64,8 @@ public class Settings extends AppCompatActivity {
         button_tuto_notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTutorialNotes();
+                prefManager.setNotesFirstTimeLaunch(true);
+                openNotesTutorial();
             }
         });
 
@@ -64,26 +73,46 @@ public class Settings extends AppCompatActivity {
         button_tuto_results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTutorialResults();
+                prefManager.setResultsFirstTimeLaunch(true);
+                openResultsTutorial();
             }
         });
     }
 
-    private void openTutorialEDT() {
-        //TODO @Flom Ouvrir tuto de l'EDT
-        Toast.makeText(this, getString(R.string.ok), Toast.LENGTH_LONG).show();
+    /**
+     * Method used to open the Schedule page
+     */
+    private void openScheduleTutorial() {
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Schedule");
+        startActivity(intent);
     }
 
-    private void openTutorialMails() {
-        //TODO @Flom Ouvrir tuto des mails
+    /**
+     * Method used to open the Mail page
+     */
+    private void openMailsTutorial() {
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Mails");
+        startActivity(intent);
     }
 
-    private void openTutorialNotes() {
-        //TODO @Flom Ouvrir tuto des notes
+    /**
+     * Method used to open the Note page
+     */
+    private void openNotesTutorial() {
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Notes");
+        startActivity(intent);
     }
 
-    private void openTutorialResults() {
-        //TODO @Flom Ouvrir tuto des résultats
+    /**
+     * Method used to open the Results page
+     */
+    private void openResultsTutorial() {
+        Intent intent = new Intent(this, TutoActivity.class);
+        intent.putExtra("Name", "Results");
+        startActivity(intent);
     }
 
     /**

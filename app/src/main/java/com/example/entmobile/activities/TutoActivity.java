@@ -42,13 +42,18 @@ public class TutoActivity extends AppCompatActivity {
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
 
+
+        Intent intent = getIntent();
+        String nameOfActivity = intent.getStringExtra("Name");
+
         /**
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Notes
          */
-        if (!prefManager.isNotesFirstTimeLaunch()) {
+        if (!prefManager.isNotesFirstTimeLaunch() && nameOfActivity.equals("Notes")) {
             launchNoteScreen();
             finish();
-        } else {
+        }
+        if (prefManager.isNotesFirstTimeLaunch() && nameOfActivity.equals("Notes")) {
 
             // Making notification bar transparent
             if (Build.VERSION.SDK_INT >= 21) {
@@ -108,10 +113,11 @@ public class TutoActivity extends AppCompatActivity {
         /**
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité de l'Emploi du temps
          */
-        if (!prefManager.isScheduleFirstTimeLaunch()) {
+        if (!prefManager.isScheduleFirstTimeLaunch() && nameOfActivity.equals("Schedule")) {
             launchScheduleScreen();
             finish();
-        } else {
+        }
+        if (prefManager.isScheduleFirstTimeLaunch() && nameOfActivity.equals("Schedule")) {
 
             // Making notification bar transparent
             if (Build.VERSION.SDK_INT >= 21) {
@@ -178,10 +184,11 @@ public class TutoActivity extends AppCompatActivity {
         /**
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Mails
          */
-        if (!prefManager.isMailsFirstTimeLaunch()) {
+        if (!prefManager.isMailsFirstTimeLaunch() && nameOfActivity.equals("Mails")) {
             launchMailScreen();
             finish();
-        } else {
+        }
+        if (prefManager.isMailsFirstTimeLaunch() && nameOfActivity.equals("Mails")) {
 
             // Making notification bar transparent
             if (Build.VERSION.SDK_INT >= 21) {
@@ -248,10 +255,11 @@ public class TutoActivity extends AppCompatActivity {
         /**
          * Regarde les SharedPreferences et lance le tuto s'il n'a jamais été lancé. Sinon va sur l'activité des Resultats
          */
-        if (!prefManager.isResultsFirstTimeLaunch()) {
+        if (!prefManager.isResultsFirstTimeLaunch() && nameOfActivity.equals("Results")) {
             launchResultScreen();
             finish();
-        } else {
+        }
+        if (prefManager.isResultsFirstTimeLaunch() && nameOfActivity.equals("Results")) {
 
             // Making notification bar transparent
             if (Build.VERSION.SDK_INT >= 21) {
