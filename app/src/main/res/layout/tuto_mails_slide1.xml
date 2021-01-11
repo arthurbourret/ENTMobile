@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/long_press"
+            android:src="@drawable/short_press"
             app:tint="@android:color/white" />
 
         <TextView

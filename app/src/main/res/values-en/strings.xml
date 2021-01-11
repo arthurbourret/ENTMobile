@@ -152,8 +152,8 @@
     <string name="tuto_mails_slide2_content">A mail can be selected by holding your finger on it.</string>
     <string name="tuto_mails_slide1_content">A mail can be marked as read by clicking on it.</string>
     <string name="tuto_schedule_slide2_content">Click on the current date to open the calendar !</string>
-    <string name="tuto_schedule_slide2_title">Date 2</string>
-    <string name="tuto_schedule_slide1_title">Date</string>
+    <string name="tuto_schedule_slide2_title">Jump to any date !</string>
+    <string name="tuto_schedule_slide1_title">Navigate day to day !</string>
     <string name="tuto_schedule_slide1_content">Use the arrows to get back to the current day !</string>
 
 </resources>
