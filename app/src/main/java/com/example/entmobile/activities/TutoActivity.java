@@ -343,6 +343,9 @@ public class TutoActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
+    /**
+     * Lance l'activité qui lui correspond s'il en est autorisé
+     */
     public void launchResultsActivityOrNot() {
         prefManager.setResultsFirstTimeLaunch(false);
         if (launchActivity) startActivity(new Intent(TutoActivity.this, ResultsActivity.class));
