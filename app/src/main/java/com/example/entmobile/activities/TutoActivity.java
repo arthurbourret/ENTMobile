@@ -137,17 +137,9 @@ public class TutoActivity extends AppCompatActivity {
 
             // layouts of all welcome sliders
             // add few more layouts if you want
-            /*layouts = new int[]{
-                    R.layout.tuto_schedule_slide1,
-                    R.layout.tuto_schedule_slide2,
-                    R.layout.tuto_schedule_slide3,
-                    R.layout.tuto_schedule_slide4};*/
-
             layouts = new int[]{
-                    R.layout.welcome_slide1,
-                    R.layout.welcome_slide2,
-                    R.layout.welcome_slide3,
-                    R.layout.welcome_slide4};
+                    R.layout.tuto_schedule_slide1,
+                    R.layout.tuto_schedule_slide2};
 
             // adding bottom dots
             addBottomDots(0);
@@ -208,17 +200,9 @@ public class TutoActivity extends AppCompatActivity {
 
             // layouts of all welcome sliders
             // add few more layouts if you want
-            /*layouts = new int[]{
-                    R.layout.tuto_mail_slide1,
-                    R.layout.tuto_mail_slide2,
-                    R.layout.tuto_mail_slide3,
-                    R.layout.tuto_mail_slide4};*/
-
             layouts = new int[]{
-                    R.layout.welcome_slide1,
-                    R.layout.welcome_slide2,
-                    R.layout.welcome_slide3,
-                    R.layout.welcome_slide4};
+                    R.layout.tuto_mails_slide1,
+                    R.layout.tuto_mails_slide2};
 
             // adding bottom dots
             addBottomDots(0);
