@@ -2,6 +2,7 @@ package com.example.entmobile.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Gère les SharedPreferences
@@ -11,7 +12,6 @@ public class PrefManager {
     private SharedPreferences.Editor editor_tuto;
 
     // Nom des SharedPreferences
-    private static final String PREF_NAME = "androidhive-welcome";
 
     private static final String IS_MAILS_FIRST_TIME_LAUNCH = "IsMailsFirstTimeLaunch";
     private static final String IS_SCHEDULE_FIRST_TIME_LAUNCH = "IsScheduleFirstTimeLaunch";
@@ -20,8 +20,7 @@ public class PrefManager {
 
     public PrefManager(Context context) {
         // shared pref mode
-        int PRIVATE_MODE = 0;
-        pref_tuto = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        pref_tuto = PreferenceManager.getDefaultSharedPreferences(context);
         editor_tuto = pref_tuto.edit();
         editor_tuto.apply();
     }

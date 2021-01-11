@@ -21,14 +21,14 @@
             <ImageView
                 android:layout_width="@dimen/img_width_height"
                 android:layout_height="@dimen/img_width_height"
+                android:rotation="180"
                 android:src="@drawable/app_res_ico_arrow_forward"
-                android:layout_marginLeft="30dp"
                 app:tint="@android:color/white" />
 
             <ImageView
                 android:layout_width="@dimen/img_width_height"
                 android:layout_height="@dimen/img_width_height"
-                android:src="@drawable/app_res_ico_arrow_back"
+                android:src="@drawable/app_res_ico_arrow_forward"
                 app:tint="@android:color/white" />
 
         </LinearLayout>

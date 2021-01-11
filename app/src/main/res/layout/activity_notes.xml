@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="There are currently no notes"
+                android:text="@string/there_are_currently_no_notes"
                 android:textSize="18sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"

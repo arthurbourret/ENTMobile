@@ -83,7 +83,7 @@
     <string name="title_s3">S3</string>
     <string name="title_s4">S4</string>
     <string name="note_et">" note"</string>
-    <string name="notes_et">notes</string>
+    <string name="notes_et">" notes"</string>
     <string name="coefs">Coefs</string>
     <string name="grades">Grades</string>
     <string name="global">Global</string>
@@ -158,5 +158,14 @@
     <string name="tuto_note_slide3_content">Browse the notes you have created.</string>
     <string name="tuto_note_slide4_title">Delete notes individually.</string>
     <string name="tuto_note_slide4_content">Swipe on a note to delete it.</string>
+    <string name="there_are_currently_no_notes">There are currently no notes.</string>
+    <string name="tuto_mails_slide1_title">Simple click</string>
+    <string name="tuto_mails_slide2_title">Hold on it</string>
+    <string name="tuto_mails_slide2_content">A mail can be selected by holding your finger on it.</string>
+    <string name="tuto_mails_slide1_content">A mail can be marked as read by clicking on it.</string>
+    <string name="tuto_schedule_slide2_content">Click on the current date to open the calendar !</string>
+    <string name="tuto_schedule_slide2_title">Date 2</string>
+    <string name="tuto_schedule_slide1_title">Date</string>
+    <string name="tuto_schedule_slide1_content">Use the arrows to get back to the current day !</string>
 
 </resources>
