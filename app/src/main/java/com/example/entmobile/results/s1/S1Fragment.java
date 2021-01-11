@@ -22,12 +22,18 @@ import java.text.ParseException;
 
 public class S1Fragment extends Fragment {
 
-    private TableLayout tableau_s1;
+    private TableLayout tableau_s1;     // Ensemble du tableau du fragment contenant les notes et les matières
 
+    /**
+     * Moyennes calculées
+     */
     private TextView moyenne_s1;
     private TextView ue11_moyenne;
     private TextView ue12_moyenne;
 
+    /**
+     * Noms, coefficients et notes de l'UE11
+     */
     private TextView m1101_name;
     private TextView m1101_coef;
     private EditText m1101_ecrit_coef;
@@ -77,6 +83,9 @@ public class S1Fragment extends Fragment {
     private EditText m1106_tp_note;
 
 
+    /**
+     * Noms, coefficients et notes de l'UE12
+     */
     private TextView m1201_name;
     private TextView m1201_coef;
     private EditText m1201_ecrit_coef;
@@ -129,17 +138,20 @@ public class S1Fragment extends Fragment {
     private TextView m1207_note;
     private EditText m1207_tp_note;
 
-    private RefreshTextView refreshTextView;
+    private RefreshTextView refreshTextView;        // Rafraichit les éléments lorsqu'une note ou un coefficient est rentré
 
+    /**
+     * Somme des coefficients des UE
+     */
     private float sommecoefue11;
     private float sommecoefue12;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_s1, container, false);
         refreshTextView = new RefreshTextView();
-        
-        /*
-        Initialisation des TextView et EditText
+
+        /**
+         * Initialisation des TextView et EditText
          */
         tableau_s1 = root.findViewById(R.id.tableau_s1);
 
@@ -195,7 +207,6 @@ public class S1Fragment extends Fragment {
         m1106_note = root.findViewById(R.id.m1106_note);
         m1106_tp_note = root.findViewById(R.id.m1106_tp_note);
 
-
         m1201_name = root.findViewById(R.id.m1201_name);
         m1201_coef = root.findViewById(R.id.m1201_coef);
         m1201_ecrit_coef = root.findViewById(R.id.m1201_ecrit_coef);
@@ -248,8 +259,8 @@ public class S1Fragment extends Fragment {
         m1207_note = root.findViewById(R.id.m1207_note);
         m1207_tp_note = root.findViewById(R.id.m1207_tp_note);
 
-        /*
-        Affichage des notes et coef de l'UE11
+        /**
+         * Charge les notes et coef de l'UE11 des SharedPreferences et les affiche
          */
         load2CoefFromSharedPreferences(m1101_name, m1101_ecrit_coef, m1101_tp_coef);
         load2GradeFromSharedPreferences(m1101_name, m1101_ecrit_note, m1101_tp_note);
@@ -274,8 +285,8 @@ public class S1Fragment extends Fragment {
         loadCoefAndGradeTPFromSharedPreferences(m1106_name, m1106_tp_coef, m1106_tp_note);
         refreshTextView.refresh1coef1grade(m1106_note, m1106_coef, m1106_tp_note, m1106_tp_coef);
 
-        /*
-        Affichage des notes et coef de l'UE12
+        /**
+         * Charge les notes et coef de l'UE12 des SharedPreferences et les affiche
          */
         load2CoefFromSharedPreferences(m1201_name, m1201_ecrit_coef, m1201_tp_coef);
         load2GradeFromSharedPreferences(m1201_name, m1201_ecrit_note, m1201_tp_note);
@@ -304,12 +315,15 @@ public class S1Fragment extends Fragment {
         refreshTextView.refresh1coef1grade(m1207_note, m1207_coef, m1207_tp_note, m1207_tp_coef);
 
 
+        /**
+         * Calcul des moyennes
+         */
         calculerUE11Moyenne();
         calculerUE12Moyenne();
         calculerMoyenneGenerale();
 
-        /*
-        Listener sur les EditText et TextView pour changer les notes et coef de l'UE11
+        /**
+         * Listener sur les EditText et TextView pour changer les notes et coef de l'UE11
          */
         m1101_ecrit_coef.addTextChangedListener(new TextWatcher() {
             @Override
@@ -784,8 +798,8 @@ public class S1Fragment extends Fragment {
             }
         });
 
-        /*
-        Listener sur les EditText et TextView pour changer les notes et coef de l'UE12
+        /**
+         * Listener sur les EditText et TextView pour changer les notes et coef de l'UE12
          */
         m1201_ecrit_coef.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1263,16 +1277,21 @@ public class S1Fragment extends Fragment {
         return root;
     }
 
+    /**
+     * Calcul de la moyenne de l'UE11
+     */
     public void calculerUE11Moyenne() {
         sommecoefue11 = 0;
         float ue11 = 0;
 
         for (int i = 0; i < tableau_s1.getChildCount(); i++) {
+            // On cherche les coefficients et notes du tableau avec les tags
             TextView coef = tableau_s1.getChildAt(i).findViewWithTag("coef1");
             TextView note = tableau_s1.getChildAt(i).findViewWithTag("note1");
             if (coef == null || note == null) continue;
             DecimalFormat decimalFormat = new DecimalFormat();
             try {
+                // On fait le calcul
                 float coefvalue = decimalFormat.parse(coef.getText().toString().replaceAll("[^0-9]", ",")).floatValue();
                 float notevalue = decimalFormat.parse(note.getText().toString().replaceAll("[^0-9]", ",")).floatValue();
                 ue11 += coefvalue * notevalue;
@@ -1284,6 +1303,9 @@ public class S1Fragment extends Fragment {
         ue11_moyenne.setText(" " + Math.floor((ue11/sommecoefue11)*100)/100);
     }
 
+    /**
+     * Calcul de la moyenne de l'UE12
+     */
     public void calculerUE12Moyenne() {
         sommecoefue12 = 0;
         float ue12 = 0;
@@ -1305,6 +1327,9 @@ public class S1Fragment extends Fragment {
         ue12_moyenne.setText(" " + Math.floor((ue12/sommecoefue12)*100)/100);
     }
 
+    /**
+     * Calcul de la moyenne générale
+     */
     public void calculerMoyenneGenerale() {
         float sommeTotalCoef = sommecoefue11 + sommecoefue12;
         float s1 = (Float.parseFloat(ue11_moyenne.getText().toString()) * sommecoefue11) + (Float.parseFloat(ue12_moyenne.getText().toString()) * sommecoefue12);
@@ -1312,6 +1337,12 @@ public class S1Fragment extends Fragment {
         moyenne_s1.setText(" " + Math.floor((s1/sommeTotalCoef)*100)/100);
     }
 
+    /**
+     * Sauvegarde le coefficient et la note TP d'une matiere lorsqu'elle n'a qu'une note TP
+     * @param nom_matiere le nom de la matiere
+     * @param coef_tp le coefficient TP de la matière
+     * @param note_tp la note TP de la matiere
+     */
     public void saveCoefGradeTPInSharedPreferences(TextView nom_matiere, EditText coef_tp, EditText note_tp) {
         //Initializes the SharedPreferences and initializes the SharedPreferences' editor
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -1323,6 +1354,12 @@ public class S1Fragment extends Fragment {
         editor.apply();
     }
 
+    /**
+     * Sauvegarde le coefficient des notes Ecrit et TP d'une matiere
+     * @param nom_matiere le nom de la matiere
+     * @param coef_ecrit le coefficient de la note ecrite
+     * @param coef_tp le coefficient de la note TP
+     */
     public void save2CoefInSharedPreferences(TextView nom_matiere, EditText coef_ecrit, EditText coef_tp) {
         //Initializes the SharedPreferences and initializes the SharedPreferences' editor
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -1334,6 +1371,12 @@ public class S1Fragment extends Fragment {
         editor.apply();
     }
 
+    /**
+     * Sauvegarde les notes Ecrit et TP d'une matiere
+     * @param nom_matiere le nom de la matiere
+     * @param note_ecrite la note Ecrit
+     * @param note_tp la note TP
+     */
     public void save2GradeInSharedPreferences(TextView nom_matiere, EditText note_ecrite, EditText note_tp) {
         //Initializes the SharedPreferences and initializes the SharedPreferences' editor
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -1345,6 +1388,13 @@ public class S1Fragment extends Fragment {
         editor.apply();
     }
 
+    /**
+     * Sauvegarde 3 coefficients d'une matiere lorsqu'elle en a 3
+     * @param nom_matiere le nom de la matiere
+     * @param coef1 le premier coefficient
+     * @param coef2 le deuxieme coefficient
+     * @param coef3 le troisieme coefficient
+     */
     public void save3CoefInSharedPreferences(TextView nom_matiere, EditText coef1, EditText coef2, EditText coef3) {
         //Initializes the SharedPreferences and initializes the SharedPreferences' editor
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -1357,6 +1407,13 @@ public class S1Fragment extends Fragment {
         editor.apply();
     }
 
+    /**
+     * Sauvegarde 3 notes d'une matiere lorsqu'elle en a 3
+     * @param nom_matiere le nom de la matiere
+     * @param note1 la premiere note
+     * @param note2 la deuxieme note
+     * @param note3 la troisieme note
+     */
     public void save3GradeInSharedPreferences(TextView nom_matiere, EditText note1, EditText note2, EditText note3) {
         //Initializes the SharedPreferences and initializes the SharedPreferences' editor
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -1370,7 +1427,10 @@ public class S1Fragment extends Fragment {
     }
 
     /**
-     * Coef des matières
+     * Charge les coefficients des notes TP et Ecrit
+     * @param nom_matiere le nom de la matiere
+     * @param coef_ecrit le coefficient Ecrit
+     * @param coef_tp le coefficient TP
      */
     public void load2CoefFromSharedPreferences(TextView nom_matiere, EditText coef_ecrit, EditText coef_tp) {
         //Initializes the SharedPreferences
@@ -1385,7 +1445,10 @@ public class S1Fragment extends Fragment {
     }
 
     /**
-     * Notes des matières
+     * Charge les notes TP et Ecrit
+     * @param nom_matiere le nom de la matiere
+     * @param note_ecrite la note Ecrit
+     * @param note_tp la note TP
      */
     public void load2GradeFromSharedPreferences(TextView nom_matiere, EditText note_ecrite, EditText note_tp) {
         //Initializes the SharedPreferences
@@ -1400,10 +1463,10 @@ public class S1Fragment extends Fragment {
     }
 
     /**
-     * Matières avec uniquement une note et un coef TP
-     * @param nom_matiere
-     * @param coef_tp
-     * @param note_tp
+     * Charge la note et le coefficient TP d'une matiere
+     * @param nom_matiere le nom de la matiere
+     * @param coef_tp le coefficient TP
+     * @param note_tp la note TP
      */
     public void loadCoefAndGradeTPFromSharedPreferences(TextView nom_matiere, EditText coef_tp, EditText note_tp) {
         //Initializes the SharedPreferences
@@ -1417,6 +1480,13 @@ public class S1Fragment extends Fragment {
         note_tp.setText(tp_shared_preferences);
     }
 
+    /**
+     * Charge les 3 coefficients d'une matiere
+     * @param nom_matiere le nom de la matiere
+     * @param coef1 le premier coefficient
+     * @param coef2 le deuxieme coefficient
+     * @param coef3 le troisieme coefficient
+     */
     public void load3CoefFromSharedPreferences(TextView nom_matiere, EditText coef1, EditText coef2, EditText coef3) {
         //Initializes the SharedPreferences
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE); //Initializes the SharedPreferences
@@ -1431,6 +1501,13 @@ public class S1Fragment extends Fragment {
         coef3.setText(coef3_shared_preferences);
     }
 
+    /**
+     * Charge les 3 notes d'une matiere
+     * @param nom_matiere le nom de la matiere
+     * @param note1 la premiere note
+     * @param note2 la deuxieme note
+     * @param note3 la troisieme note
+     */
     public void load3GradeFromSharedPreferences(TextView nom_matiere, EditText note1, EditText note2, EditText note3) {
         //Initializes the SharedPreferences
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE); //Initializes the SharedPreferences
